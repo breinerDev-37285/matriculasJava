@@ -1,0 +1,31 @@
+body{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url("../assets/fondo.jpg");
+	opacity: 0.9;
+	background-attachment: scroll;
+	background-repeat:no-repeat;
+}
+
+
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	padding: 2em 1em;
+	background: transparent;
+}
+
+.container > .elem{
+	margin: 0.5em 0;
+}
+
+.container > .chil{
+	margin-bottom: 1em;
+}
+

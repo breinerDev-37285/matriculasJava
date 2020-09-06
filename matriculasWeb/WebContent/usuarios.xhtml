@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<link rel="stylesheet" href="./utils/styles/general.css" />
+		<title>Manager Cordinador</title>
+	</f:facet>
+</h:head>
+
+<body>
+
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form>
+		<p:growl id="messages" showDetail="true" />
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Usuarios" class="button" icon="fa fa-user"
+					action="matriculas.xhtml" />
+				<p:commandButton value="Matriculas" class="button"
+					icon="fa fa-check" action="matriculas.xhtml" />
+				<p:commandButton value="Materias" class="button" icon="fa fa-book"
+					action="matriculas.xhtml" />
+				<p:commandButton value="Ciclo academico" class="button"
+					icon="fa fa-undo" action="matriculas.xhtml" />
+			</f:facet>
+
+			<f:facet name="right">
+				<span class="fa fa-user" />
+				<h:outputText value="   #{beanLogin.correo}" />
+				<p:commandButton value="Cerrar Session" icon="fa fa-sign-out"
+					style="border: none; outline:none"
+					action="#{beanLogin.actionCerrarSession()}" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+
+	<br />
+	<hr />
+	<br />
+
+	<h3>Usuarios</h3>
+
+	<br />
+
+	<p:outputPanel deferred="true">
+
+		<h:form>
+			<p:panel header="Agregar un nuevo usuario" class="panel">
+
+				<p:outputPanel deferred="true" class="form_panel">
+
+					<p:outputPanel deferred="true" class="container">
+
+						<p:outputPanel deferred="true" class="item-container">
+						
+							<h:outputText value="Nombres completos:" class="elem" />
+							<p:inputText value="#{beanUsuarios.nombres}" class="elem"
+								placeholder="nombre de usuario" />
+
+							<h:outputText value="Apellidos completos:" class="elem" />
+							<p:inputText value="#{beanUsuarios.apellidos}" class="elem"
+								placeholder="apellidos de usuario" />
+
+						</p:outputPanel>
+
+						<p:outputPanel deferred="true" class="item-container">
+
+							<h:outputText value="Cedula" class="elem" />
+
+							<p:inputText value="#{beanUsuarios.cedula}" class="elem"
+								placeholder="1009874563210" />
+								
+								
+								<h:outputText value="Ciudad:" class="elem" />
+							<p:inputText value="#{beanUsuarios.ciudad}" class="elem"
+								placeholder="ibarra" />
+							
+						</p:outputPanel>
+
+
+
+						<p:outputPanel deferred="true" class="item-container">
+
+							<h:outputText value="Ingrese su correo:" class="elem" />
+							<p:inputText value="#{beanUsuarios.correo}" class="elem"
+								placeholder="usuario@dominio.com" />
+
+							<h:outputText value="Ingrese su contraseña:" class="elem" />
+							<p:password value="#{beanUsuarios.password}" class="elem"
+								placeholder="**********" />
+
+
+						</p:outputPanel>
+
+						<p:outputPanel deferred="true" class="item-container">
+							
+
+							<h:outputText value="Calle principal:" class="elem" />
+							<p:inputText value="#{beanUsuarios.callePrincipal}" class="elem"
+								placeholder="fray vacas galindo" />
+								
+								
+								<h:outputText value="Calle secundaria:" class="elem" />
+							<p:inputText value="#{beanUsuarios.calleSecundaria}" class="elem"
+								placeholder="bastion" />
+
+						</p:outputPanel>
+
+
+
+						<p:outputPanel deferred="true" class="item-container">
+						
+							
+							<h:outputText value="Numero de Casa" class="elem" />
+							<p:inputText value="#{beanUsuarios.numeroCasa}" class="elem chil"
+								placeholder="12-03" />
+							
+							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
+							   <p:selectOneMenu id="sd" value="#{beanUsuarios.rol}" effect="fold" editable="true" class="elemrol">
+								<f:selectItem itemLabel="Seleccione el rol..." noSelectionOption="true"  />
+								<f:selectItems value="#{ beanUsuarios.roles }" var="rol"
+									itemLabel="#{ rol.nombre }" itemValue="#{ rol.id }" />
+							</p:selectOneMenu>
+
+						</p:outputPanel>
+
+						<p:commandButton value="Registrar" class="buttonreg"  icon="fa fa-save"
+							actionListener="#{beanUsuarios.registrarUsuario()}" />
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:panel>
+		</h:form>
+
+		<h:form>
+			<p:panel header="Lista de usuarios">
+				<p:dataTable var="user" value="#{beanUsuarios.usuarios}">
+					<p:column headerText="Nombres">
+						<h:outputText value="#{user.nombres}" />
+					</p:column>
+
+					<p:column headerText="Apellidos">
+						<h:outputText value="#{user.apellidos}" />
+					</p:column>
+
+					<p:column headerText="Correo">
+						<h:outputText value="#{user.correo}" />
+					</p:column>
+					
+					<p:column headerText="Estado">
+						<h:outputText value="#{user.estado}" />
+					</p:column>
+
+					<p:column headerText="Cedula">
+						<h:outputText value="#{user.cedula}" />
+					</p:column>
+
+
+					<p:column headerText="Ciudad">
+						<h:outputText value="#{user.ciudad}" />
+					</p:column>
+
+					<p:column headerText="Calle Prin.">
+						<h:outputText value="#{user.calleP}" />
+					</p:column>
+
+					<p:column headerText="Calle Sec.">
+						<h:outputText value="#{user.calleP}" />
+					</p:column>
+
+					<p:column headerText="Num Casa">
+						<h:outputText value="#{user.numCasa}" />
+					</p:column>
+					
+					<p:column headerText="Opciones">
+							<p:commandButton  value=""  icon="fa fa-trash"/>
+							<p:commandButton  value=""  icon="fa fa-edit"/>
+					</p:column>
+					
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</p:outputPanel>
+
+
+</body>
+</html>
