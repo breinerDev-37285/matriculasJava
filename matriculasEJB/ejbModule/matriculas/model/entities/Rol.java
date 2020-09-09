@@ -22,10 +22,7 @@ public class Rol implements Serializable {
 	@Column(nullable=false, length=30)
 	private String nombre;
 
-	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="rolBean")
-	private List<Usuario> usuarios;
-
+	
 	public Rol() {
 	}
 
@@ -45,26 +42,5 @@ public class Rol implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return this.usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public Usuario addUsuario(Usuario usuario) {
-		getUsuarios().add(usuario);
-		usuario.setRolBean(this);
-
-		return usuario;
-	}
-
-	public Usuario removeUsuario(Usuario usuario) {
-		getUsuarios().remove(usuario);
-		usuario.setRolBean(null);
-
-		return usuario;
-	}
 
 }

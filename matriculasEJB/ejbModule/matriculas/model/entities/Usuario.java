@@ -23,6 +23,8 @@ public class Usuario implements Serializable {
 	@Column(nullable=false, length=50)
 	private String correo;
 
+	private Boolean estado;
+
 	@Column(nullable=false, length=100)
 	private String password;
 
@@ -35,10 +37,8 @@ public class Usuario implements Serializable {
 	@JoinColumn(name="persona")
 	private Persona personaBean;
 
-	//bi-directional many-to-one association to Rol
-	@ManyToOne
-	@JoinColumn(name="rol")
-	private Rol rolBean;
+	
+	private int rol;
 
 	public Usuario() {
 	}
@@ -57,6 +57,14 @@ public class Usuario implements Serializable {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+	public Boolean getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
 
 	public String getPassword() {
@@ -97,12 +105,12 @@ public class Usuario implements Serializable {
 		this.personaBean = personaBean;
 	}
 
-	public Rol getRolBean() {
-		return this.rolBean;
+	public int getRol() {
+		return this.rol;
 	}
 
-	public void setRolBean(Rol rolBean) {
-		this.rolBean = rolBean;
+	public void setRol(int rol) {
+		this.rol = rol;
 	}
 
 }

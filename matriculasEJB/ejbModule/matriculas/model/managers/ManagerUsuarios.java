@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import matriculas.model.dto.usuariosDTO;
+import matriculas.model.entities.Persona;
 import matriculas.model.entities.Usuario;
 
 /**
@@ -25,35 +26,78 @@ public class ManagerUsuarios {
 	public ManagerUsuarios() {
 	}
 
-	public void registrarUsuario(String nombres, String apellidos, String cedula, String correo, String password,
-			int rol, String ciudad, String callePrincipal, String calleSecundaria, String numCasa) throws Exception{
+	public void registrarPersona(Persona persona, Usuario user ) throws Exception{
 		
-		if(  nombres.equals("") ) {
+		if ( persona == null ) {
+			persona = new Persona();
+		}
+		
+		List<Usuario> listUser = new ArrayList<Usuario>();
+
+		if(  persona.getNombres() .equals("") ) {
 			throw new Exception("Por favor ingresa los nombres");
 		}
 		
-		if(  apellidos.equals("") ) {
+		if(  persona.getApellidos(). equals("") ) {
 			throw new Exception("Por favor ingresa los apellidos");
 		}
 	
-		if(  correo.equals("") ) {
+		if(   persona.getCedula().equals("") ) {
+			throw new Exception("Por favor ingresa la cedula");
+		}
+		
+		if(   persona.getCedula().length()    != 10 ||  !isNumeric(persona.getCedula()) ) {
+			throw new Exception("La cedula debe constar de 10 caracteres numericos");
+		}
+	
+		if ( buscarPersonaPorCedula(persona.getCedula()).size() != 0 ) {
+			throw new Exception("la cedula ingresada ya se encuentra registrada en el sistema");
+		}	
+		
+		
+		listUser.add(user);
+	    persona.setUsuarios(listUser);
+	    
+	    em.persist(persona);
+	}
+	
+	
+	public Usuario registrarUsuarios( Usuario user ) throws Exception {
+		
+		if(  user.getCorreo().equals("") ) {
 			throw new Exception("Por favor ingresa el correo");
 		}
 		
-		if(  password.equals("") ) {
-			throw new Exception("Por favor ingresa la contraseña");
+		if( user.getPassword().equals("") ) {
+			throw new Exception("Por favor ingresa una contraseña");
 		}
 		
-		if(  rol == 0 ) {
-			throw new Exception("Por favor seleccionar el rol de usuario");
+		if( user.getRol()  == 0) {
+			throw new Exception("Por favor selecciona un rol");
 		}
 		
-		System.out.println(  "rol ->  "+rol  );
-		System.out.println(  "nombres  -> "+nombres  );
-		
-		
+	    return user;
 	}
 	
+	
+//	private void agregarUsuario(int rol, int persona, String  correo, String password) {
+//		Usuario user = new Usuario();
+//		user.setCorreo(correo);
+//		user.setper
+//		em.persist(user);
+//	}
+//	
+//	private void agregarPersona(String nombres, String apellidos, String cedula, String ciudad, String calleP, String calleS, String numCasa) {
+//		
+//	}
+//	
+	public List<Object[]> buscarPersonaPorCedula(String cedula) {
+			Query q = em.createNativeQuery("select * from persona where cedula='"+cedula+"'");
+		   List<Object[]> u = q.getResultList();
+		   return u;
+	}
+	
+
 	public List<usuariosDTO> obtenerTodoslosUsuarios() throws Exception {
 		
 		String consulta = "select p.nombres, p.apellidos, u.correo,p.cedula, u.estado, p.dir_ciudad as ciudad, \n"+
@@ -93,6 +137,14 @@ public class ManagerUsuarios {
 		}
 		
 		return usuarios;
-		
+	}
+	
+	private  boolean isNumeric(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
 	}
 }

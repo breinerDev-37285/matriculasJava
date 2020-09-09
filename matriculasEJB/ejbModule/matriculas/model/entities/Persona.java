@@ -23,6 +23,9 @@ public class Persona implements Serializable {
 	@Column(nullable=false, length=30)
 	private String apellidos;
 
+	@Column(nullable=false, length=10)
+	private String cedula;
+
 	@Column(name="dir_calle_principal", length=30)
 	private String dirCallePrincipal;
 
@@ -43,7 +46,7 @@ public class Persona implements Serializable {
 	private List<Telefono> telefonos;
 
 	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="personaBean")
+	@OneToMany(mappedBy="personaBean",cascade = CascadeType.ALL)
 	private List<Usuario> usuarios;
 
 	public Persona() {
@@ -63,6 +66,14 @@ public class Persona implements Serializable {
 
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
+	}
+
+	public String getCedula() {
+		return this.cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
 	public String getDirCallePrincipal() {

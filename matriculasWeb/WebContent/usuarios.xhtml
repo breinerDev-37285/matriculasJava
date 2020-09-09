@@ -64,11 +64,11 @@
 						<p:outputPanel deferred="true" class="item-container">
 						
 							<h:outputText value="Nombres completos:" class="elem" />
-							<p:inputText value="#{beanUsuarios.nombres}" class="elem"
+							<p:inputText value="#{beanUsuarios.persona.nombres}" class="elem"
 								placeholder="nombre de usuario" />
 
 							<h:outputText value="Apellidos completos:" class="elem" />
-							<p:inputText value="#{beanUsuarios.apellidos}" class="elem"
+							<p:inputText value="#{beanUsuarios.persona.apellidos}" class="elem"
 								placeholder="apellidos de usuario" />
 
 						</p:outputPanel>
@@ -77,12 +77,12 @@
 
 							<h:outputText value="Cedula" class="elem" />
 
-							<p:inputText value="#{beanUsuarios.cedula}" class="elem"
+							<p:inputText value="#{beanUsuarios.persona.cedula}" class="elem"
 								placeholder="1009874563210" />
 								
 								
 								<h:outputText value="Ciudad:" class="elem" />
-							<p:inputText value="#{beanUsuarios.ciudad}" class="elem"
+							<p:inputText value="#{beanUsuarios.persona.dirCiudad}" class="elem"
 								placeholder="ibarra" />
 							
 						</p:outputPanel>
@@ -92,11 +92,11 @@
 						<p:outputPanel deferred="true" class="item-container">
 
 							<h:outputText value="Ingrese su correo:" class="elem" />
-							<p:inputText value="#{beanUsuarios.correo}" class="elem"
+							<p:inputText value="#{beanUsuarios.usuario.correo}" class="elem"
 								placeholder="usuario@dominio.com" />
 
 							<h:outputText value="Ingrese su contraseña:" class="elem" />
-							<p:password value="#{beanUsuarios.password}" class="elem"
+							<p:password value="#{beanUsuarios.usuario.password}" class="elem"
 								placeholder="**********" />
 
 
@@ -106,12 +106,12 @@
 							
 
 							<h:outputText value="Calle principal:" class="elem" />
-							<p:inputText value="#{beanUsuarios.callePrincipal}" class="elem"
+							<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}" class="elem"
 								placeholder="fray vacas galindo" />
 								
 								
 								<h:outputText value="Calle secundaria:" class="elem" />
-							<p:inputText value="#{beanUsuarios.calleSecundaria}" class="elem"
+							<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}" class="elem"
 								placeholder="bastion" />
 
 						</p:outputPanel>
@@ -122,13 +122,13 @@
 						
 							
 							<h:outputText value="Numero de Casa" class="elem" />
-							<p:inputText value="#{beanUsuarios.numeroCasa}" class="elem chil"
+							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}" class="elem chil"
 								placeholder="12-03" />
 							
 							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-							   <p:selectOneMenu id="sd" value="#{beanUsuarios.rol}" effect="fold" editable="true" class="elemrol">
+							   <p:selectOneMenu id="sd" value="#{beanUsuarios.usuario.rol }" effect="fold" editable="true" >
 								<f:selectItem itemLabel="Seleccione el rol..." noSelectionOption="true"  />
-								<f:selectItems value="#{ beanUsuarios.roles }" var="rol"
+								<f:selectItems value="#{ beanUsuarios.roles}" var="rol"
 									itemLabel="#{ rol.nombre }" itemValue="#{ rol.id }" />
 							</p:selectOneMenu>
 

@@ -6,7 +6,9 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import matriculas.model.dto.usuariosDTO;
+import matriculas.model.entities.Persona;
 import matriculas.model.entities.Rol;
+import matriculas.model.entities.Usuario;
 import matriculas.model.managers.ManagerLogin;
 import matriculas.model.managers.ManagerUsuarios;
 
@@ -26,22 +28,17 @@ public class BeanUsuarios implements Serializable {
 
 	private List<Rol> roles;
 	private List<usuariosDTO> usuarios;
-	private int rol;
-	private String nombres;
-	private String apellidos;
-	private String cedula;
-	private String correo;
-	private String password;
-	private String ciudad;
-	private String callePrincipal;
-	private String calleSecundaria;
-	private String numeroCasa;
+	private Usuario usuario;
+	private Persona persona;
+	
 
 	@PostConstruct
 	public void init() {
 		try {
 			roles = mLogin.obtenerTodosRoles();
 			usuarios= mUsuario.obtenerTodoslosUsuarios();
+			persona = new Persona();
+			usuario = new Usuario();
 		} catch (Exception e) {
 			JSFUtil.crearMensajeInfo(e.getMessage());
 			e.printStackTrace();
@@ -50,15 +47,19 @@ public class BeanUsuarios implements Serializable {
 
 	public void registrarUsuario() {
 		try {
-			mUsuario.registrarUsuario(nombres, apellidos, cedula, correo, password, rol, ciudad, callePrincipal,
-					calleSecundaria, numeroCasa);
+			usuario = mUsuario.registrarUsuarios(usuario);
+			mUsuario.registrarPersona(persona,usuario);
+			
+			usuarios= mUsuario.obtenerTodoslosUsuarios();
+			persona = new Persona();
+			usuario = new Usuario();
+			
 			JSFUtil.crearMensajeInfo("usuario registrado correctamente");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError( e.getMessage() );
 			e.printStackTrace();
 		}
 	}
-	
 
 	public List<Rol> getRoles() {
 		return roles;
@@ -68,86 +69,6 @@ public class BeanUsuarios implements Serializable {
 		this.roles = roles;
 	}
 
-	public int getRol() {
-		return rol;
-	}
-
-	public void setRol(int rol) {
-		this.rol = rol;
-	}
-
-	public String getNombres() {
-		return nombres;
-	}
-
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	public String getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getCiudad() {
-		return ciudad;
-	}
-
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
-
-	public String getCallePrincipal() {
-		return callePrincipal;
-	}
-
-	public void setCallePrincipal(String callePrincipal) {
-		this.callePrincipal = callePrincipal;
-	}
-
-	public String getCalleSecundaria() {
-		return calleSecundaria;
-	}
-
-	public void setCalleSecundaria(String calleSecundaria) {
-		this.calleSecundaria = calleSecundaria;
-	}
-
-	public String getNumeroCasa() {
-		return numeroCasa;
-	}
-
-	public void setNumeroCasa(String numeroCasa) {
-		this.numeroCasa = numeroCasa;
-	}
-
 	public List<usuariosDTO> getUsuarios() {
 		return usuarios;
 	}
@@ -155,7 +76,21 @@ public class BeanUsuarios implements Serializable {
 	public void setUsuarios(List<usuariosDTO> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
 
 }
