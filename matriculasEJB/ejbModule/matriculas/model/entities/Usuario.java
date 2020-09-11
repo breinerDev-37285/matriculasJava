@@ -16,7 +16,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
 	private Integer id;
 
@@ -37,8 +37,10 @@ public class Usuario implements Serializable {
 	@JoinColumn(name="persona")
 	private Persona personaBean;
 
-	
-	private int rol;
+	//bi-directional many-to-one association to Rol
+	@ManyToOne
+	@JoinColumn(name="rol")
+	private Rol rolBean;
 
 	public Usuario() {
 	}
@@ -105,12 +107,12 @@ public class Usuario implements Serializable {
 		this.personaBean = personaBean;
 	}
 
-	public int getRol() {
-		return this.rol;
+	public Rol getRolBean() {
+		return this.rolBean;
 	}
 
-	public void setRol(int rol) {
-		this.rol = rol;
+	public void setRolBean(Rol rolBean) {
+		this.rolBean = rolBean;
 	}
 
 }

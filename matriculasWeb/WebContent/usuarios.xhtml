@@ -36,7 +36,7 @@
 
 			<f:facet name="right">
 				<span class="fa fa-user" />
-				<h:outputText value="   #{beanLogin.correo}" />
+				<h:outputText value=" #{beanLogin.correo}" />
 				<p:commandButton value="Cerrar Session" icon="fa fa-sign-out"
 					style="border: none; outline:none"
 					action="#{beanLogin.actionCerrarSession()}" />
@@ -54,7 +54,7 @@
 
 	<p:outputPanel deferred="true">
 
-		<h:form>
+		<h:form id="form1">
 			<p:panel header="Agregar un nuevo usuario" class="panel">
 
 				<p:outputPanel deferred="true" class="form_panel">
@@ -62,14 +62,14 @@
 					<p:outputPanel deferred="true" class="container">
 
 						<p:outputPanel deferred="true" class="item-container">
-						
+
 							<h:outputText value="Nombres completos:" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.nombres}" class="elem"
-								placeholder="nombre de usuario" />
+							<p:inputText value="#{ beanUsuarios.persona.nombres }"
+								class="elem" placeholder="nombre de usuario" />
 
 							<h:outputText value="Apellidos completos:" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.apellidos}" class="elem"
-								placeholder="apellidos de usuario" />
+							<p:inputText value="#{beanUsuarios.persona.apellidos}"
+								class="elem" placeholder="apellidos de usuario" />
 
 						</p:outputPanel>
 
@@ -77,14 +77,14 @@
 
 							<h:outputText value="Cedula" class="elem" />
 
-							<p:inputText value="#{beanUsuarios.persona.cedula}" class="elem"
-								placeholder="1009874563210" />
-								
-								
-								<h:outputText value="Ciudad:" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.dirCiudad}" class="elem"
-								placeholder="ibarra" />
-							
+							<p:inputText value="#{ beanUsuarios.persona.cedula }"
+								class="elem" placeholder="1009874563210" />
+
+
+							<h:outputText value="Ciudad:" class="elem" />
+							<p:inputText value="#{beanUsuarios.persona.dirCiudad}"
+								class="elem" placeholder="ibarra" />
+
 						</p:outputPanel>
 
 
@@ -103,39 +103,43 @@
 						</p:outputPanel>
 
 						<p:outputPanel deferred="true" class="item-container">
-							
+
 
 							<h:outputText value="Calle principal:" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}" class="elem"
-								placeholder="fray vacas galindo" />
-								
-								
-								<h:outputText value="Calle secundaria:" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}" class="elem"
-								placeholder="bastion" />
+							<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
+								class="elem" placeholder="fray vacas galindo" />
+
+
+							<h:outputText value="Calle secundaria:" class="elem" />
+							<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}"
+								class="elem" placeholder="bastion" />
 
 						</p:outputPanel>
 
 
 
 						<p:outputPanel deferred="true" class="item-container">
-						
-							
+
+
 							<h:outputText value="Numero de Casa" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}" class="elem chil"
-								placeholder="12-03" />
-							
-							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-							   <p:selectOneMenu id="sd" value="#{beanUsuarios.usuario.rol }" effect="fold" editable="true" >
-								<f:selectItem itemLabel="Seleccione el rol..." noSelectionOption="true"  />
-								<f:selectItems value="#{ beanUsuarios.roles}" var="rol"
-									itemLabel="#{ rol.nombre }" itemValue="#{ rol.id }" />
+							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
+								class="elem chil" placeholder="12-03" />
+
+							<p:outputLabel for="sd"  value="Seleccione el Rol " class="elem" />
+							<p:selectOneMenu  value="#{beanUsuarios.rol}"  id="sd" effect="fold"
+								 editable="true">
+								<f:selectItem itemLabel="Seleccione uno...."  
+									noSelectionOption="true" />
+								<f:selectItems  value="#{beanUsuarios.roles}" var="rol"
+									itemLabel="#{rol.nombre}"  itemValue="#{rol.id}" />
 							</p:selectOneMenu>
 
 						</p:outputPanel>
 
-						<p:commandButton value="Registrar" class="buttonreg"  icon="fa fa-save"
-							actionListener="#{beanUsuarios.registrarUsuario()}" />
+						<p:commandButton value="Registrar" class="buttonreg"
+						   update="@form,:form2"
+							actionListener="#{beanUsuarios.registrarUsuario()}"
+							icon="fa fa-save" />
 
 					</p:outputPanel>
 
@@ -143,7 +147,7 @@
 			</p:panel>
 		</h:form>
 
-		<h:form>
+		<h:form id="form2">
 			<p:panel header="Lista de usuarios">
 				<p:dataTable var="user" value="#{beanUsuarios.usuarios}">
 					<p:column headerText="Nombres">
@@ -157,7 +161,7 @@
 					<p:column headerText="Correo">
 						<h:outputText value="#{user.correo}" />
 					</p:column>
-					
+
 					<p:column headerText="Estado">
 						<h:outputText value="#{user.estado}" />
 					</p:column>
@@ -182,12 +186,12 @@
 					<p:column headerText="Num Casa">
 						<h:outputText value="#{user.numCasa}" />
 					</p:column>
-					
+
 					<p:column headerText="Opciones">
-							<p:commandButton  value=""  icon="fa fa-trash"/>
-							<p:commandButton  value=""  icon="fa fa-edit"/>
+						<p:commandButton icon="fa fa-trash" />
+						<p:commandButton icon="fa fa-edit" />
 					</p:column>
-					
+
 				</p:dataTable>
 			</p:panel>
 		</h:form>

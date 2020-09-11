@@ -30,6 +30,7 @@ public class BeanUsuarios implements Serializable {
 	private List<usuariosDTO> usuarios;
 	private Usuario usuario;
 	private Persona persona;
+	private int rol;
 	
 
 	@PostConstruct
@@ -38,7 +39,8 @@ public class BeanUsuarios implements Serializable {
 			roles = mLogin.obtenerTodosRoles();
 			usuarios= mUsuario.obtenerTodoslosUsuarios();
 			persona = new Persona();
-			usuario = new Usuario();
+			usuario = new Usuario();			
+			
 		} catch (Exception e) {
 			JSFUtil.crearMensajeInfo(e.getMessage());
 			e.printStackTrace();
@@ -47,13 +49,11 @@ public class BeanUsuarios implements Serializable {
 
 	public void registrarUsuario() {
 		try {
-			usuario = mUsuario.registrarUsuarios(usuario);
-			mUsuario.registrarPersona(persona,usuario);
-			
+				
+			mUsuario.registrarUsuario( usuario, rol,persona );
 			usuarios= mUsuario.obtenerTodoslosUsuarios();
-			persona = new Persona();
 			usuario = new Usuario();
-			
+			persona = new Persona();
 			JSFUtil.crearMensajeInfo("usuario registrado correctamente");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError( e.getMessage() );
@@ -92,5 +92,16 @@ public class BeanUsuarios implements Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+
+	public int getRol() {
+		return rol;
+	}
+
+	public void setRol(int rol) {
+		this.rol = rol;
+	}
+
+	
+	
 
 }
