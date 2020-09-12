@@ -23,19 +23,25 @@ public class BeanPeriodoAcademico implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		listaPeriodoAcademico = mPeriodoAcademico.findAllPeriodoAcademico();
 		periodoAcademico = new PeriodoAcademico();
+		listaPeriodoAcademico = mPeriodoAcademico.findAllPeriodoAcademico();
 	}
 
 	public void registrarPeriodoAcademico() {
 		try {
 			mPeriodoAcademico.registrarPeriodoAcademico(periodoAcademico);
 			listaPeriodoAcademico = mPeriodoAcademico.findAllPeriodoAcademico();
-			periodoAcademico = new PeriodoAcademico();
-
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
-			e.printStackTrace();
+		}
+	}
+
+	public void actualizarPeriodoAcademico(PeriodoAcademico periodoAcademico) {
+		try {
+			mPeriodoAcademico.actualizarPeriodoAcademico(periodoAcademico);
+			listaPeriodoAcademico = mPeriodoAcademico.findAllPeriodoAcademico();
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
 		}
 	}
 
