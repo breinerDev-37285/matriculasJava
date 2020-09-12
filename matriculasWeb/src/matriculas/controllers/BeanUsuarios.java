@@ -49,7 +49,6 @@ public class BeanUsuarios implements Serializable {
 
 	public void registrarUsuario() {
 		try {
-				
 			mUsuario.registrarUsuario( usuario, rol,persona );
 			usuarios= mUsuario.obtenerTodoslosUsuarios();
 			usuario = new Usuario();
@@ -59,6 +58,29 @@ public class BeanUsuarios implements Serializable {
 			JSFUtil.crearMensajeError( e.getMessage() );
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public void actualizarUsuario( usuariosDTO user ) {
+		try {
+			mUsuario.actualizarUsuario(user);
+			usuarios= mUsuario.obtenerTodoslosUsuarios();
+			JSFUtil.crearMensajeInfo("usuario actulizado  correctamente");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError( e.getMessage() );
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarUsuario( usuariosDTO user ) {
+			try {
+				mUsuario.eliminarUsuario(user);
+				usuarios= mUsuario.obtenerTodoslosUsuarios();
+				JSFUtil.crearMensajeInfo("usuario eliminado  correctamente");
+			} catch (Exception e) {
+				JSFUtil.crearMensajeError( e.getMessage() );
+				e.printStackTrace();
+			}
 	}
 
 	public List<Rol> getRoles() {

@@ -91,6 +91,44 @@ public class ManagerUsuarios {
 
 		return persona;
 	}
+	
+	public void actualizarUsuario(usuariosDTO usuario) throws Exception {
+		
+			if( usuario.getCiudad() == null ) {
+				usuario.setCiudad("");
+			}
+			
+			if( usuario.getCalleP() == null ) {
+				usuario.setCalleP("");
+			}
+			
+			if( usuario.getCalleS() == null ) {
+				usuario.setCalleS("");
+			}
+			
+			if( usuario.getNumCasa() == null ) {
+				usuario.setNumCasa("");
+			}
+			
+		
+			Persona persona = em.find(Persona.class, usuario.getId());
+		    Usuario user = persona.getUsuarios().get(0);
+		   user.setCorreo(usuario.getCorreo());
+		   user.setEstado(usuario.getEstado());
+		   
+		   persona.setNombres(usuario.getNombres());
+		   persona.setApellidos(usuario.getApellidos());
+		   persona.setCedula(usuario.getCedula().toString());
+		   persona.setDirCallePrincipal(usuario.getCalleP().toString());
+		   persona.setDirCalleSecundaria(usuario.getCalleS().toString());
+		   persona.setDirCiudad(usuario.getCiudad().toString());
+		   persona.setDirNumCasa(usuario.getNumCasa().toString());
+			
+		   persona = validarPersona(persona);
+			
+			em.merge(persona);
+			
+	}
 
 	public List<Object[]> buscarPersonaPorCedula(String cedula) {
 		Query q = em.createNativeQuery("select * from persona where cedula='" + cedula + "'");
@@ -100,7 +138,7 @@ public class ManagerUsuarios {
 
 	public List<usuariosDTO> obtenerTodoslosUsuarios() throws Exception {
 
-		String consulta = "select p.nombres, p.apellidos, u.correo,p.cedula, u.estado, p.dir_ciudad as ciudad, \n"
+		String consulta = "select p.id, p.nombres, p.apellidos, u.correo,p.cedula, u.estado, p.dir_ciudad as ciudad, \n"
 				+ "p.dir_calle_principal as calleP, p.dir_calle_secundaria as calleS, p.dir_num_casa as numCasa\n"
 				+ "from usuario u\n" + "inner join persona p\n" + "on u.persona = p.id;";
 
@@ -109,30 +147,37 @@ public class ManagerUsuarios {
 		List<usuariosDTO> usuarios = new ArrayList<usuariosDTO>();
 
 		for (int i = 0; i < fu.size(); i++) {
+			
+			int id = Integer.parseInt( fu.get(i)[0].toString()  );
+			String nombres = fu.get(i)[1].toString();
+			String apellidos = fu.get(i)[2].toString();
+			String correo = fu.get(i)[3].toString();
+			Object cedula = fu.get(i)[4];
+			boolean estado = Boolean.parseBoolean(fu.get(i)[5].toString());
+			Object ciudad = fu.get(i)[6];
+			Object calleP = fu.get(i)[7];
+			Object calleS = fu.get(i)[8];
+			Object numCasa = fu.get(i)[9];
 
-			String nombres = fu.get(i)[0].toString();
-			String apellidos = fu.get(i)[1].toString();
-			String correo = fu.get(i)[2].toString();
-			Object cedula = fu.get(i)[3];
-			boolean estado = Boolean.parseBoolean(fu.get(i)[4].toString());
-			Object ciudad = fu.get(i)[5];
-			Object calleP = fu.get(i)[6];
-			Object calleS = fu.get(i)[7];
-			Object numCasa = fu.get(i)[8];
-
-			String est = "inactivo";
-
-			if (estado)
-				est = "activo";
-
-			usuariosDTO userdf = new usuariosDTO(nombres, apellidos, cedula, correo, est, ciudad, calleP, calleS,
+			usuariosDTO userdf = new usuariosDTO(id,nombres, apellidos, cedula, correo, estado, ciudad, calleP, calleS,
 					numCasa);
 
 			usuarios.add(userdf);
+			
 		}
 
 		return usuarios;
 	}
+	
+	
+	public void eliminarUsuario(usuariosDTO usuario)  {
+		
+		Persona persona = em.find(Persona.class, usuario.getId());
+	    Usuario user = persona.getUsuarios().get(0);
+	    
+	    em.remove(persona);
+	}
+	
 
 	private boolean isNumeric(String cadena) {
 		try {
