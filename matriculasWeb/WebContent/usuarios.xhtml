@@ -223,10 +223,13 @@ body {
 
 					<p:column headerText="Num Casa">
 						<h:inputText value="#{user.numCasa}" class="inputText" />
+
 					</p:column>
 
 					<p:column headerText="Opciones">
-						<p:commandButton icon="fa fa-trash" class="buttonOp" />
+						<p:commandButton icon="fa fa-trash" update="@form"
+							actionListener="#{beanUsuarios.eliminarUsuario(user)}"
+							class="buttonOp" />
 						<p:commandButton icon="fa fa-edit" update="@form"
 							actionListener="#{beanUsuarios.actualizarUsuario(user)}"
 							class="buttonOp" />
