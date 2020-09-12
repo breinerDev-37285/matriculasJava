@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<link rel="stylesheet" href="./utils/styles/general.css" />
+		<title>Registro de Periodo Academico</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form>
+		<p:growl id="messages" showDetail="true" />
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Usuarios" class="button" icon="fa fa-user"
+					action="matriculas.xhtml" />
+				<p:commandButton value="Matriculas" class="button"
+					icon="fa fa-check" action="matriculas.xhtml" />
+				<p:commandButton value="Materias" class="button" icon="fa fa-book"
+					action="matriculas.xhtml" />
+				<p:commandButton value="Ciclo academico" class="button"
+					icon="fa fa-undo" action="matriculas.xhtml" />
+				<p:commandButton value="Periodo Academico" class="button"
+					icon="fa fa-graduation-cap" action="periodoAcademico.xhtml" />
+			</f:facet>
+
+			<f:facet name="right">
+				<span class="fa fa-user" />
+				<h:outputText value=" #{beanLogin.correo}" />
+				<p:commandButton value="Cerrar Session" icon="fa fa-sign-out"
+					style="border: none; outline:none"
+					action="#{beanLogin.actionCerrarSession()}" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+
+	<br />
+	<hr />
+	<br />
+
+	<h3>Periodo Academico</h3>
+
+	<br />
+
+	<p:outputPanel deferred="true">
+
+		<h:form id="form1">
+			<p:panel header="Agregar un nuevo Periodo Academico" class="panel">
+
+				<p:outputPanel deferred="true" class="form_panel">
+
+					<p:outputPanel deferred="true" class="container">
+
+						<p:outputPanel deferred="true" class="item-container">
+
+							<h:outputText value="Fecha de Inicio del Periodo Academico:"
+								class="elem" />
+							<p:datePicker
+								value="#{beanPeriodoAcademico.periodoAcademico.fechaInicio}"
+								class="elem" />
+
+							<h:outputText value="Fecha de Fin del Periodo Academico:"
+								class="elem" />
+							<p:datePicker
+								value="#{beanPeriodoAcademico.periodoAcademico.fechaFin}"
+								class="elem" />
+
+						</p:outputPanel>
+
+						<p:commandButton value="Registrar" class="buttonreg"
+							update="@form,:form2"
+							actionListener="#{beanPeriodoAcademico.registrarPeriodoAcademico()}"
+							icon="fa fa-save" />
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:panel>
+		</h:form>
+
+		<h:form id="form2">
+			<p:panel header="Lista de Periodos Academicos">
+				<p:dataTable var="periodoAcademico"
+					value="#{beanPeriodoAcademico.listaPeriodoAcademico}">
+					<p:column headerText="Fecha de Inicio del Periodo Academico">
+						<h:outputText value="#{periodoAcademico.fechaInicio}" />
+					</p:column>
+
+					<p:column headerText="Fecha De Fin del Periodo Academico">
+						<h:outputText value="#{periodoAcademico.fechaFin}" />
+					</p:column>
+
+					<p:column headerText="Opciones">
+						<p:commandButton icon="fa fa-trash" />
+						<p:commandButton icon="fa fa-edit" />
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</p:outputPanel>
+</body>
+</html>
