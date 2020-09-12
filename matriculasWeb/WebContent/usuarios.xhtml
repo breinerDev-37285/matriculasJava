@@ -32,6 +32,8 @@
 					action="matriculas.xhtml" />
 				<p:commandButton value="Ciclo academico" class="button"
 					icon="fa fa-undo" action="matriculas.xhtml" />
+				<p:commandButton value="Periodo Academico" class="button"
+					icon="fa fa-graduation-cap" action="periodoAcademico.xhtml" />
 			</f:facet>
 
 			<f:facet name="right">
@@ -125,19 +127,19 @@
 							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
 								class="elem chil" placeholder="12-03" />
 
-							<p:outputLabel for="sd"  value="Seleccione el Rol " class="elem" />
-							<p:selectOneMenu  value="#{beanUsuarios.rol}"  id="sd" effect="fold"
-								 editable="true">
-								<f:selectItem itemLabel="Seleccione uno...."  
+							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
+							<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
+								effect="fold" editable="true">
+								<f:selectItem itemLabel="Seleccione uno...."
 									noSelectionOption="true" />
-								<f:selectItems  value="#{beanUsuarios.roles}" var="rol"
-									itemLabel="#{rol.nombre}"  itemValue="#{rol.id}" />
+								<f:selectItems value="#{beanUsuarios.roles}" var="rol"
+									itemLabel="#{rol.nombre}" itemValue="#{rol.id}" />
 							</p:selectOneMenu>
 
 						</p:outputPanel>
 
 						<p:commandButton value="Registrar" class="buttonreg"
-						   update="@form,:form2"
+							update="@form,:form2"
 							actionListener="#{beanUsuarios.registrarUsuario()}"
 							icon="fa fa-save" />
 
