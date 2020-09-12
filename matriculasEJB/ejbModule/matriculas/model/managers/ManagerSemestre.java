@@ -25,7 +25,7 @@ public class ManagerSemestre {
     public ManagerSemestre() {
     }
     
-    public Semestre findSemestreyById(int  )
+//    public Semestre findSemestreyById(int  )
     
     public void registrarSemestre(Semestre semestre, int nivel,PeriodoAcademico periodo )throws Exception{
     	
