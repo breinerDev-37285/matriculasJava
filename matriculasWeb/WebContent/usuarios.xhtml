@@ -160,7 +160,7 @@ body {
 							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
 								class="elem chil" placeholder="12-03" />
 							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-							<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
+							<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd" class="elem"
 								effect="fold" editable="true">
 								<f:selectItem itemLabel="Seleccione uno...."
 									noSelectionOption="true" />
@@ -228,10 +228,10 @@ body {
 
 					<p:column headerText="Opciones">
 						<p:commandButton icon="fa fa-trash" update="@form"
-							actionListener="#{beanUsuarios.eliminarUsuario(user)}"
+							actionListener="#{beanUsuarios.eliminarUsuario(user,beanLogin.correo)}"
 							class="buttonOp" />
 						<p:commandButton icon="fa fa-edit" update="@form"
-							actionListener="#{beanUsuarios.actualizarUsuario(user)}"
+							actionListener="#{beanUsuarios.actualizarUsuario(user,beanLogin.correo)}"
 							class="buttonOp" />
 					</p:column>
 

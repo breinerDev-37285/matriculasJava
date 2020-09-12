@@ -37,13 +37,19 @@ public class ManagerLogin {
 			
 			List<Object[]> getUsuario = query.getResultList();
 			
+			
 			String rol = getUsuario.get(0)[1].toString();
-		
-			switch (  rol  ) {
-		    		case "1": link = "estudiante.xhtml";  break;
-		    		case "2": link = "usuarios.xhtml"; break;
+			boolean estado = Boolean.parseBoolean(  getUsuario.get(0)[5].toString()  );
+			
+			if  ( !estado  ) {
+				throw new Exception( "El usuario se encuentra inactivo" );
 			}
+		
 	    		
+			switch (  rol  ) {
+					case "1": link = "estudiante.xhtml";  break;
+					case "2": link = "usuarios.xhtml"; break;
+			}				
 	       return link;
     }
     
@@ -51,5 +57,7 @@ public class ManagerLogin {
     		List<Rol> roles = em.createQuery("SELECT r FROM Rol r",Rol.class).getResultList();
     		return roles;
     }
+    
+  
 
 }
