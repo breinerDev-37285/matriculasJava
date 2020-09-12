@@ -1,6 +1,8 @@
 package matriculas.model.dto;
 
 public class usuariosDTO {
+	
+	private int id;
 	private  String nombres;
 	private String apellidos; 
 	private Object cedula;
@@ -12,8 +14,9 @@ public class usuariosDTO {
 	private Object numCasa;
 	
 	
-	public usuariosDTO(String nombres, String apellidos, Object cedula, String correo, boolean estado, Object ciudad,
+	public usuariosDTO(int id, String nombres, String apellidos, Object cedula, String correo, boolean estado, Object ciudad,
 			Object calleP, Object calleS, Object numCasa) {
+		this.id = id;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.cedula = cedula;
@@ -25,6 +28,15 @@ public class usuariosDTO {
 		this.numCasa = numCasa;
 	}
 
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNombres() {
 		return nombres;

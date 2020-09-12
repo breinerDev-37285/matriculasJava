@@ -63,12 +63,24 @@ public class BeanUsuarios implements Serializable {
 	
 	public void actualizarUsuario( usuariosDTO user ) {
 		try {
-			System.out.println("Nombre ->"+ user.getNombres() );
-			System.out.println("Nombre ->"+ user.getEstado() );
+			mUsuario.actualizarUsuario(user);
+			usuarios= mUsuario.obtenerTodoslosUsuarios();
+			JSFUtil.crearMensajeInfo("usuario actulizado  correctamente");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError( e.getMessage() );
 			e.printStackTrace();
 		}
+	}
+	
+	public void eliminarUsuario( usuariosDTO user ) {
+			try {
+				mUsuario.eliminarUsuario(user);
+				usuarios= mUsuario.obtenerTodoslosUsuarios();
+				JSFUtil.crearMensajeInfo("usuario eliminado  correctamente");
+			} catch (Exception e) {
+				JSFUtil.crearMensajeError( e.getMessage() );
+				e.printStackTrace();
+			}
 	}
 
 	public List<Rol> getRoles() {

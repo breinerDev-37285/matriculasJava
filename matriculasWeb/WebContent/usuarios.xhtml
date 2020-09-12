@@ -9,70 +9,68 @@
 	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<h:outputStylesheet library="css" name="./utils/css/general.css"  />
+		<h:outputStylesheet library="css" name="./utils/css/general.css" />
 		<title>Manager Cordinador</title>
-		
+
 		<style type="text/css">
-				@font-face{
-						font-family: ubuntu-regular;
-						src: url("assets/fonts/Ubuntu-Light.ttf");
-					}
-					
-					body {
-						background-color: #fff;
-						font-family: ubuntu-regular;	
-					}
-					
-					.container {
-						display: flex;
-						flex-wrap: wrap;
-						gap: 2em;
-						background: transparent;
-					}
-					
-					.form_panel{
-						width:100%;
-						padding: 2em 1em;
-					}
-					
-					.panel {
-						margin-bottom: 3em;
-					}
-					
-					.elem{
-						width: 100%;
-					}
-					
-					.item-container{
-					    font-family: ubuntu-regular;
-						display: flex;
-						flex-direction: column;
-						align-items: flex-start;
-						justify-content: space-between;
-						height: 150px;
-						width: 300px;
-					}
-					
-					.buttonreg{
-						width: 200px;
-						height: 35px;
-						margin-bottom: 50px;
-						align-self: flex-end;
-					}
-					
-					.inputText {
-						border: none;
-						outline: none;
-						background: transparent;
-					}
-					
-					.buttonOp{
-						margin-left: 1em;
-						border: solid red;
-					}
-					
-		
-		</style>
+@font-face {
+	font-family: ubuntu-regular;
+	src: url("assets/fonts/Ubuntu-Light.ttf");
+}
+
+body {
+	background-color: #fff;
+	font-family: ubuntu-regular;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2em;
+	background: transparent;
+}
+
+.form_panel {
+	width: 100%;
+	padding: 2em 1em;
+}
+
+.panel {
+	margin-bottom: 3em;
+}
+
+.elem {
+	width: 100%;
+}
+
+.item-container {
+	font-family: ubuntu-regular;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	height: 150px;
+	width: 300px;
+}
+
+.buttonreg {
+	width: 200px;
+	height: 35px;
+	margin-bottom: 50px;
+	align-self: flex-end;
+}
+
+.inputText {
+	border: none;
+	outline: none;
+	background: transparent;
+}
+
+.buttonOp {
+	margin-left: 1em;
+	border: solid red;
+}
+</style>
 	</f:facet>
 </h:head>
 
@@ -146,7 +144,7 @@
 
 
 						</p:outputPanel>
-							<p:outputPanel deferred="true" class="item-container">
+						<p:outputPanel deferred="true" class="item-container">
 							<h:outputText value="Calle principal:" class="elem" />
 							<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
 								class="elem" placeholder="fray vacas galindo" />
@@ -161,8 +159,8 @@
 							<h:outputText value="Numero de Casa" class="elem" />
 							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
 								class="elem chil" placeholder="12-03" />
-								<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-								<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
+							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
+							<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
 								effect="fold" editable="true">
 								<f:selectItem itemLabel="Seleccione uno...."
 									noSelectionOption="true" />
@@ -182,11 +180,11 @@
 			</p:panel>
 		</h:form>
 
-		<h:form id="form2" >
+		<h:form id="form2">
 			<p:panel header="Lista de usuarios">
 				<p:dataTable var="user" value="#{beanUsuarios.usuarios}">
 					<p:column headerText="Nombres">
-						<h:inputText  value="#{user.nombres}"  class="inputText"/>
+						<h:inputText value="#{user.nombres}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Apellidos">
@@ -194,42 +192,44 @@
 					</p:column>
 
 					<p:column headerText="Correo">
-						<h:inputText value="#{user.correo}"   class="inputText"/>
+						<h:inputText value="#{user.correo}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Estado">
-						
-								<p:selectOneMenu value="#{user.estado}">
-							            <f:selectItem itemLabel="activo" itemValue="true" />
-							            <f:selectItem itemLabel="inactivo" itemValue="false" />
-						        </p:selectOneMenu>
-						
+
+						<p:selectOneMenu value="#{user.estado}">
+							<f:selectItem itemLabel="activo" itemValue="true" />
+							<f:selectItem itemLabel="inactivo" itemValue="false" />
+						</p:selectOneMenu>
+
 					</p:column>
 
 					<p:column headerText="Cedula">
-						<h:inputText value="#{user.cedula}"  class="inputText" />
+						<h:inputText value="#{user.cedula}" class="inputText" />
 					</p:column>
 
 
 					<p:column headerText="Ciudad">
-						<h:inputText value="#{user.ciudad}"  class="inputText" />
+						<h:inputText value="#{user.ciudad}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Calle Prin.">
-						<h:inputText value="#{user.calleP}"  class="inputText" />
+						<h:inputText value="#{user.calleP}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Calle Sec.">
-						<h:inputText value="#{user.calleP}"  class="inputText" />
+						<h:inputText value="#{user.calleS}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Num Casa">
-						<h:inputText value="#{user.numCasa}"  class="inputText" />
+						<h:inputText value="#{user.numCasa}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Opciones">
-						<p:commandButton icon="fa fa-trash"  class="buttonOp"/>
-						<p:commandButton icon="fa fa-edit"  actionListener="#{beanUsuarios.actualizarUsuario(user)}"  class="buttonOp"/>
+						<p:commandButton icon="fa fa-trash" class="buttonOp" />
+						<p:commandButton icon="fa fa-edit" update="@form"
+							actionListener="#{beanUsuarios.actualizarUsuario(user)}"
+							class="buttonOp" />
 					</p:column>
 
 				</p:dataTable>
