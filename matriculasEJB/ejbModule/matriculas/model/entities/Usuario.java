@@ -23,6 +23,7 @@ public class Usuario implements Serializable {
 	@Column(nullable=false, length=50)
 	private String correo;
 
+	@Column(nullable=false)
 	private Boolean estado;
 
 	@Column(nullable=false, length=100)
