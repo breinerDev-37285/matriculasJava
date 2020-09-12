@@ -120,12 +120,7 @@ public class ManagerUsuarios {
 			Object calleS = fu.get(i)[7];
 			Object numCasa = fu.get(i)[8];
 
-			String est = "inactivo";
-
-			if (estado)
-				est = "activo";
-
-			usuariosDTO userdf = new usuariosDTO(nombres, apellidos, cedula, correo, est, ciudad, calleP, calleS,
+			usuariosDTO userdf = new usuariosDTO(nombres, apellidos, cedula, correo, estado, ciudad, calleP, calleS,
 					numCasa);
 
 			usuarios.add(userdf);
@@ -133,6 +128,7 @@ public class ManagerUsuarios {
 
 		return usuarios;
 	}
+	
 
 	private boolean isNumeric(String cadena) {
 		try {

@@ -49,12 +49,22 @@ public class BeanUsuarios implements Serializable {
 
 	public void registrarUsuario() {
 		try {
-				
 			mUsuario.registrarUsuario( usuario, rol,persona );
 			usuarios= mUsuario.obtenerTodoslosUsuarios();
 			usuario = new Usuario();
 			persona = new Persona();
 			JSFUtil.crearMensajeInfo("usuario registrado correctamente");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError( e.getMessage() );
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void actualizarUsuario( usuariosDTO user ) {
+		try {
+			System.out.println("Nombre ->"+ user.getNombres() );
+			System.out.println("Nombre ->"+ user.getEstado() );
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError( e.getMessage() );
 			e.printStackTrace();
