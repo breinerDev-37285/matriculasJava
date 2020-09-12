@@ -22,7 +22,6 @@ public class ManagerLogin {
 
 	@PersistenceContext
     private EntityManager em;
-    public ManagerLogin() { }
     
     public String verificarAcceso(String email, String password) throws Exception {
     	
