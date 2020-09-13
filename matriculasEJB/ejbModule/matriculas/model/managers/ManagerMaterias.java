@@ -38,6 +38,16 @@ public class ManagerMaterias {
 		em.persist(materia);
 	}
 	
+	public void actualizarMateria(Materia materia) throws Exception {
+		
+		int idSemestre = Integer.parseInt(materia.getSemestreBean().getNombre());
+		materia = validarMateria(materia, idSemestre);
+		Semestre semestre = em.find(Semestre.class,idSemestre );
+		
+		materia.setSemestreBean(semestre);
+		em.merge(materia);	
+	}
+	
 	
 	public Materia validarMateria( Materia materia, int semestre) throws Exception {
 		

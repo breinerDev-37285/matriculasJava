@@ -65,7 +65,7 @@ body {
 	background: transparent;
 }
 
-.caja > label{
+.caja>label {
 	margin: 1em;
 }
 
@@ -121,14 +121,14 @@ body {
 
 						<p:outputPanel deferred="true" class="item-container">
 							<p:outputPanel deferred="true" class="caja">
-								<p:outputLabel  value="Nombre" class="elem" />
+								<p:outputLabel value="Nombre" class="elem" />
 								<p:inputText value="#{ beanMateria.materia.nombre }"
 									class="elem" placeholder="matematicas" />
 							</p:outputPanel>
 							<p:outputPanel deferred="true" class="caja">
-								<p:outputLabel  value="Creditos:" class="elem" />
+								<p:outputLabel value="Creditos:" class="elem" />
 								<p:spinner id="basic" value="#{beanMateria.materia.creditos}"
-									class="elem" placeholder="4" min="0" max="6" />
+									class="elem" placeholder="4" min="0" max="5" />
 							</p:outputPanel>
 
 							<p:outputPanel deferred="true" class="caja">
@@ -167,20 +167,30 @@ body {
 					</p:column>
 
 					<p:column headerText="Creditos">
-						<h:inputText value="#{materia.creditos}" class="inputText" />
+						<p:spinner id="basic" value="#{materia.creditos}" class="elem"
+							placeholder="4" min="0" max="5"
+							style="border:none; width:100%; outline: none; background:transparent" />
 					</p:column>
 
 					<p:column headerText="Semestre">
-						<h:inputText value="#{materia.semestreBean.nombre}"
-							class="inputText" />
+
+						<p:selectOneMenu value="#{ materia.semestreBean.nombre }" id="sd"
+							style="border:none; width:100%; outline: none; background:transparent" class="inputText"
+							effect="fold" editable="true">
+							<f:selectItem itemLabel="Seleccione uno...." class="elem"
+								noSelectionOption="true" />
+							<f:selectItems value="#{beanMateria.semestres}" var="semestre"
+								itemLabel="#{semestre.nombre}" itemValue="#{semestre.id}" />
+						</p:selectOneMenu>
 					</p:column>
 
 
 
 					<p:column headerText="Opciones">
+				
 						<p:commandButton icon="fa fa-edit" update="@form"
 							actionListener="#{beanMateria.actionListenerActualizarMateria(materia)}" />
-
+	
 					</p:column>
 
 				</p:dataTable>

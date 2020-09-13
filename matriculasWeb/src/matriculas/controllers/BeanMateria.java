@@ -47,9 +47,12 @@ public class BeanMateria implements Serializable {
 	
 	public void actionListenerActualizarMateria( Materia materia )  {
 		try {
-			
+			mMateria.actualizarMateria(materia);
+			materia = new Materia();
+			materias = mMateria.findAllmaterias();
+			JSFUtil.crearMensajeInfo("Materia agregada correctamente");
 		} catch (Exception e) {
-			
+			JSFUtil.crearMensajeError(e.getLocalizedMessage());
 		}
 	}
 
