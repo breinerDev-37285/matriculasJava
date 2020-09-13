@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<h:outputStylesheet library="css" name="./utils/css/general.css" />
+		<title>Manager Cordinador</title>
+
+		<style type="text/css">
+@font-face {
+	font-family: ubuntu-regular;
+	src: url("assets/fonts/Ubuntu-Light.ttf");
+}
+
+body {
+	background-color: #fff;
+	font-family: ubuntu-regular;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2em;
+	background: transparent;
+}
+
+.form_panel {
+	width: 100%;
+	padding: 2em 1em;
+}
+
+.panel {
+	margin-bottom: 3em;
+}
+
+.elem {
+	width: 250px;
+}
+
+.item-container {
+	font-family: ubuntu-regular;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 150px;
+	align-items: center;
+}
+
+.buttonreg {
+	width: 250px;
+	height: 35px;
+}
+
+.inputText {
+	border: none;
+	outline: none;
+	background: transparent;
+}
+
+.caja > label{
+	margin: 1em;
+}
+
+.buttonOp {
+	margin-left: 1em;
+	border: solid red;
+}
+</style>
+	</f:facet>
+</h:head>
+<body>
+
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form>
+		<p:growl id="messages" showDetail="true" />
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Usuarios" class="button" icon="fa fa-user"
+					action="usuarios.xhtml" />
+				<p:commandButton value="Matriculas" class="button"
+					icon="fa fa-check" action="matriculas.xhtml" />
+				<p:commandButton value="Materias" class="button" icon="fa fa-book"
+					action="materias.xhtml" />
+				<p:commandButton value="Periodo Academico" class="button"
+					icon="fa fa-undo" action="periodoAcademico.xhtml" />
+			</f:facet>
+
+			<f:facet name="right">
+				<span class="fa fa-user" />
+				<h:outputText value=" #{beanLogin.correo}" class="elem" />
+				<p:commandButton value="Cerrar Session" icon="fa fa-sign-out"
+					style="border: none; outline:none"
+					action="#{beanLogin.actionCerrarSession()}" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+
+	<br />
+	<hr />
+
+	<br />
+
+	<p:outputPanel deferred="true">
+
+		<h:form id="form1">
+			<p:panel header="Agregar una nueva materia" class="panel">
+
+				<p:outputPanel deferred="true" class="form_panel">
+					<p:outputPanel deferred="true" class="container">
+
+						<p:outputPanel deferred="true" class="item-container">
+							<p:outputPanel deferred="true" class="caja">
+								<p:outputLabel  value="Nombre" class="elem" />
+								<p:inputText value="#{ beanMateria.materia.nombre }"
+									class="elem" placeholder="matematicas" />
+							</p:outputPanel>
+							<p:outputPanel deferred="true" class="caja">
+								<p:outputLabel  value="Creditos:" class="elem" />
+								<p:spinner id="basic" value="#{beanMateria.materia.creditos}"
+									class="elem" placeholder="4" min="0" max="6" />
+							</p:outputPanel>
+
+							<p:outputPanel deferred="true" class="caja">
+								<p:outputLabel for="sd" value="Seleccione el semestre"
+									class="elem" />
+								<p:selectOneMenu value="#{ beanMateria.semestre }" id="sd"
+									class="elem" effect="fold" editable="true">
+									<f:selectItem itemLabel="Seleccione uno...." class="elem"
+										noSelectionOption="true" />
+									<f:selectItems value="#{beanMateria.semestres}" var="semestre"
+										itemLabel="#{semestre.nombre}" itemValue="#{semestre.id}" />
+								</p:selectOneMenu>
+							</p:outputPanel>
+							<p:commandButton value="Registrar" class="buttonreg"
+								update="@form,:form2"
+								actionListener="#{beanMateria.actionListenerRegistrarMateria()}"
+								icon="fa fa-save" />
+
+						</p:outputPanel>
+
+
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:panel>
+		</h:form>
+
+
+
+		<h:form id="form2">
+			<p:panel header="Listado de materias">
+				<p:dataTable var="materia" value="#{beanMateria.materias}">
+					<p:column headerText="Nombre">
+						<h:inputText value="#{materia.nombre}" class="inputText" />
+					</p:column>
+
+					<p:column headerText="Creditos">
+						<h:inputText value="#{materia.creditos}" class="inputText" />
+					</p:column>
+
+					<p:column headerText="Semestre">
+						<h:inputText value="#{materia.semestreBean.nombre}"
+							class="inputText" />
+					</p:column>
+
+
+
+					<p:column headerText="Opciones">
+						<p:commandButton icon="fa fa-edit" update="@form"
+							actionListener="#{beanMateria.actionListenerActualizarMateria(materia)}" />
+
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</p:outputPanel>
+
+</body>
+</html>

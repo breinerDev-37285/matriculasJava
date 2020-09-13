@@ -89,11 +89,10 @@ body {
 				<p:commandButton value="Matriculas" class="button"
 					icon="fa fa-check" action="matriculas.xhtml" />
 				<p:commandButton value="Materias" class="button" icon="fa fa-book"
-					action="matriculas.xhtml" />
-				<p:commandButton value="Ciclo academico" class="button"
-					icon="fa fa-undo" action="matriculas.xhtml" />
+					action="materias.xhtml" />
+				
 				<p:commandButton value="Periodo Academico" class="button"
-					icon="fa fa-graduation-cap" action="periodoAcademico.xhtml" />
+					icon="fa fa-undo" action="periodoAcademico.xhtml" />
 			</f:facet>
 
 			<f:facet name="right">
@@ -161,11 +160,7 @@ body {
 							<h:outputText value="Numero de Casa" class="elem" />
 							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
 								class="elem chil" placeholder="12-03" />
-<<<<<<< HEAD
 
-=======
-								
->>>>>>> morocho
 							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
 							<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd" class="elem"
 								effect="fold" editable="true">

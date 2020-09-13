@@ -23,7 +23,7 @@ public class Persona implements Serializable {
 	@Column(nullable=false, length=30)
 	private String apellidos;
 
-	@Column(length=10)
+	@Column(nullable=false, length=10)
 	private String cedula;
 
 	@Column(name="dir_calle_principal", length=30)
