@@ -23,7 +23,7 @@
 		<p:toolbar>
 			<f:facet name="left">
 				<p:commandButton value="Usuarios" class="button" icon="fa fa-user"
-					action="matriculas.xhtml" />
+					action="usuarios.xhtml" />
 				<p:commandButton value="Matriculas" class="button"
 					icon="fa fa-check" action="matriculas.xhtml" />
 				<p:commandButton value="Materias" class="button" icon="fa fa-book"
@@ -63,17 +63,17 @@
 
 						<p:outputPanel deferred="true" class="item-container">
 
-							<h:outputText value="Fecha de Inicio del Periodo Academico:"
+							<p:outputLabel value="Fecha de Inicio del Periodo Academico:"
 								class="elem" />
 							<p:datePicker
 								value="#{beanPeriodoAcademico.periodoAcademico.fechaInicio}"
-								class="elem" />
+								class="elem" required="true" readonlyInput="true" />
 
-							<h:outputText value="Fecha de Fin del Periodo Academico:"
+							<p:outputLabel value="Fecha de Inicio del Periodo Academico:"
 								class="elem" />
 							<p:datePicker
 								value="#{beanPeriodoAcademico.periodoAcademico.fechaFin}"
-								class="elem" />
+								required="true" class="elem" readonlyInput="true" />
 
 						</p:outputPanel>
 
@@ -93,16 +93,19 @@
 				<p:dataTable var="periodoAcademico"
 					value="#{beanPeriodoAcademico.listaPeriodoAcademico}">
 					<p:column headerText="Fecha de Inicio del Periodo Academico">
-						<h:outputText value="#{periodoAcademico.fechaInicio}" />
+						<p:datePicker value="#{periodoAcademico.fechaInicio}" class="elem"
+							required="true" readonlyInput="true" />
 					</p:column>
 
 					<p:column headerText="Fecha De Fin del Periodo Academico">
-						<h:outputText value="#{periodoAcademico.fechaFin}" />
+						<p:datePicker value="#{periodoAcademico.fechaFin}" required="true"
+							class="elem" readonlyInput="true" />
 					</p:column>
 
 					<p:column headerText="Opciones">
-						<p:commandButton icon="fa fa-trash" />
-						<p:commandButton icon="fa fa-edit" />
+						<p:commandButton icon="fa fa-edit" class="buttonreg"
+							update="@form"
+							actionListener="#{beanPeriodoAcademico.actualizarPeriodoAcademico(periodoAcademico)}" />
 					</p:column>
 
 				</p:dataTable>

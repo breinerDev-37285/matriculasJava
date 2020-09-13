@@ -29,8 +29,8 @@ public class PeriodoAcademico implements Serializable {
 	@Column(name="fecha_inicio", nullable=false)
 	private Date fechaInicio;
 
-	//bi-directional many-to-one association to Semestre
-	@OneToMany(mappedBy="periodoAcademicoBean")
+	//bi-directional many-to-many association to Semestre
+	@ManyToMany(mappedBy="periodoAcademicos")
 	private List<Semestre> semestres;
 
 	public PeriodoAcademico() {
@@ -66,20 +66,6 @@ public class PeriodoAcademico implements Serializable {
 
 	public void setSemestres(List<Semestre> semestres) {
 		this.semestres = semestres;
-	}
-
-	public Semestre addSemestre(Semestre semestre) {
-		getSemestres().add(semestre);
-		semestre.setPeriodoAcademicoBean(this);
-
-		return semestre;
-	}
-
-	public Semestre removeSemestre(Semestre semestre) {
-		getSemestres().remove(semestre);
-		semestre.setPeriodoAcademicoBean(null);
-
-		return semestre;
 	}
 
 }
