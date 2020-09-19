@@ -90,7 +90,7 @@ body {
 					icon="fa fa-check" action="matriculas.xhtml" />
 				<p:commandButton value="Materias" class="button" icon="fa fa-book"
 					action="materias.xhtml" />
-				
+
 				<p:commandButton value="Periodo Academico" class="button"
 					icon="fa fa-undo" action="periodoAcademico.xhtml" />
 			</f:facet>
@@ -147,11 +147,15 @@ body {
 						</p:outputPanel>
 						<p:outputPanel deferred="true" class="item-container">
 							<h:outputText value="Calle principal:" class="elem" />
+
 							<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
 								class="elem" placeholder="fray vacas galindo" />
 							<h:outputText value="Calle secundaria:" class="elem" />
+
 							<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}"
 								class="elem" placeholder="bastion" />
+
+
 						</p:outputPanel>
 
 						<p:outputPanel deferred="true" class="item-container">
@@ -161,18 +165,27 @@ body {
 							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
 								class="elem chil" placeholder="12-03" />
 
+
+
+
 							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
 							<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd" class="elem"
-								effect="fold" editable="true">
+								style="width:100%" effect="fold" editable="true">
 								<f:selectItem itemLabel="Seleccione uno...."
-									noSelectionOption="true" />
+									noSelectionOption="true" itemValue="0"/>
 								<f:selectItems value="#{beanUsuarios.roles}" var="rol"
 									itemLabel="#{rol.nombre}" itemValue="#{rol.id}" />
 							</p:selectOneMenu>
+
+
+
+
+
 						</p:outputPanel>
 
+
 						<p:commandButton value="Registrar" class="buttonreg"
-							update="@form,:form2"
+							update="@form,:form2" style="width:200px;"
 							actionListener="#{beanUsuarios.registrarUsuario()}"
 							icon="fa fa-save" />
 
@@ -199,7 +212,8 @@ body {
 
 					<p:column headerText="Estado">
 
-						<p:selectOneMenu value="#{user.estado}">
+						<p:selectOneMenu value="#{user.estado}"
+							style="border:none; width:100%; outline: none; background:transparent">
 							<f:selectItem itemLabel="activo" itemValue="true" />
 							<f:selectItem itemLabel="inactivo" itemValue="false" />
 						</p:selectOneMenu>

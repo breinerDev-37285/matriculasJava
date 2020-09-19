@@ -6,71 +6,227 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<f:facet name="first">
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<title>Aplicacion de matriculas</title>
-	    <style type="text/css">
-	    
-	    				@font-face{
-							font-family: ubuntu-regular;
-							src: url("assets/fonts/Ubuntu-Light.ttf");
-						}
-						
-
-						body{
-							
-							height: 100vh;
-							display: flex;
-							justify-content: center;
-							align-items: center;
-							background-image: url("assets/fondo.jpg");
-							opacity: 0.9;
-							background-attachment: scroll;
-							background-repeat:no-repeat;
-						}
-						
-						
-						.container {
-							display: flex;
-							flex-direction: column;
-							width: 400px;
-							padding: 2em 1em;
-							background: transparent;
-							
-						}
-						
-						.container > .elem{
-							margin: 0.5em 0;
-							font-family: ubuntu-regular;
-							font-size:  15px;
-						}
-						
-						.container > .chil{
-							margin-bottom: 1em;
-						}
-	    
-	   </style>
-	</f:facet>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="#{request.contextPath}/faces/resources/theme.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="#{request.contextPath}/faces/resources/fa/font-awesome.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="#{request.contextPath}/faces/resources/components.css"
+    />
+    <script
+      type="text/javascript"
+      src="#{request.contextPath}/faces/resources/jquery/jquery.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="#{request.contextPath}/faces/resources/core.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="#{request.contextPath}/faces/resources/components.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="#{request.contextPath}/faces/resources/jquery/jquery-plugins.js"
+    ></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="#{request.contextPath}/faces/resources/css/layout-steel.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="#{request.contextPath}/faces/resources/css/primeflex.css"
+    />
+    <title>PrimeFaces Prestige</title>
 </h:head>
-<body>
+<h:body class="landing-body">
+	<div class="landing-wrapper">
+		<div id="header">
+			<div class="header-top">
+				<a href="#"><img id="j_idt7"
+					src="#{request.contextPath}/faces/resources/images/logo.png" alt=""
+					class="logo" /> </a> <a id="landing-menu-button" href="#">
+					<i class="fa fa-bars"></i>
+				</a>
+				<ul id="landing-menu">
+					<li><a href="#home">Inicio</a></li>
+					<li><a href="#features">Caracteristicas</a></li>
+					<li><a href="login.xhtml">Login</a></li>
+				</ul>
+			</div>
+			<div class="header-content">
+				<div class="header-content-text">
+					<p>PrimeFaces Presents</p>
+					<h1>Prestige</h1>
+					<button id="j_idt9" name="j_idt9" type="button"
+						class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+						onclick="window.open('\/prestige\/landing.xhtml','_self')">
+						<span class="ui-button-text ui-c">Learn More</span>
+					</button>
+					<script id="j_idt9_s" type="text/javascript">
+						$(function() {
+							PrimeFaces.cw("Button", "widget_j_idt9", {
+								id : "j_idt9"
+							});
+						});
+					</script>
+				</div>
+				<div class="header-content-img">
+					<img id="j_idt11"
+						src="#{request.contextPath}/faces/resources/images/landing/asset-prestige.png"
+						alt="" />
+				</div>
+			</div>
+		</div>
 
-	<p:growl>
-		<p:autoUpdate />
-	</p:growl>
+		<div id="features">
+			<h1>Features</h1>
+			<p>Fully Customizable Template</p>
+			<div class="p-grid">
+				<div class="p-col-12 p-md-6 p-lg-4">
+					<div class="feature-box">
+						<div class="feature-icon">
+							<img id="j_idt13"
+								src="#{request.contextPath}/faces/resources/images/landing/icon-responsive.svg"
+								alt="" />
+						</div>
+						<h3>RESPONSIVE DESIGN</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					</div>
+				</div>
 
-	<h:form class="form">
-		<p:panel header="Login">
-			<p:outputPanel deferred="true" class="container">
-				<h:outputText value="Ingrese su correo:" class="elem"   />
-				<p:inputText value="#{beanLogin.correo}" class="elem" placeholder="usuario@dominio.com" />
-				<h:outputText value="Ingrese su contraseña:" class="elem" />
-				<p:password value="#{beanLogin.password}" class="elem chil" placeholder="**********" />
-				<p:commandButton value="Ingresar" class="button"
-					action="usuarios.xhtml" />
-			</p:outputPanel>
-		</p:panel>
-	</h:form>
+				<div class="p-col-12 p-md-6 p-lg-4">
+					<div class="feature-box">
+						<div class="feature-icon">
+							<img id="j_idt15"
+								src="#{request.contextPath}/faces/resources/images/landing/icon-modern.svg"
+								alt="" />
+						</div>
+						<h3>MODERN DESIGN</h3>
+						<p>Vivamus semper vestibulum ullamcorper.</p>
+					</div>
+				</div>
 
-</body>
+				<div class="p-col-12 p-md-6 p-lg-4">
+					<div class="feature-box">
+						<div class="feature-icon">
+							<img id="j_idt17"
+								src="#{request.contextPath}/faces/resources/images/landing/icon-welldocumented.svg"
+								alt="" />
+						</div>
+						<h3>WELL DOCUMENTED</h3>
+						<p>Quisque in nunc ut justo consectetur pharetra nec vel
+							tortor.</p>
+					</div>
+				</div>
+
+				<div class="p-col-12 p-md-6 p-lg-4">
+					<div class="feature-box">
+						<div class="feature-icon">
+							<img id="j_idt19"
+								src="#{request.contextPath}/faces/resources/images/landing/icon-cleancode.svg"
+								alt="" />
+						</div>
+						<h3>CLEAN CODE</h3>
+						<p>Duis et dui dapibus, tristique lacus et, egestas nisi.</p>
+					</div>
+				</div>
+
+				<div class="p-col-12 p-md-6 p-lg-4">
+					<div class="feature-box">
+						<div class="feature-icon">
+							<img id="j_idt21"
+								src="#{request.contextPath}/faces/resources/images/landing/icon-gorgeous.svg"
+								alt="" />
+						</div>
+						<h3>GORGEOUS</h3>
+						<p>Morbi pharetra consequat tellus in facilisis.</p>
+					</div>
+				</div>
+
+				<div class="p-col-12 p-md-6 p-lg-4">
+					<div class="feature-box">
+						<div class="feature-icon">
+							<img id="j_idt23"
+								src="#{request.contextPath}/faces/resources/images/landing/icon-you.svg"
+								alt="" />
+						</div>
+						<h3>CRAFTED FOR YOU</h3>
+						<p>Maecenas vestibulum ligula sit amet augue elementum
+							faucibus.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+
+		
+		<div class="layout-footer">
+			<div class="p-grid">
+				<div class="p-col-12 p-md-6 p-lg-3">
+					<span class="logo">Prestige</span>
+					<p>PrimeFaces Premium Template</p>
+				</div>
+				<div class="p-col-12 p-md-6 p-lg-3">
+					<span>LATEST TEMPLATES</span>
+					<div class="p-grid templates">
+						<ul>
+							<li><a href="#primefaces">Sapphire</a></li>
+							<li><a href="#primefaces">Roma</a></li>
+							<li><a href="#primefaces">Babylon</a></li>
+							<li><a href="#primefaces">Olympia</a></li>
+						</ul>
+						<ul>
+							<li><a href="#primefaces">Manhattan</a></li>
+							<li><a href="#primefaces">Ecuador</a></li>
+							<li><a href="#primefaces">Harmony</a></li>
+							<li><a href="#primefaces">California</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="p-col-12 p-md-6 p-lg-3">
+					<span>DEMOS</span>
+					<div class="p-grid">
+						<ul class="links">
+							<li><a href="#primefaces">PrimeFaces</a></li>
+							<li><a href="#primefaces">PrimeNG</a></li>
+							<li><a href="#primefaces">PrimeReact</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="p-col-12 p-md-6 p-lg-3">
+					<span>SOCIAL</span>
+					<div class="p-grid">
+						<ul class="links social">
+							<li><a href="#twitter" class="icon-link"><i
+									class="fa fa-twitter icon"></i></a></li>
+							<li><a href="#facebook" class="icon-link"><i
+									class="fa fa-facebook icon"></i></a></li>
+							<li><a href="#github" class="icon-link"><i
+									class="fa fa-github icon"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</h:body>
 </html>
