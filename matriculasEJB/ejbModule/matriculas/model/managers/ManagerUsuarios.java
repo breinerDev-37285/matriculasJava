@@ -158,6 +158,7 @@ public class ManagerUsuarios {
 			Object calleP = fu.get(i)[7];
 			Object calleS = fu.get(i)[8];
 			Object numCasa = fu.get(i)[9];
+			
 
 			usuariosDTO userdf = new usuariosDTO(id,nombres, apellidos, cedula, correo, estado, ciudad, calleP, calleS,
 					numCasa);

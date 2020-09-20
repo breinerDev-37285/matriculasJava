@@ -25,17 +25,26 @@ public class ManagerPeriodoAcademico {
 	}
 
 	public void registrarPeriodoAcademico(PeriodoAcademico periodoAcademico) throws Exception {
-		periodoAcademico = validarPeriodoAcademico(periodoAcademico);
+		periodoAcademico = validacionesPeriodoAcademico(periodoAcademico);
 		em.persist(periodoAcademico);
 	}
 
-	public PeriodoAcademico validarPeriodoAcademico(PeriodoAcademico periodoAcademico) throws Exception {
-		if (periodoAcademico.getFechaInicio().equals("")) {
-			throw new Exception("Por favor ingrese la fecha de inicio");
-		}
-		if (periodoAcademico.getFechaFin().equals("")) {
-			throw new Exception("Por favor ingrese la fecha de finalizacion");
-		}
+	public void actualizarPeriodoAcademico(PeriodoAcademico periodoAcademico) throws Exception {
+		periodoAcademico = validacionesPeriodoAcademico(periodoAcademico);
+		PeriodoAcademico pa = findPeriodoAcademicoById(periodoAcademico.getId());
+		pa.setFechaInicio(periodoAcademico.getFechaInicio());
+		pa.setFechaFin(periodoAcademico.getFechaFin());
+		em.merge(pa);
+	}
+
+	public PeriodoAcademico validacionesPeriodoAcademico(PeriodoAcademico periodoAcademico) throws Exception {
+		if (periodoAcademico.getFechaInicio() == null || periodoAcademico.getFechaInicio().equals(""))
+			throw new Exception("Ingrese la fecha de inicio del periodo academico");
+		if (periodoAcademico.getFechaFin() == null || periodoAcademico.getFechaFin().equals(""))
+			throw new Exception("Ingrese la fecha de Fin del periodo academico");
+		if (periodoAcademico.getFechaInicio().after(periodoAcademico.getFechaFin()))
+			throw new Exception(
+					"La Fecha de Fin del periodo academico deber ser mayo que la Fecha de Inicio del periodo academico");
 		return periodoAcademico;
 	}
 }

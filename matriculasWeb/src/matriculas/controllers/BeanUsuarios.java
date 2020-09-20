@@ -39,7 +39,7 @@ public class BeanUsuarios implements Serializable {
 			roles = mLogin.obtenerTodosRoles();
 			usuarios= mUsuario.obtenerTodoslosUsuarios();
 			persona = new Persona();
-			usuario = new Usuario();			
+			usuario = new Usuario();		
 			
 		} catch (Exception e) {
 			JSFUtil.crearMensajeInfo(e.getMessage());
@@ -61,22 +61,31 @@ public class BeanUsuarios implements Serializable {
 	}
 	
 	
-	public void actualizarUsuario( usuariosDTO user ) {
+	public void actualizarUsuario( usuariosDTO user, String currentUser ) {
 		try {
-			mUsuario.actualizarUsuario(user);
-			usuarios= mUsuario.obtenerTodoslosUsuarios();
-			JSFUtil.crearMensajeInfo("usuario actulizado  correctamente");
+			
+			if (  user.getCorreo().equals(currentUser) ) {
+				throw new Exception("No se puede actualizar el usuario actual");
+			}else {
+					mUsuario.actualizarUsuario(user);
+					usuarios= mUsuario.obtenerTodoslosUsuarios();
+					JSFUtil.crearMensajeInfo("usuario actulizado  correctamente");
+			}
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError( e.getMessage() );
 			e.printStackTrace();
 		}
 	}
 	
-	public void eliminarUsuario( usuariosDTO user ) {
+	public void eliminarUsuario( usuariosDTO user , String currentUser) {
 			try {
-				mUsuario.eliminarUsuario(user);
-				usuarios= mUsuario.obtenerTodoslosUsuarios();
-				JSFUtil.crearMensajeInfo("usuario eliminado  correctamente");
+				if (  user.getCorreo().equals(currentUser) ) {
+					throw new Exception("No se puede eliminar el usuario con el que se inicio sesion");
+				}else {
+					mUsuario.eliminarUsuario(user);
+					usuarios= mUsuario.obtenerTodoslosUsuarios();
+					JSFUtil.crearMensajeInfo("usuario eliminado  correctamente");
+				}
 			} catch (Exception e) {
 				JSFUtil.crearMensajeError( e.getMessage() );
 				e.printStackTrace();

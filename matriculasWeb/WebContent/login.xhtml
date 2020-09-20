@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/theme.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/fa/font-awesome.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/components.css" />
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/jquery/jquery.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/core.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/components.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/jquery/jquery-plugins.js"></script>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/css/layout-steel.css" />
+	<title>Login</title>
+</h:head>
+
+<body class="login-body">
+
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+		<div class="login-panel">
+			<div class="logo">
+				<img id="j_idt9"
+					src="#{request.contextPath}/faces/resources/images/logo.svg" alt="" />
+			</div>
+			<div class="back-icon">
+				<div
+					class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
+					onclick="window.open('\/matriculasWeb/faces/index.xhtml','_self')">
+					<span class="ui-button-icon-left ui-icon ui-c fa fa-arrow-left"></span><span
+					class="ui-button-text ui-c">ui-button</span>
+				</div>
+				
+			</div>
+		</div>
+		
+
+		<h:form class="login-card">
+
+			<div class="top-border"></div>
+			<div class="login-content">
+
+
+				<h1>Login</h1>
+				<p>Bienvenido, por favor inicie sesion.</p>
+
+				<div class="username-container">
+					<label>Correo</label>
+					<div class="login-input">
+						<p:inputText value="#{beanLogin.correo}"
+							class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all"
+							placeholder="usuario@dominio.com" />
+					</div>
+				</div>
+
+				<div class="password-container">
+					<label>Contraseña</label>
+					<div class="login-input">
+						<p:password value="#{beanLogin.password}"
+							class="ui-inputfield ui-password ui-widget ui-state-default ui-corner-all"
+							placeholder="**********" />
+					</div>
+				</div>
+
+				
+				<div class="forgetpassword-container">
+					<a href="#" class="forget-password">Forget Password?</a>
+				</div>
+				
+				
+				<!-- 
+					<div>
+						<p:commandButton value="Ingresar"
+							class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+							action="#{beanLogin.actionValidarUsuario()}" />
+	
+					</div>
+			 	-->
+			 	
+			 	
+				<div>
+					<p:commandButton value="Ingresar"
+						class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+						action="#{beanLogin.actionValidarUsuario()}" />
+
+				</div>
+			</div>
+		</h:form>
+		
+</body>
+
+</html>

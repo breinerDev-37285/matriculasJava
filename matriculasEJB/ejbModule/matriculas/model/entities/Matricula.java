@@ -19,15 +19,17 @@ public class Matricula implements Serializable {
 
 	private Boolean estado;
 
+	private Integer registro;
+
 	//bi-directional many-to-one association to Materia
 	@ManyToOne
 	@JoinColumn(name="materia", nullable=false, insertable=false, updatable=false)
 	private Materia materiaBean;
 
-	//bi-directional many-to-one association to NumMateria
+	//bi-directional many-to-one association to NumMatricula
 	@ManyToOne
 	@JoinColumn(name="num_materia", nullable=false, insertable=false, updatable=false)
-	private NumMateria numMateriaBean;
+	private NumMatricula numMatricula;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
@@ -53,6 +55,14 @@ public class Matricula implements Serializable {
 		this.estado = estado;
 	}
 
+	public Integer getRegistro() {
+		return this.registro;
+	}
+
+	public void setRegistro(Integer registro) {
+		this.registro = registro;
+	}
+
 	public Materia getMateriaBean() {
 		return this.materiaBean;
 	}
@@ -61,12 +71,12 @@ public class Matricula implements Serializable {
 		this.materiaBean = materiaBean;
 	}
 
-	public NumMateria getNumMateriaBean() {
-		return this.numMateriaBean;
+	public NumMatricula getNumMatricula() {
+		return this.numMatricula;
 	}
 
-	public void setNumMateriaBean(NumMateria numMateriaBean) {
-		this.numMateriaBean = numMateriaBean;
+	public void setNumMatricula(NumMatricula numMatricula) {
+		this.numMatricula = numMatricula;
 	}
 
 	public Usuario getUsuario() {
