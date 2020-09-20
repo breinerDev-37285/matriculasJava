@@ -9,8 +9,68 @@
 	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<link rel="stylesheet" href="./utils/styles/general.css" />
+		<h:outputStylesheet library="css" name="./utils/css/general.css" />
 		<title>Manager Cordinador</title>
+
+		<style type="text/css">
+@font-face {
+	font-family: ubuntu-regular;
+	src: url("assets/fonts/Ubuntu-Light.ttf");
+}
+
+body {
+	background-color: #fff;
+	font-family: ubuntu-regular;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2em;
+	background: transparent;
+}
+
+.form_panel {
+	width: 100%;
+	padding: 2em 1em;
+}
+
+.panel {
+	margin-bottom: 3em;
+}
+
+.elem {
+	width: 100%;
+}
+
+.item-container {
+	font-family: ubuntu-regular;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	height: 150px;
+	width: 300px;
+}
+
+.buttonreg {
+	width: 200px;
+	height: 35px;
+	margin-bottom: 50px;
+	align-self: flex-end;
+}
+
+.inputText {
+	border: none;
+	outline: none;
+	background: transparent;
+}
+
+.buttonOp {
+	margin-left: 1em;
+	border: solid red;
+}
+</style>
 	</f:facet>
 </h:head>
 
@@ -34,9 +94,15 @@
 					icon="fa fa-undo" action="matriculas.xhtml" />
 					
 			
+					
+				<p:commandButton value="Periodo Academico" class="button"
+					icon="fa fa-graduation-cap" action="periodoAcademico.xhtml" />
+
+
 				<p:commandButton value="Semestre Periodo" class="button"
 					icon="fa fa-undo" action="semestres.xhtml" />
-					
+
+
 			</f:facet>
 
 			<f:facet name="right">
@@ -51,9 +117,6 @@
 
 	<br />
 	<hr />
-	<br />
-
-	<h3>Usuarios</h3>
 
 	<br />
 
@@ -63,60 +126,42 @@
 			<p:panel header="Agregar un nuevo usuario" class="panel">
 
 				<p:outputPanel deferred="true" class="form_panel">
-
 					<p:outputPanel deferred="true" class="container">
-
 						<p:outputPanel deferred="true" class="item-container">
-
 							<h:outputText value="Nombres completos:" class="elem" />
 							<p:inputText value="#{ beanUsuarios.persona.nombres }"
 								class="elem" placeholder="nombre de usuario" />
-
 							<h:outputText value="Apellidos completos:" class="elem" />
 							<p:inputText value="#{beanUsuarios.persona.apellidos}"
 								class="elem" placeholder="apellidos de usuario" />
-
 						</p:outputPanel>
 
 						<p:outputPanel deferred="true" class="item-container">
-
 							<h:outputText value="Cedula" class="elem" />
-
 							<p:inputText value="#{ beanUsuarios.persona.cedula }"
 								class="elem" placeholder="1009874563210" />
-
-
 							<h:outputText value="Ciudad:" class="elem" />
 							<p:inputText value="#{beanUsuarios.persona.dirCiudad}"
 								class="elem" placeholder="ibarra" />
-
 						</p:outputPanel>
 
 						<p:outputPanel deferred="true" class="item-container">
-
 							<h:outputText value="Ingrese su correo:" class="elem" />
 							<p:inputText value="#{beanUsuarios.usuario.correo}" class="elem"
 								placeholder="usuario@dominio.com" />
-
 							<h:outputText value="Ingrese su contraseña:" class="elem" />
 							<p:password value="#{beanUsuarios.usuario.password}" class="elem"
 								placeholder="**********" />
 
 
 						</p:outputPanel>
-
 						<p:outputPanel deferred="true" class="item-container">
-
-
 							<h:outputText value="Calle principal:" class="elem" />
 							<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
 								class="elem" placeholder="fray vacas galindo" />
-
-
 							<h:outputText value="Calle secundaria:" class="elem" />
 							<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}"
 								class="elem" placeholder="bastion" />
-
 						</p:outputPanel>
 
 
@@ -127,19 +172,18 @@
 							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
 								class="elem chil" placeholder="12-03" />
 
-							<p:outputLabel for="sd"  value="Seleccione el Rol " class="elem" />
-							<p:selectOneMenu  value="#{beanUsuarios.rol}"  id="sd" effect="fold"
-								 editable="true">
-								<f:selectItem itemLabel="Seleccione uno...."  
+							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
+							<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
+								effect="fold" editable="true">
+								<f:selectItem itemLabel="Seleccione uno...."
 									noSelectionOption="true" />
-								<f:selectItems  value="#{beanUsuarios.roles}" var="rol"
-									itemLabel="#{rol.nombre}"  itemValue="#{rol.id}" />
+								<f:selectItems value="#{beanUsuarios.roles}" var="rol"
+									itemLabel="#{rol.nombre}" itemValue="#{rol.id}" />
 							</p:selectOneMenu>
-
 						</p:outputPanel>
 
 						<p:commandButton value="Registrar" class="buttonreg"
-						   update="@form,:form2"
+							update="@form,:form2"
 							actionListener="#{beanUsuarios.registrarUsuario()}"
 							icon="fa fa-save" />
 
@@ -153,45 +197,55 @@
 			<p:panel header="Lista de usuarios">
 				<p:dataTable var="user" value="#{beanUsuarios.usuarios}">
 					<p:column headerText="Nombres">
-						<h:outputText value="#{user.nombres}" />
+						<h:inputText value="#{user.nombres}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Apellidos">
-						<h:outputText value="#{user.apellidos}" />
+						<h:inputText value="#{user.apellidos}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Correo">
-						<h:outputText value="#{user.correo}" />
+						<h:inputText value="#{user.correo}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Estado">
-						<h:outputText value="#{user.estado}" />
+
+						<p:selectOneMenu value="#{user.estado}">
+							<f:selectItem itemLabel="activo" itemValue="true" />
+							<f:selectItem itemLabel="inactivo" itemValue="false" />
+						</p:selectOneMenu>
+
 					</p:column>
 
 					<p:column headerText="Cedula">
-						<h:outputText value="#{user.cedula}" />
+						<h:inputText value="#{user.cedula}" class="inputText" />
 					</p:column>
 
 
 					<p:column headerText="Ciudad">
-						<h:outputText value="#{user.ciudad}" />
+						<h:inputText value="#{user.ciudad}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Calle Prin.">
-						<h:outputText value="#{user.calleP}" />
+						<h:inputText value="#{user.calleP}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Calle Sec.">
-						<h:outputText value="#{user.calleP}" />
+						<h:inputText value="#{user.calleS}" class="inputText" />
 					</p:column>
 
 					<p:column headerText="Num Casa">
-						<h:outputText value="#{user.numCasa}" />
+						<h:inputText value="#{user.numCasa}" class="inputText" />
+
 					</p:column>
 
 					<p:column headerText="Opciones">
-						<p:commandButton icon="fa fa-trash" />
-						<p:commandButton icon="fa fa-edit" />
+						<p:commandButton icon="fa fa-trash" update="@form"
+							actionListener="#{beanUsuarios.eliminarUsuario(user)}"
+							class="buttonOp" />
+						<p:commandButton icon="fa fa-edit" update="@form"
+							actionListener="#{beanUsuarios.actualizarUsuario(user)}"
+							class="buttonOp" />
 					</p:column>
 
 				</p:dataTable>

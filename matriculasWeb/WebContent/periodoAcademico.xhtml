@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -11,7 +10,7 @@
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
 		<link rel="stylesheet" href="./utils/styles/general.css" />
-		<title>Seleccione Semestre Correspondiente</title>
+		<title>Registro de Periodo Academico</title>
 	</f:facet>
 </h:head>
 <body>
@@ -49,7 +48,7 @@
 	<hr />
 	<br />
 
-	<h3>Semestre a matricularse</h3>
+	<h3>Periodo Academico</h3>
 
 	<br />
 
@@ -64,7 +63,7 @@
 
 						<p:outputPanel deferred="true" class="item-container">
 
-							<h:outputText value="Nivel de carrera:"
+							<h:outputText value="Fecha de Inicio del Periodo Academico:"
 								class="elem" />
 							<p:datePicker
 								value="#{beanPeriodoAcademico.periodoAcademico.fechaInicio}"
@@ -72,7 +71,9 @@
 
 							<h:outputText value="Fecha de Fin del Periodo Academico:"
 								class="elem" />
-							<p:spinner value="Matricula..." />
+							<p:datePicker
+								value="#{beanPeriodoAcademico.periodoAcademico.fechaFin}"
+								class="elem" />
 
 						</p:outputPanel>
 
@@ -109,4 +110,4 @@
 		</h:form>
 	</p:outputPanel>
 </body>
-</html> 
+</html>

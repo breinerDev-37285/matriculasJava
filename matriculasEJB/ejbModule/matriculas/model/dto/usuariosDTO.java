@@ -1,19 +1,22 @@
 package matriculas.model.dto;
 
 public class usuariosDTO {
+	
+	private int id;
 	private  String nombres;
 	private String apellidos; 
 	private Object cedula;
 	private String correo;
-	private String estado;
+	private boolean estado;
 	private Object ciudad;
 	private Object calleP;
 	private Object calleS;
 	private Object numCasa;
 	
 	
-	public usuariosDTO(String nombres, String apellidos, Object cedula, String correo, String estado, Object ciudad,
+	public usuariosDTO(int id, String nombres, String apellidos, Object cedula, String correo, boolean estado, Object ciudad,
 			Object calleP, Object calleS, Object numCasa) {
+		this.id = id;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.cedula = cedula;
@@ -25,6 +28,15 @@ public class usuariosDTO {
 		this.numCasa = numCasa;
 	}
 
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNombres() {
 		return nombres;
@@ -66,12 +78,12 @@ public class usuariosDTO {
 	}
 
 
-	public String getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

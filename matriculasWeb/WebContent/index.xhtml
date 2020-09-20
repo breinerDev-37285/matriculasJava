@@ -9,8 +9,49 @@
 	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<link rel="stylesheet" href="./utils/styles/login.css" />
 		<title>Aplicacion de matriculas</title>
+	    <style type="text/css">
+	    
+	    				@font-face{
+							font-family: ubuntu-regular;
+							src: url("assets/fonts/Ubuntu-Light.ttf");
+						}
+						
+
+						body{
+							
+							height: 100vh;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							background-image: url("assets/fondo.jpg");
+							opacity: 0.9;
+							background-attachment: scroll;
+							background-repeat:no-repeat;
+						}
+						
+						
+						.container {
+							display: flex;
+							flex-direction: column;
+							width: 400px;
+							padding: 2em 1em;
+							background: transparent;
+							
+						}
+						
+						.container > .elem{
+							margin: 0.5em 0;
+							font-family: ubuntu-regular;
+							font-size:  15px;
+						}
+						
+						.container > .chil{
+							margin-bottom: 1em;
+						}
+	    
+	    
+	   </style>
 	</f:facet>
 </h:head>
 <body>
@@ -22,7 +63,7 @@
 	<h:form class="form">
 		<p:panel header="Login">
 			<p:outputPanel deferred="true" class="container">
-				<h:outputText value="Ingrese su correo:" class="elem"  />
+				<h:outputText value="Ingrese su correo:" class="elem"   />
 				<p:inputText value="#{beanLogin.correo}" class="elem" placeholder="usuario@dominio.com" />
 				<h:outputText value="Ingrese su contraseña:" class="elem" />
 				<p:password value="#{beanLogin.password}" class="elem chil" placeholder="**********" />
