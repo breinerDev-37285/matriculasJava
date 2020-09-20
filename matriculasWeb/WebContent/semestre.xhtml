@@ -126,6 +126,10 @@ body {
 	background: transparent;
 }
 
+.outputText{
+	font-size: 13px
+}
+
 .buttonOp {
 	margin-left: 1em;
 	border: solid red;
@@ -267,77 +271,31 @@ body {
 			<!-- ................................. Tabla de registro............................ -->
 
 			<h:form id="form1" class="form">
-				<p:panel header="Agregar un nuevo usuario">
+				<p:panel header="Agregar un nuevo semestre">
 
 					<p:outputPanel deferred="true" class="form_panel">
 						<p:outputPanel deferred="true" class="container">
+							
 							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Nombres completos:" class="elem" />
-								<p:inputText value="#{ beanUsuarios.persona.nombres }"
-									class="elem" placeholder="nombre de usuario" />
-								<h:outputText value="Apellidos completos:" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.apellidos}"
-									class="elem" placeholder="apellidos de usuario" />
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Cedula" class="elem" />
-								<p:inputText value="#{ beanUsuarios.persona.cedula }"
-									class="elem" placeholder="1009874563210" />
-								<h:outputText value="Ciudad:" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.dirCiudad}"
-									class="elem" placeholder="ibarra" />
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Ingrese su correo:" class="elem" />
-								<p:inputText value="#{beanUsuarios.usuario.correo}" class="elem"
-									placeholder="usuario@dominio.com" />
-								<h:outputText value="Ingrese su contraseña:" class="elem" />
-								<p:password value="#{beanUsuarios.usuario.password}"
-									class="elem" placeholder="**********" />
-
-
-							</p:outputPanel>
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Calle principal:" class="elem" />
-
-								<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
-									class="elem" placeholder="fray vacas galindo" />
-								<h:outputText value="Calle secundaria:" class="elem" />
-
-								<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}"
-									class="elem" placeholder="bastion" />
-
-
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-
-
-								<h:outputText value="Numero de Casa" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
-									class="elem chil" placeholder="12-03" />
-
-
-
-
-								<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-								<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
+								<h:outputText value="Nombre:" class="elem" />
+								<p:inputText value="#{ beanSemestre.semestre.nombre }"
+									class="elem" placeholder="nombre del semestre" />
+								
+								
+								<p:selectOneMenu value="#{beanSemestre.periodo}" id="sd"
 									class="elem" style="width:100%" effect="fold" editable="true">
-									<f:selectItem itemLabel="Seleccione uno...."
+									<f:selectItem itemLabel="Seleccione un periodo academico"
 										noSelectionOption="true" itemValue="0" />
-									<f:selectItems value="#{beanUsuarios.roles}" var="rol"
-										itemLabel="#{rol.nombre}" itemValue="#{rol.id}" />
+									<f:selectItems value="#{beanSemestre.lPeriodos}" var="periodo"
+										itemLabel="#{periodo.fechaInicio}   -   #{periodo.fechaFin}" itemValue="#{periodo.id}" />
 								</p:selectOneMenu>
-
-
+								
 							</p:outputPanel>
 
-
+							
 							<p:commandButton value="Registrar" class="buttonreg"
 								update="@form,:form2" style="width:200px;"
-								actionListener="#{beanUsuarios.registrarUsuario()}"
+								actionListener="#{beanSemestre.actionListenerRegistrarSemestre()}"
 								icon="fa fa-save" />
 
 						</p:outputPanel>
@@ -351,59 +309,25 @@ body {
 
 
 			<h:form id="form2" class="form">
-				<p:panel header="Lista de usuarios">
-					<p:dataTable var="user" value="#{beanUsuarios.usuarios}"
+				<p:panel header="Listado de semestres">
+					<p:dataTable var="sem" value="#{beanSemestre.lSemestres}"
 						reflow="true">
-						<p:column headerText="Nombres">
-							<h:inputText value="#{user.nombres}" class="inputText" />
+						<p:column headerText="Semestre">
+							<h:inputText value="#{sem.nombre}" class="inputText" />
 						</p:column>
 
-						<p:column headerText="Apellidos">
-							<h:inputText value="#{user.apellidos}" class="inputText" />
+						<p:column headerText="Fecha Inicio">
+							<h:outputText value="#{sem.fecha_inicio}" class="outputText" />
 						</p:column>
 
-						<p:column headerText="Correo">
-							<h:inputText value="#{user.correo}" class="inputText" />
+						<p:column headerText="Fecha Fin">
+							<h:outputText value="#{sem.fecha_fin}" class="outputText" />
 						</p:column>
 
-						<p:column headerText="Estado">
-
-							<p:selectOneMenu value="#{user.estado}"
-								style="border:none; width:100%; outline: none; background:transparent">
-								<f:selectItem itemLabel="activo" itemValue="true" />
-								<f:selectItem itemLabel="inactivo" itemValue="false" />
-							</p:selectOneMenu>
-
-						</p:column>
-
-						<p:column headerText="Cedula">
-							<h:inputText value="#{user.cedula}" class="inputText" />
-						</p:column>
-
-
-						<p:column headerText="Ciudad">
-							<h:inputText value="#{user.ciudad}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Calle Prin.">
-							<h:inputText value="#{user.calleP}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Calle Sec.">
-							<h:inputText value="#{user.calleS}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Num Casa">
-							<h:inputText value="#{user.numCasa}" class="inputText" />
-
-						</p:column>
 
 						<p:column headerText="Opciones">
-							<p:commandButton icon="fa fa-trash" update="@form"
-								actionListener="#{beanUsuarios.eliminarUsuario(user,beanLogin.correo)}"
-								class="buttonOp" />
 							<p:commandButton icon="fa fa-edit" update="@form"
-								actionListener="#{beanUsuarios.actualizarUsuario(user,beanLogin.correo)}"
+								actionListener="#{beanSemestre.actionListenerActualizarSemestre(sem)}"
 								class="buttonOp" />
 						</p:column>
 

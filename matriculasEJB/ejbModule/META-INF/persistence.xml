@@ -5,7 +5,7 @@
 		<class>matriculas.model.entities.Materia</class>
 		<class>matriculas.model.entities.Matricula</class>
 		<class>matriculas.model.entities.MatriculaPK</class>
-		<class>matriculas.model.entities.NumMateria</class>
+		<class>matriculas.model.entities.NumMatricula</class>
 		<class>matriculas.model.entities.PeriodoAcademico</class>
 		<class>matriculas.model.entities.Persona</class>
 		<class>matriculas.model.entities.Rol</class>

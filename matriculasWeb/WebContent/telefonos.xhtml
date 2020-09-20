@@ -271,73 +271,31 @@ body {
 
 					<p:outputPanel deferred="true" class="form_panel">
 						<p:outputPanel deferred="true" class="container">
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Nombres completos:" class="elem" />
-								<p:inputText value="#{ beanUsuarios.persona.nombres }"
-									class="elem" placeholder="nombre de usuario" />
-								<h:outputText value="Apellidos completos:" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.apellidos}"
-									class="elem" placeholder="apellidos de usuario" />
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Cedula" class="elem" />
-								<p:inputText value="#{ beanUsuarios.persona.cedula }"
-									class="elem" placeholder="1009874563210" />
-								<h:outputText value="Ciudad:" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.dirCiudad}"
-									class="elem" placeholder="ibarra" />
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Ingrese su correo:" class="elem" />
-								<p:inputText value="#{beanUsuarios.usuario.correo}" class="elem"
-									placeholder="usuario@dominio.com" />
-								<h:outputText value="Ingrese su contraseña:" class="elem" />
-								<p:password value="#{beanUsuarios.usuario.password}"
-									class="elem" placeholder="**********" />
-
-
-							</p:outputPanel>
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Calle principal:" class="elem" />
-
-								<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
-									class="elem" placeholder="fray vacas galindo" />
-								<h:outputText value="Calle secundaria:" class="elem" />
-
-								<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}"
-									class="elem" placeholder="bastion" />
-
-
-							</p:outputPanel>
+						
 
 							<p:outputPanel deferred="true" class="item-container">
 
 
-								<h:outputText value="Numero de Casa" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
-									class="elem chil" placeholder="12-03" />
+								<h:outputText value="Numero telefónico" class="elem" />
+								<p:inputText value="#{beanTelefono.telefono.numero}"
+									class="elem chil" placeholder="0912345678" />
 
 
-
-
-								<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-								<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
+								<p:outputLabel for="sd" value="Seleccione la cedula y apellido del usuario" class="elem" />
+								<p:selectOneMenu value="#{beanTelefono.persona}" id="sd"
 									class="elem" style="width:100%" effect="fold" editable="true">
 									<f:selectItem itemLabel="Seleccione uno...."
 										noSelectionOption="true" itemValue="0" />
-									<f:selectItems value="#{beanUsuarios.roles}" var="rol"
-										itemLabel="#{rol.nombre}" itemValue="#{rol.id}" />
+									<f:selectItems value="#{beanTelefono.lPersonas}" var="per"
+										itemLabel="#{per.cedula} - #{per.apellidos}" itemValue="#{per.id}" />
 								</p:selectOneMenu>
-
 
 							</p:outputPanel>
 
 
 							<p:commandButton value="Registrar" class="buttonreg"
 								update="@form,:form2" style="width:200px;"
-								actionListener="#{beanUsuarios.registrarUsuario()}"
+								actionListener="#{beanTelefono.actionListenerRegistrarPersona()}"
 								icon="fa fa-save" />
 
 						</p:outputPanel>
@@ -352,58 +310,32 @@ body {
 
 			<h:form id="form2" class="form">
 				<p:panel header="Lista de usuarios">
-					<p:dataTable var="user" value="#{beanUsuarios.usuarios}"
+					<p:dataTable var="tel" value="#{beanTelefono.lTelefonos}"
 						reflow="true">
-						<p:column headerText="Nombres">
-							<h:inputText value="#{user.nombres}" class="inputText" />
+						<p:column headerText="Nombre">
+							<h:outputText value="#{tel.nombres}" class="inputText" />
 						</p:column>
 
-						<p:column headerText="Apellidos">
-							<h:inputText value="#{user.apellidos}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Correo">
-							<h:inputText value="#{user.correo}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Estado">
-
-							<p:selectOneMenu value="#{user.estado}"
-								style="border:none; width:100%; outline: none; background:transparent">
-								<f:selectItem itemLabel="activo" itemValue="true" />
-								<f:selectItem itemLabel="inactivo" itemValue="false" />
-							</p:selectOneMenu>
-
+						<p:column headerText="Apellido">
+							<h:outputText value="#{tel.apellidos}" class="inputText" />
 						</p:column>
 
 						<p:column headerText="Cedula">
-							<h:inputText value="#{user.cedula}" class="inputText" />
+							<h:outputText value="#{tel.cedula}" class="inputText" />
+						</p:column>
+
+						<p:column headerText="Numero">
+							<h:inputText value="#{tel.numero}" class="inputText" />
 						</p:column>
 
 
-						<p:column headerText="Ciudad">
-							<h:inputText value="#{user.ciudad}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Calle Prin.">
-							<h:inputText value="#{user.calleP}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Calle Sec.">
-							<h:inputText value="#{user.calleS}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Num Casa">
-							<h:inputText value="#{user.numCasa}" class="inputText" />
-
-						</p:column>
-
+						
 						<p:column headerText="Opciones">
 							<p:commandButton icon="fa fa-trash" update="@form"
-								actionListener="#{beanUsuarios.eliminarUsuario(user,beanLogin.correo)}"
+								actionListener="#{beanTelefono.actionListenereliminarTelefono(tel)}"
 								class="buttonOp" />
 							<p:commandButton icon="fa fa-edit" update="@form"
-								actionListener="#{beanUsuarios.actualizarUsuario(user,beanLogin.correo)}"
+								actionListener="#{beanTelefono.actionListenerActualizarTelefono(tel)}"
 								class="buttonOp" />
 						</p:column>
 

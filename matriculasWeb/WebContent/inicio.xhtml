@@ -161,7 +161,13 @@ body {
 						<li><a href="#" class="layout-topbar-icon"> <i
 								class="topbar-icon fa fa-sign-out"></i>
 						</a>
-							<div class="layout-quickmenu-tooltip">
+						
+						
+						<p:commandButton value="Ingresar"
+							class="layout-quickmenu-tooltip"
+							actionListener="beanLogin.actionCerrarSession()" />
+							
+							<div class="layout-quickmenu-tooltip" onclick="#{beanLogin.actionCerrarSession()}">
 								<div class="layout-quickmenu-tooltip-arrow"></div>
 								<div class="layout-quickmenu-tooltip-text">Sign Out</div>
 							</div></li>
@@ -195,55 +201,55 @@ body {
 
 				<div class="layout-menu-wrapper">
 
-					<ul  class="layout-menu">
-						<li id="menuform:om_dashboard"><a href="inicio.xhtml"> <i
-								class="fa fa-fw fa-dashboard fa-fw layout-menuitem-icon"></i> <span
-								class="layout-menuitem-text">Dashboard</span>
-						</a></li>
+				<ul id="menuform:j_idt21" class="layout-menu">
+					<li><a href="inicio.xhtml"> <i
+							class="fa fa-fw fa-dashboard fa-fw layout-menuitem-icon"></i> <span
+							class="layout-menuitem-text">Dashboard</span>
+					</a></li>
 
-						<li ><a href="roles.xhtml"> <i
-								class="fa fa-fw fa-globe fa-fw layout-menuitem-icon" /> <span
-								class="layout-menuitem-text">Roles</span>
-						</a></li>
+					<li><a href="roles.xhtml"> <i
+							class="fa fa-fw fa-globe fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Roles</span>
+					</a></li>
 
-						<li ><a href="usuarios.xhtml">
-								<i class="fa fa-fw fa-user fa-fw layout-menuitem-icon" /> <span
-								class="layout-menuitem-text">Usuarios</span>
-						</a></li>
+					<li><a href="usuarios.xhtml"> <i
+							class="fa fa-fw fa-user fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Usuarios</span>
+					</a></li>
 
-						<li ><a href="#"> <i
-								class="fa fa-fw fa-phone fa-fw layout-menuitem-icon"></i> <span
-								class="layout-menuitem-text">Telefonos</span>
-						</a></li>
+					<li><a href="telefonos.xhtml"> <i
+							class="fa fa-fw fa-phone fa-fw layout-menuitem-icon"></i> <span
+							class="layout-menuitem-text">Telefonos</span>
+					</a></li>
 
-						<li ><a href="#"> <i
-								class="fa fa-fw fa-bookmark fa-fw layout-menuitem-icon" /> <span
-								class="layout-menuitem-text">Materias</span>
-						</a></li>
+					<li><a href="materias.xhtml"> <i
+							class="fa fa-fw fa-bookmark fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Materias</span>
+					</a></li>
 
-						<li ><a href="#"> <i
-								class="fa fa-fw fa-graduation-cap fa-fw layout-menuitem-icon" />
-								<span class="layout-menuitem-text">Matriculas</span>
-						</a></li>
+					<li><a href="matriculas.xhtml"> <i
+							class="fa fa-fw fa-graduation-cap fa-fw layout-menuitem-icon" />
+							<span class="layout-menuitem-text">Matriculas</span>
+					</a></li>
 
-						<li ><a href="#"> <i
-								class="fa fa-fw fa-check-circle fa-fw layout-menuitem-icon" /> <span
-								class="layout-menuitem-text">Semestre</span>
-						</a></li>
+					<li><a href="semestre.xhtml"> <i
+							class="fa fa-fw fa-check-circle fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Semestre</span>
+					</a></li>
 
-						<li ><a href="#"> <i
-								class="fa fa-fw fa-cog fa-fw layout-menuitem-icon" /> <span
-								class="layout-menuitem-text">Periodo academico</span>
-						</a></li>
-					</ul>
-					<script id="menuform:j_idt21_s" type="text/javascript">
-						$(function() {
-							PrimeFaces.cw("Prestige", "prestigeMenuWidget", {
-								id : "menuform:j_idt21",
-							});
+					<li><a href="periodoAcademico.xhtml"> <i
+							class="fa fa-fw fa-cog fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Periodo academico</span>
+					</a></li>
+				</ul>
+				<script id="menuform:j_idt21_s" type="text/javascript">
+					$(function() {
+						PrimeFaces.cw("Prestige", "prestigeMenuWidget", {
+							id : "menuform:j_idt21",
 						});
-					</script>
-				</div>
+					});
+				</script>
+			</div>
 		</div>
 		
 		

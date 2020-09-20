@@ -63,7 +63,6 @@ public class BeanLogin implements Serializable {
 			if (verificado == false) {
 				// el usuario no ingrese por login
 				ec.redirect(ec.getRequestContextPath() + "/faces/login.xhtml");
-				JSFUtil.crearMensajeWarning("Acceso denegado" );
 			} else {
 				// el usuario iso login pero se verifica el control de acceso
 				
@@ -71,8 +70,11 @@ public class BeanLogin implements Serializable {
 				String pagina = requestPath;
 				List<String> paginas = new ArrayList<String>();
 				
-				paginas.add("usuarios.xhtml");
 				paginas.add("inicio.xhtml");
+				paginas.add("usuarios.xhtml");
+				paginas.add("matriculas.xhtml");
+				paginas.add("periodoAcademico.xhtml");
+				paginas.add("materias.xhtml");
 				
 				for (String pg : paginas) {
 					if ( pagina.contains(pg)  && rol !=2  ) {
