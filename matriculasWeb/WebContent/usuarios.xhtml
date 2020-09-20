@@ -1,18 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<f:facet name="first">
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<h:outputStylesheet library="css" name="./utils/css/general.css" />
-		<title>Manager Cordinador</title>
+<f:metadata>
+	<f:event listener="#{beanLogin.actionListenerVerificarLogin()}"
+		type="preRenderView" />
+</f:metadata>
 
-		<style type="text/css">
+
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="prestige-layout/images/favicon.html" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/theme.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/fa/font-awesome.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/components.css" />
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/jquery/jquery.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/core.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/components.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/jquery/jquery-plugins.js"></script>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/keyboard/keyboard.css" />
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/keyboard/keyboard.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/touch/touchswipe.js"></script>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/css/primeflex.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/css/layout-blue.css" />
+	<title>Usuarios</title>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/js/layout.js"></script>
+	<style type="text/css">
+.ui-panelgrid.form-elements .ui-grc-2 {
+	padding-left: 60px;
+}
+
+@media ( max-width : 1024px) {
+	.ui-panelgrid.form-elements .ui-grc-2 {
+		padding-left: 20px;
+	}
+}
+
+@media ( max-width : 640px) {
+	.ui-panelgrid.form-elements .ui-grc-2 {
+		padding-left: 6px;
+	}
+}
+
+.dialogDemo label {
+	line-height: 2.1em;
+}
+</style>
+
+	<style type="text/css">
 @font-face {
 	font-family: ubuntu-regular;
 	src: url("assets/fonts/Ubuntu-Light.ttf");
@@ -60,6 +116,10 @@ body {
 	align-self: flex-end;
 }
 
+.form {
+	margin: 2em 1em;
+}
+
 .inputText {
 	border: none;
 	outline: none;
@@ -71,191 +131,319 @@ body {
 	border: solid red;
 }
 </style>
-	</f:facet>
 </h:head>
 
-<body>
+
+<h:body>
 
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
 
-	<h:form>
-		<p:growl id="messages" showDetail="true" />
-		<p:toolbar>
-			<f:facet name="left">
-				<p:commandButton value="Usuarios" class="button" icon="fa fa-user"
-					action="usuarios.xhtml" />
-				<p:commandButton value="Matriculas" class="button"
-					icon="fa fa-check" action="matriculas.xhtml" />
-				<p:commandButton value="Materias" class="button" icon="fa fa-book"
-					action="materias.xhtml" />
+	<div class="layout-wrapper layout-menu-horizontal layout-blue">
 
-				<p:commandButton value="Periodo Academico" class="button"
-					icon="fa fa-undo" action="periodoAcademico.xhtml" />
-			</f:facet>
+		<div class="layout-topbar">
+			<div class="layout-topbar-logo" />
+			<a class="layout-menu-button" href="#"> <i class="fa fa-bars" />
+			</a>
+			<ul class="layout-topbar-menu" role="menu">
+				<li class="layout-topbar-item"><a href="#"
+					class="layout-topbar-icon first"> <i
+						class="topbar-icon fa fa-cog"></i>
+				</a>
+					<ul>
+						<li><a href="#" class="layout-topbar-icon"> <i
+								class="topbar-icon fa fa-bar-chart"></i>
+						</a>
+							<div class="layout-quickmenu-tooltip">
+								<div class="layout-quickmenu-tooltip-arrow"></div>
+								<div class="layout-quickmenu-tooltip-text">Statistics</div>
+							</div></li>
+						<li><a href="#" class="layout-topbar-icon"> <i
+								class="topbar-icon fa fa-sign-out"></i>
+						</a>
+							<div class="layout-quickmenu-tooltip">
+								<div class="layout-quickmenu-tooltip-arrow"></div>
+								<div class="layout-quickmenu-tooltip-text">Sign Out</div>
+							</div></li>
+					</ul></li>
 
-			<f:facet name="right">
-				<span class="fa fa-user" />
-				<h:outputText value=" #{beanLogin.correo}" />
-				<p:commandButton value="Cerrar Session" icon="fa fa-sign-out"
-					style="border: none; outline:none"
-					action="#{beanLogin.actionCerrarSession()}" />
-			</f:facet>
-		</p:toolbar>
-	</h:form>
+				<li class="user-profile" role="menuitem"><a href="#">
+						<div class="user-profile-info profile-link">
+							<span class="user-profile-name">Ava Gregoraci</span> <span
+								class="user-profile-role">Design Ops</span>
+						</div> <img id="j_idt15"
+						src="#{request.contextPath}/faces/resources/images/avatar/avatar-ava.jpg"
+						alt="" class="logo" />
+				</a></li>
+			</ul>
+		</div>
 
-	<br />
-	<hr />
+		<!--  ...............................parte superior...........................................   -->
 
-	<br />
+		<div class="layout-menu-container">
+			<div class="overlay-menu-button">
+				<div class="overlay-menu-button-bars">
+					<span></span> <span></span> <span></span>
+				</div>
+				<div class="overlay-menu-button-times">
+					<span></span> <span></span>
+				</div>
+			</div>
 
-	<p:outputPanel deferred="true">
 
-		<h:form id="form1">
-			<p:panel header="Agregar un nuevo usuario" class="panel">
+			<!--  ..................................  menu  ........................................   -->
 
-				<p:outputPanel deferred="true" class="form_panel">
-					<p:outputPanel deferred="true" class="container">
-						<p:outputPanel deferred="true" class="item-container">
-							<h:outputText value="Nombres completos:" class="elem" />
-							<p:inputText value="#{ beanUsuarios.persona.nombres }"
-								class="elem" placeholder="nombre de usuario" />
-							<h:outputText value="Apellidos completos:" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.apellidos}"
-								class="elem" placeholder="apellidos de usuario" />
+			<div class="layout-menu-wrapper">
+
+				<ul id="menuform:j_idt21" class="layout-menu">
+					<li><a href="inicio.xhtml"> <i
+							class="fa fa-fw fa-dashboard fa-fw layout-menuitem-icon"></i> <span
+							class="layout-menuitem-text">Dashboard</span>
+					</a></li>
+
+					<li><a href="roles.xhtml"> <i
+							class="fa fa-fw fa-globe fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Roles</span>
+					</a></li>
+
+					<li><a href="usuarios.xhtml"> <i
+							class="fa fa-fw fa-user fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Usuarios</span>
+					</a></li>
+
+					<li><a href="#"> <i
+							class="fa fa-fw fa-phone fa-fw layout-menuitem-icon"></i> <span
+							class="layout-menuitem-text">Telefonos</span>
+					</a></li>
+
+					<li><a href="#"> <i
+							class="fa fa-fw fa-bookmark fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Materias</span>
+					</a></li>
+
+					<li><a href="#"> <i
+							class="fa fa-fw fa-graduation-cap fa-fw layout-menuitem-icon" />
+							<span class="layout-menuitem-text">Matriculas</span>
+					</a></li>
+
+					<li><a href="#"> <i
+							class="fa fa-fw fa-check-circle fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Semestre</span>
+					</a></li>
+
+					<li><a href="#"> <i
+							class="fa fa-fw fa-cog fa-fw layout-menuitem-icon" /> <span
+							class="layout-menuitem-text">Periodo academico</span>
+					</a></li>
+				</ul>
+				<script id="menuform:j_idt21_s" type="text/javascript">
+					$(function() {
+						PrimeFaces.cw("Prestige", "prestigeMenuWidget", {
+							id : "menuform:j_idt21",
+						});
+					});
+				</script>
+			</div>
+		</div>
+
+
+		<!-- .........................  Breadcrumbs  ..................................  -->
+
+		<div class="layout-actionbar">
+			<div class="layout-breadcrumb">
+				<ul class="route-bar-breadcrumb">
+					<li>Components</li>
+	
+						<a href="inicio.xhtml" class="ui-link ui-widget">Dashboard</a>
+					
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="layout-content">
+
+			<!-- ................................. Tabla de registro............................ -->
+
+			<h:form id="form1" class="form">
+				<p:panel header="Agregar un nuevo usuario">
+
+					<p:outputPanel deferred="true" class="form_panel">
+						<p:outputPanel deferred="true" class="container">
+							<p:outputPanel deferred="true" class="item-container">
+								<h:outputText value="Nombres completos:" class="elem" />
+								<p:inputText value="#{ beanUsuarios.persona.nombres }"
+									class="elem" placeholder="nombre de usuario" />
+								<h:outputText value="Apellidos completos:" class="elem" />
+								<p:inputText value="#{beanUsuarios.persona.apellidos}"
+									class="elem" placeholder="apellidos de usuario" />
+							</p:outputPanel>
+
+							<p:outputPanel deferred="true" class="item-container">
+								<h:outputText value="Cedula" class="elem" />
+								<p:inputText value="#{ beanUsuarios.persona.cedula }"
+									class="elem" placeholder="1009874563210" />
+								<h:outputText value="Ciudad:" class="elem" />
+								<p:inputText value="#{beanUsuarios.persona.dirCiudad}"
+									class="elem" placeholder="ibarra" />
+							</p:outputPanel>
+
+							<p:outputPanel deferred="true" class="item-container">
+								<h:outputText value="Ingrese su correo:" class="elem" />
+								<p:inputText value="#{beanUsuarios.usuario.correo}" class="elem"
+									placeholder="usuario@dominio.com" />
+								<h:outputText value="Ingrese su contraseña:" class="elem" />
+								<p:password value="#{beanUsuarios.usuario.password}"
+									class="elem" placeholder="**********" />
+
+
+							</p:outputPanel>
+							<p:outputPanel deferred="true" class="item-container">
+								<h:outputText value="Calle principal:" class="elem" />
+
+								<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
+									class="elem" placeholder="fray vacas galindo" />
+								<h:outputText value="Calle secundaria:" class="elem" />
+
+								<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}"
+									class="elem" placeholder="bastion" />
+
+
+							</p:outputPanel>
+
+							<p:outputPanel deferred="true" class="item-container">
+
+
+								<h:outputText value="Numero de Casa" class="elem" />
+								<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
+									class="elem chil" placeholder="12-03" />
+
+
+
+
+								<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
+								<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
+									class="elem" style="width:100%" effect="fold" editable="true">
+									<f:selectItem itemLabel="Seleccione uno...."
+										noSelectionOption="true" itemValue="0" />
+									<f:selectItems value="#{beanUsuarios.roles}" var="rol"
+										itemLabel="#{rol.nombre}" itemValue="#{rol.id}" />
+								</p:selectOneMenu>
+
+
+							</p:outputPanel>
+
+
+							<p:commandButton value="Registrar" class="buttonreg"
+								update="@form,:form2" style="width:200px;"
+								actionListener="#{beanUsuarios.registrarUsuario()}"
+								icon="fa fa-save" />
+
 						</p:outputPanel>
-
-						<p:outputPanel deferred="true" class="item-container">
-							<h:outputText value="Cedula" class="elem" />
-							<p:inputText value="#{ beanUsuarios.persona.cedula }"
-								class="elem" placeholder="1009874563210" />
-							<h:outputText value="Ciudad:" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.dirCiudad}"
-								class="elem" placeholder="ibarra" />
-						</p:outputPanel>
-
-						<p:outputPanel deferred="true" class="item-container">
-							<h:outputText value="Ingrese su correo:" class="elem" />
-							<p:inputText value="#{beanUsuarios.usuario.correo}" class="elem"
-								placeholder="usuario@dominio.com" />
-							<h:outputText value="Ingrese su contraseña:" class="elem" />
-							<p:password value="#{beanUsuarios.usuario.password}" class="elem"
-								placeholder="**********" />
-
-
-						</p:outputPanel>
-						<p:outputPanel deferred="true" class="item-container">
-							<h:outputText value="Calle principal:" class="elem" />
-
-							<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
-								class="elem" placeholder="fray vacas galindo" />
-							<h:outputText value="Calle secundaria:" class="elem" />
-
-							<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}"
-								class="elem" placeholder="bastion" />
-
-
-						</p:outputPanel>
-
-						<p:outputPanel deferred="true" class="item-container">
-
-
-							<h:outputText value="Numero de Casa" class="elem" />
-							<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
-								class="elem chil" placeholder="12-03" />
-
-
-
-
-							<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-							<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd" class="elem"
-								style="width:100%" effect="fold" editable="true">
-								<f:selectItem itemLabel="Seleccione uno...."
-									noSelectionOption="true" itemValue="0"/>
-								<f:selectItems value="#{beanUsuarios.roles}" var="rol"
-									itemLabel="#{rol.nombre}" itemValue="#{rol.id}" />
-							</p:selectOneMenu>
-
-
-
-
-
-						</p:outputPanel>
-
-
-						<p:commandButton value="Registrar" class="buttonreg"
-							update="@form,:form2" style="width:200px;"
-							actionListener="#{beanUsuarios.registrarUsuario()}"
-							icon="fa fa-save" />
 
 					</p:outputPanel>
+				</p:panel>
+			</h:form>
 
-				</p:outputPanel>
-			</p:panel>
-		</h:form>
-
-		<h:form id="form2">
-			<p:panel header="Lista de usuarios">
-				<p:dataTable var="user" value="#{beanUsuarios.usuarios}">
-					<p:column headerText="Nombres">
-						<h:inputText value="#{user.nombres}" class="inputText" />
-					</p:column>
-
-					<p:column headerText="Apellidos">
-						<h:inputText value="#{user.apellidos}" class="inputText" />
-					</p:column>
-
-					<p:column headerText="Correo">
-						<h:inputText value="#{user.correo}" class="inputText" />
-					</p:column>
-
-					<p:column headerText="Estado">
-
-						<p:selectOneMenu value="#{user.estado}"
-							style="border:none; width:100%; outline: none; background:transparent">
-							<f:selectItem itemLabel="activo" itemValue="true" />
-							<f:selectItem itemLabel="inactivo" itemValue="false" />
-						</p:selectOneMenu>
-
-					</p:column>
-
-					<p:column headerText="Cedula">
-						<h:inputText value="#{user.cedula}" class="inputText" />
-					</p:column>
+			<!-- .................................. Tabla de datos ......................... -->
 
 
-					<p:column headerText="Ciudad">
-						<h:inputText value="#{user.ciudad}" class="inputText" />
-					</p:column>
 
-					<p:column headerText="Calle Prin.">
-						<h:inputText value="#{user.calleP}" class="inputText" />
-					</p:column>
+			<h:form id="form2" class="form">
+				<p:panel header="Lista de usuarios">
+					<p:dataTable var="user" value="#{beanUsuarios.usuarios}"
+						reflow="true">
+						<p:column headerText="Nombres">
+							<h:inputText value="#{user.nombres}" class="inputText" />
+						</p:column>
 
-					<p:column headerText="Calle Sec.">
-						<h:inputText value="#{user.calleS}" class="inputText" />
-					</p:column>
+						<p:column headerText="Apellidos">
+							<h:inputText value="#{user.apellidos}" class="inputText" />
+						</p:column>
 
-					<p:column headerText="Num Casa">
-						<h:inputText value="#{user.numCasa}" class="inputText" />
+						<p:column headerText="Correo">
+							<h:inputText value="#{user.correo}" class="inputText" />
+						</p:column>
 
-					</p:column>
+						<p:column headerText="Estado">
 
-					<p:column headerText="Opciones">
-						<p:commandButton icon="fa fa-trash" update="@form"
-							actionListener="#{beanUsuarios.eliminarUsuario(user,beanLogin.correo)}"
-							class="buttonOp" />
-						<p:commandButton icon="fa fa-edit" update="@form"
-							actionListener="#{beanUsuarios.actualizarUsuario(user,beanLogin.correo)}"
-							class="buttonOp" />
-					</p:column>
+							<p:selectOneMenu value="#{user.estado}"
+								style="border:none; width:100%; outline: none; background:transparent">
+								<f:selectItem itemLabel="activo" itemValue="true" />
+								<f:selectItem itemLabel="inactivo" itemValue="false" />
+							</p:selectOneMenu>
 
-				</p:dataTable>
-			</p:panel>
-		</h:form>
-	</p:outputPanel>
+						</p:column>
+
+						<p:column headerText="Cedula">
+							<h:inputText value="#{user.cedula}" class="inputText" />
+						</p:column>
 
 
-</body>
+						<p:column headerText="Ciudad">
+							<h:inputText value="#{user.ciudad}" class="inputText" />
+						</p:column>
+
+						<p:column headerText="Calle Prin.">
+							<h:inputText value="#{user.calleP}" class="inputText" />
+						</p:column>
+
+						<p:column headerText="Calle Sec.">
+							<h:inputText value="#{user.calleS}" class="inputText" />
+						</p:column>
+
+						<p:column headerText="Num Casa">
+							<h:inputText value="#{user.numCasa}" class="inputText" />
+
+						</p:column>
+
+						<p:column headerText="Opciones">
+							<p:commandButton icon="fa fa-trash" update="@form"
+								actionListener="#{beanUsuarios.eliminarUsuario(user,beanLogin.correo)}"
+								class="buttonOp" />
+							<p:commandButton icon="fa fa-edit" update="@form"
+								actionListener="#{beanUsuarios.actualizarUsuario(user,beanLogin.correo)}"
+								class="buttonOp" />
+						</p:column>
+
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+
+
+		</div>
+
+
+
+
+		<!-- ..................................... Footer .................................... -->
+
+
+		<div class="layout-footer">
+			<div class="p-grid">
+				<div class="p-col-12 p-md-6 p-lg-3">
+					<span class="logo">UTN</span>
+					<p>Universidad Técnica del Norte</p>
+				</div>
+
+
+				<div class="p-col-12 p-md-6 p-lg-3">
+					<span>SOCIAL</span>
+					<div class="p-grid">
+						<ul class="links social">
+							<li><a href="#twitter" class="icon-link"><i
+									class="fa fa-twitter icon"></i></a></li>
+							<li><a href="#facebook" class="icon-link"><i
+									class="fa fa-facebook icon"></i></a></li>
+							<li><a href="#github" class="icon-link"><i
+									class="fa fa-github icon"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</h:body>
 </html>

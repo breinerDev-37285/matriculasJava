@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
 
 <h:head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -27,29 +28,28 @@
 		src="#{request.contextPath}/faces/resources/jquery/jquery-plugins.js"></script>
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/faces/resources/css/layout-steel.css" />
-	<title>PrimeFaces Prestige - Login</title>
+	<title>Login</title>
 </h:head>
-<h:body>
-	<body class="login-body">
-		<div class="mobile-banner">
-			<img id="j_idt7"
-				src="#{request.contextPath}/faces/resources/images/logo-mobile.svg"
-				alt="" />
-		</div>
-		
+
+<body class="login-body">
+
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
 		<div class="login-panel">
 			<div class="logo">
 				<img id="j_idt9"
 					src="#{request.contextPath}/faces/resources/images/logo.svg" alt="" />
 			</div>
 			<div class="back-icon">
-				<button id="j_idt11" name="j_idt11" type="button"
+				<div
 					class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
 					onclick="window.open('\/matriculasWeb/faces/index.xhtml','_self')">
 					<span class="ui-button-icon-left ui-icon ui-c fa fa-arrow-left"></span><span
-						class="ui-button-text ui-c">ui-button</span>
-				</button>
-
+					class="ui-button-text ui-c">ui-button</span>
+				</div>
+				
 			</div>
 		</div>
 		
@@ -81,21 +81,31 @@
 					</div>
 				</div>
 
+				
 				<div class="forgetpassword-container">
 					<a href="#" class="forget-password">Forget Password?</a>
 				</div>
-
+				
+				
+				<!-- 
+					<div>
+						<p:commandButton value="Ingresar"
+							class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+							action="#{beanLogin.actionValidarUsuario()}" />
+	
+					</div>
+			 	-->
 				<div>
 					<p:commandButton value="Ingresar"
 						class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-						action="usuarios.xhtml" />
+						action="inicio.xhtml" />
 
 				</div>
 			</div>
 		</h:form>
-	</body>
-
-
-</h:body>
+		
+		
+		
+</body>
 
 </html>
