@@ -1,19 +1,128 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<link rel="stylesheet" href="./utils/css/general.css" />
-		<title>Aplicacion de matriculas</title>
+		<link rel="stylesheet" href="./utils/styles/general.css" />
+		<title>Matricula</title>
 	</f:facet>
 </h:head>
-<body> 
-	usuarios
-</body> 
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form>
+		<p:growl id="messages" showDetail="true" />
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Usuarios" class="button" icon="fa fa-user"
+					action="usuarios.xhtml" />
+				<p:commandButton value="Matriculas" class="button"
+					icon="fa fa-check" action="matriculas.xhtml" />
+				<p:commandButton value="Materias" class="button" icon="fa fa-book"
+					action="matriculas.xhtml" />
+				<p:commandButton value="Ciclo academico" class="button"
+					icon="fa fa-undo" action="matriculas.xhtml" />
+				<p:commandButton value="Periodo Academico" class="button"
+					icon="fa fa-graduation-cap" action="periodoAcademico.xhtml" />
+				<p:commandButton value="Matricula" class="button"
+					icon="fa fa-file-alt" action="matricula.xhtml" />
+			</f:facet>
+
+			<f:facet name="right">
+				<span class="fa fa-user" />
+				<h:outputText value=" #{beanLogin.correo}" />
+				<p:commandButton value="Cerrar Session" icon="fa fa-sign-out"
+					style="border: none; outline:none"
+					action="#{beanLogin.actionCerrarSession()}" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+
+	<br />
+	<hr />
+
+	<p:outputPanel deferred="true">
+
+		<h3>Matricula</h3>
+		<h:form>
+			<p:panel header="Seleccione el semestre">
+				<p:panelGrid columns="2">
+					<p:selectOneMenu value="#{beanMatricula.idSemestre}">
+						<f:selectItem itemLabel="Seleccione un semestre..."
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanMatricula.lSemestres}" var="s"
+							itemLabel="#{s.nombre}" itemValue="#{s.id}"></f:selectItems>
+					</p:selectOneMenu>
+					<p:commandButton value="Buscar" update="@form"
+						actionListener="#{beanMatricula.materiasBySemestre()}"></p:commandButton>
+				</p:panelGrid>
+			</p:panel>
+			<p:panel header="Materias">
+				<p:panelGrid columns="7">
+					<h:outputText value="Nombre Materia:" />
+					<p:selectOneMenu value="#{beanMatricula.matriculaPK.materia}">
+						<f:selectItem itemLabel="Seleccione una materia..."
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanMatricula.lMaterias}" var="m"
+							itemLabel="#{m.nombre}" itemValue="#{m.codigo}" />
+					</p:selectOneMenu>
+					<p:selectOneMenu value="#{beanMatricula.matriculaPK.numMateria}">
+						<f:selectItem itemLabel="Seleccione el tipo de matricula..."
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanMatricula.lNumMateria}" var="nm"
+							itemLabel="#{nm.nombre}" itemValue="#{nm.codigo}" />
+					</p:selectOneMenu>
+					<p:commandButton value="Agregar Materia" update="@form"
+						actionListener="#{beanMatricula.agregarMaterias()}" />
+				</p:panelGrid>
+				<p:dataTable value="#{beanMatricula.lMateriasMatriculadas}" var="mm">
+					<p:column headerText="Semestre">
+						<h:outputText value="#{mm.nSemestre}" />
+					</p:column>
+					<p:column headerText="Nombre de la Materia">
+						<h:outputText value="#{mm.nMateria}" />
+					</p:column>
+					<p:column headerText="Numero de Creditos">
+						<h:outputText value="#{mm.nCreditos}" />
+					</p:column>
+					<p:column headerText="Tipo de matricula">
+						<h:outputText value="#{mm.tipoMatricula}" />
+					</p:column>
+					<p:column headerText="Eliminar Materia">
+						<p:commandButton update="@form" icon="fa fa-trash"
+							actionListener="#{beanMatricula.eliminarMateriaMatriculada(mm.id)}" />
+					</p:column>
+				</p:dataTable>
+				<f:facet name="footer">
+					<p:commandButton value="Matricularse" update="@form"
+						actionListener="#{beanMatricula.guardarMatricula()}" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+
+		<h:form id="form2">
+			<p:panel header="Lista de Matriculas">
+				<p:dataTable var="matricula" value="#{beanMatricula.lMatriculas}">
+					<p:column headerText="Nombre de la materia">
+						<p:outputLabel value="#{matricula.nombreMateria}" class="elem" />
+					</p:column>
+					<p:column headerText="Tipo de matricula">
+						<p:outputLabel value="#{matricula.nombreNumMateria}" class="elem" />
+					</p:column>
+					<p:column headerText="Estado de matricula">
+						<p:outputLabel value="#{matricula.estado}" class="elem" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</p:outputPanel>
+</body>
 </html>

@@ -23,7 +23,6 @@ public class BeanPeriodoAcademico implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		periodoAcademico = new PeriodoAcademico();
 		listaPeriodoAcademico = mPeriodoAcademico.findAllPeriodoAcademico();
 	}
 

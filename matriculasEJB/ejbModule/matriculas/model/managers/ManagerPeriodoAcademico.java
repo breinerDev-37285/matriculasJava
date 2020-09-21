@@ -21,7 +21,7 @@ public class ManagerPeriodoAcademico {
 	}
 
 	public List<PeriodoAcademico> findAllPeriodoAcademico() {
-		return em.createQuery("SELECT p FROM PeriodoAcademico p", PeriodoAcademico.class).getResultList();
+		return em.createNamedQuery("PeriodoAcademico.findAll", PeriodoAcademico.class).getResultList();
 	}
 
 	public void registrarPeriodoAcademico(PeriodoAcademico periodoAcademico) throws Exception {
