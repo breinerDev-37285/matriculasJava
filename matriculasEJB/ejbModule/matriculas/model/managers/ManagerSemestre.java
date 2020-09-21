@@ -1,6 +1,4 @@
 package matriculas.model.managers;
-<<<<<<< HEAD
-=======
 
 
 import java.time.LocalDate;
@@ -29,7 +27,6 @@ import matriculas.model.entities.Semestre;
 @Stateless
 @LocalBean
 public class ManagerSemestre {
-<<<<<<< HEAD
 	@PersistenceContext
 	private EntityManager em;
 	
@@ -54,7 +51,7 @@ public class ManagerSemestre {
 //    	
 //    }
     
-=======
+
 
     @PersistenceContext
     	EntityManager em;
