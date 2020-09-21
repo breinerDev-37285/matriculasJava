@@ -44,7 +44,7 @@
 		href="#{request.contextPath}/faces/resources/css/primeflex.css" />
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/faces/resources/css/layout-blue.css" />
-	<title>Usuarios</title>
+	<title>Materias</title>
 	<script type="text/javascript"
 		src="#{request.contextPath}/faces/resources/js/layout.js"></script>
 	<style type="text/css">
@@ -338,13 +338,14 @@ body {
 	
 							<p:selectOneMenu value="#{ materia.semestreBean.nombre }" id="sd"
 								style="border:none; width:100%; outline: none; background:transparent" class="inputText"
-								effect="fold" editable="true">
-								<f:selectItem itemLabel="Seleccione uno...." class="elem"
-									noSelectionOption="true" />
+								effect="fold" >
 								<f:selectItems value="#{beanMateria.semestres}" var="semestre"
 									itemLabel="#{semestre.nombre}" itemValue="#{semestre.id}" />
 							</p:selectOneMenu>
 						</p:column>
+						
+						
+						
 	
 	
 	

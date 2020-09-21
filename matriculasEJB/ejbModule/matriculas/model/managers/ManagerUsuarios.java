@@ -34,17 +34,27 @@ public class ManagerUsuarios {
 	public Rol findRolById(int rol) {
 		return em.find(Rol.class, rol);
 	}
+	
+	public Rol validarRol(Rol rol) throws Exception {
+		
+		if ( rol == null ) {
+			throw new Exception("Por favor seleccione un rol valido");
+		}
+		
+		return rol;
+	}
 
 	public void registrarUsuario(Usuario user, int rol, Persona persona) throws Exception {
 
-		if (rol <= 0) {
-			throw new Exception("Por favor seleccione un rol valido");
-		}
+		
 
 		user = validarUsuario(user);
 		persona = validarPersona(persona);
 
 		Rol rolBean = findRolById(rol);
+		rolBean = validarRol(rolBean);
+		
+		
 		user.setRolBean(rolBean);
 		user.setEstado(true);
 
