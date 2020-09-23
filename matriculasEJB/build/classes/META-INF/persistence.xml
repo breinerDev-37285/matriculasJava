@@ -2,12 +2,14 @@
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="matriculasDS" transaction-type="JTA">
 		<jta-data-source>java:/matriculasDS</jta-data-source>
+		<class>matriculas.model.entities.Estado</class>
 		<class>matriculas.model.entities.Materia</class>
 		<class>matriculas.model.entities.Matricula</class>
 		<class>matriculas.model.entities.MatriculaPK</class>
 		<class>matriculas.model.entities.NumMatricula</class>
 		<class>matriculas.model.entities.PeriodoAcademico</class>
 		<class>matriculas.model.entities.Persona</class>
+		<class>matriculas.model.entities.Registro</class>
 		<class>matriculas.model.entities.Rol</class>
 		<class>matriculas.model.entities.Semestre</class>
 		<class>matriculas.model.entities.Telefono</class>

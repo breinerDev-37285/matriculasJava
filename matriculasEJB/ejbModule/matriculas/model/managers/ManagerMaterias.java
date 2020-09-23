@@ -29,10 +29,21 @@ public class ManagerMaterias {
 		return em.createQuery("select s from Semestre s", Semestre.class).getResultList();
 	}
 	
+	public Semestre validarSemestre(Semestre semestre) throws Exception {
+		
+		if( semestre == null ) {
+				throw new Exception("Por favor seleccione un semestre valido");
+		}
+		
+		return semestre;
+	}
+	
 	public void registrarNuevaMateria(Materia materia, int id_semestre) throws Exception {
 		
 		materia = validarMateria(materia, id_semestre);
 		Semestre semestre = em.find(Semestre.class,id_semestre );
+		semestre = validarSemestre(semestre);
+		
 		materia.setSemestreBean(semestre);
 		
 		em.persist(materia);
@@ -55,7 +66,12 @@ public class ManagerMaterias {
 			throw new Exception( "Por favor incluya el nombre de la materia" );
 		}
 		
-		if ( materia.getCreditos() == 0 || materia.getCreditos() == null  || !isNumeric(materia.getCreditos().toString())  ) {
+		if ( materia.getCreditos() == 0 || 
+				materia.getCreditos() == null  || 
+				!isNumeric(materia.getCreditos().toString()) ||
+				materia.getCreditos() <=  0 || 
+				materia.getCreditos() > 5
+				) {
 			throw new Exception( "Por favor ingrese los creditos validos" );
 		}
 		

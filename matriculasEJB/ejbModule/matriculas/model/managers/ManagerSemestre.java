@@ -1,23 +1,16 @@
 package matriculas.model.managers;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
->>>>>>> a728b45bee3eb4a5262971acd06b02e0e5941675
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-<<<<<<< HEAD
-
-=======
 import javax.persistence.Query;
 
 import matriculas.model.dto.semestreDTO;
->>>>>>> a728b45bee3eb4a5262971acd06b02e0e5941675
 import matriculas.model.entities.PeriodoAcademico;
 import matriculas.model.entities.Semestre;
 
@@ -52,15 +45,17 @@ public class ManagerSemestre {
 //    }
     
 
-
-    @PersistenceContext
-    	EntityManager em;
+    
+    
+    
+    
+    
     
     
     
     public void RegistrarSemestre(  Semestre semestre, int idPeriodo  )  throws Exception{
     	
-    	List<PeriodoAcademico> lPeriodos = new ArrayList<PeriodoAcademico>();
+    	List<PeriodoAcademico> lPeriodos = new ArrayList()<PeriodoAcademico>();
     	PeriodoAcademico periodo = findPeriodo(idPeriodo);
     	
     	if  ( periodo == null  ) {
@@ -153,5 +148,4 @@ public class ManagerSemestre {
         return f_fecha;
     }
 
->>>>>>> a728b45bee3eb4a5262971acd06b02e0e5941675
 }
