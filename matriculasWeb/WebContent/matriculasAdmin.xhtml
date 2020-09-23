@@ -265,7 +265,7 @@ body {
 							class="layout-menuitem-text">Materias</span>
 					</a></li>
 
-					<li><a href="matriculas.xhtml"> <i
+					<li><a href="matriculasAdmin.xhtml"> <i
 							class="fa fa-fw fa-graduation-cap fa-fw layout-menuitem-icon" />
 							<span class="layout-menuitem-text">Matriculas</span>
 					</a></li>
@@ -415,9 +415,7 @@ body {
 											actionListener="#{beanTIpoMatricula.actionListenerActualizarTipoMatricula(mat)}"
 											class="buttonOp" />
 											
-										<p:commandButton icon="fa fa-edit" update="@form"
-											actionListener="#{beanTIpoMatricula.actionListener}"
-											class="buttonOp" />
+										
 									</p:column>
 
 								</p:dataTable>
@@ -430,7 +428,7 @@ body {
 			</p:panel>
 
 
-
+		<!-- ...................... Tabla de datos matriculas ......................... -->
 
 			<h:form id="form3" class="form">
 				<p:panel header="Lista de matriculas">
@@ -450,10 +448,22 @@ body {
 
 
 						<p:column headerText="Opciones">
-							<p:commandButton icon="fa fa-trash" update="@form,:form5"
-								onclick="PF('dlg2').show();"
-								actionListener="#{beanMatriculasAdmin.actionListenerVerMaterias(mat.id)}"
-								class="buttonOp" />
+						
+								<p:commandButton icon="fa fa-check" update="@form"
+									actionListener="#{beanMatriculasAdmin.actionListenerAceptarMatricula(mat.id)}"
+									class="buttonOp" />
+						
+								<p:commandButton icon="fa fa-trash" update="@form"
+									actionListener="#{beanMatriculasAdmin.actionListenerRechazarMatricula(mat.id)}"
+									class="buttonOp" />
+									
+								
+								<p:commandButton icon="fa fa-list" update="@form,:form5"
+									onclick="PF('dlg2').show();"
+									actionListener="#{beanMatriculasAdmin.actionListenerVerMaterias(mat.id)}"
+									class="buttonOp" />
+									
+								
 
 						</p:column>
 
@@ -492,14 +502,13 @@ body {
 							</p:column>
 							
 							<p:column headerText="Opciones">
-								<p:commandButton icon="fa fa-trash" update="@form,:form3"
-										actionListener="#{beanMatriculasAdmin.actionListenerRechazarMateria(mater)}"
-										class="buttonOp" />
-									
-									<p:commandButton icon="fa fa-edit" update="@form,:form3"
+							
+								<p:commandButton icon="fa fa-check" update="@form"
 										actionListener="#{beanMatriculasAdmin.actionListeneraceptarMateria(mater)}"
 										class="buttonOp" />
-	
+								<p:commandButton icon="fa fa-trash" update="@form"
+										actionListener="#{beanMatriculasAdmin.actionListenerRechazarMateria(mater)}"
+										class="buttonOp" />
 							</p:column>
 
 						</p:dataTable>
