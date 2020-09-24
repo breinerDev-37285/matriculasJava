@@ -38,13 +38,13 @@ public class ManagerUsuarios {
 	public Rol findRolById(int rol) {
 		return em.find(Rol.class, rol);
 	}
-	
+
 	public Rol validarRol(Rol rol) throws Exception {
-		
-		if ( rol == null ) {
+
+		if (rol == null) {
 			throw new Exception("Por favor seleccione un rol valido");
 		}
-		
+
 		return rol;
 	}
 
@@ -55,8 +55,7 @@ public class ManagerUsuarios {
 
 		Rol rolBean = findRolById(rol);
 		rolBean = validarRol(rolBean);
-		
-		
+
 		user.setRolBean(rolBean);
 		user.setEstado(true);
 		user.setPassword(getMd5(user.getPassword()));
@@ -104,43 +103,42 @@ public class ManagerUsuarios {
 
 		return persona;
 	}
-	
+
 	public void actualizarUsuario(usuariosDTO usuario) throws Exception {
-		
-			if( usuario.getCiudad() == null ) {
-				usuario.setCiudad("");
-			}
-			
-			if( usuario.getCalleP() == null ) {
-				usuario.setCalleP("");
-			}
-			
-			if( usuario.getCalleS() == null ) {
-				usuario.setCalleS("");
-			}
-			
-			if( usuario.getNumCasa() == null ) {
-				usuario.setNumCasa("");
-			}
-			
-		
-			Persona persona = em.find(Persona.class, usuario.getId());
-		    Usuario user = persona.getUsuarios().get(0);
-		   user.setCorreo(usuario.getCorreo());
-		   user.setEstado(usuario.getEstado());
-		   
-		   persona.setNombres(usuario.getNombres());
-		   persona.setApellidos(usuario.getApellidos());
-		   persona.setCedula(usuario.getCedula().toString());
-		   persona.setDirCallePrincipal(usuario.getCalleP().toString());
-		   persona.setDirCalleSecundaria(usuario.getCalleS().toString());
-		   persona.setDirCiudad(usuario.getCiudad().toString());
-		   persona.setDirNumCasa(usuario.getNumCasa().toString());
-			
-		   persona = validarPersona(persona);
-			
-			em.merge(persona);
-			
+
+		if (usuario.getCiudad() == null) {
+			usuario.setCiudad("");
+		}
+
+		if (usuario.getCalleP() == null) {
+			usuario.setCalleP("");
+		}
+
+		if (usuario.getCalleS() == null) {
+			usuario.setCalleS("");
+		}
+
+		if (usuario.getNumCasa() == null) {
+			usuario.setNumCasa("");
+		}
+
+		Persona persona = em.find(Persona.class, usuario.getId());
+		Usuario user = persona.getUsuarios().get(0);
+		user.setCorreo(usuario.getCorreo());
+		user.setEstado(usuario.getEstado());
+
+		persona.setNombres(usuario.getNombres());
+		persona.setApellidos(usuario.getApellidos());
+		persona.setCedula(usuario.getCedula().toString());
+		persona.setDirCallePrincipal(usuario.getCalleP().toString());
+		persona.setDirCalleSecundaria(usuario.getCalleS().toString());
+		persona.setDirCiudad(usuario.getCiudad().toString());
+		persona.setDirNumCasa(usuario.getNumCasa().toString());
+
+		persona = validarPersona(persona);
+
+		em.merge(persona);
+
 	}
 
 	public List<Object[]> buscarPersonaPorCedula(String cedula) {
@@ -160,8 +158,8 @@ public class ManagerUsuarios {
 		List<usuariosDTO> usuarios = new ArrayList<usuariosDTO>();
 
 		for (int i = 0; i < fu.size(); i++) {
-			
-			int id = Integer.parseInt( fu.get(i)[0].toString()  );
+
+			int id = Integer.parseInt(fu.get(i)[0].toString());
 			String nombres = fu.get(i)[1].toString();
 			String apellidos = fu.get(i)[2].toString();
 			String correo = fu.get(i)[3].toString();
@@ -171,39 +169,31 @@ public class ManagerUsuarios {
 			Object calleP = fu.get(i)[7];
 			Object calleS = fu.get(i)[8];
 			Object numCasa = fu.get(i)[9];
-			
 
-			usuariosDTO userdf = new usuariosDTO(id,nombres, apellidos, cedula, correo, estado, ciudad, calleP, calleS,
+			usuariosDTO userdf = new usuariosDTO(id, nombres, apellidos, cedula, correo, estado, ciudad, calleP, calleS,
 					numCasa);
 
 			usuarios.add(userdf);
-			
+
 		}
 
 		return usuarios;
 	}
-	
-	
-	public void eliminarUsuario(usuariosDTO usuario)  {
-		
+
+	public void eliminarUsuario(usuariosDTO usuario) {
+
 		Persona persona = em.find(Persona.class, usuario.getId());
 		deleteTelefonoByPersona(persona);
-	    em.remove(persona);
+		em.remove(persona);
 	}
-	
-	private void deleteTelefonoByPersona(Persona persona) {
-		
-		String consulta = "DELETE  from Telefono t " + 
-	              "WHERE t.personaBean = :idPersona";
-		
-	em.createQuery(consulta)
-			  .setParameter("idPersona", persona)
-			  .executeUpdate();
 
-}
-	
-	
-	
+	private void deleteTelefonoByPersona(Persona persona) {
+
+		String consulta = "DELETE  from Telefono t " + "WHERE t.personaBean = :idPersona";
+
+		em.createQuery(consulta).setParameter("idPersona", persona).executeUpdate();
+
+	}
 
 	private boolean isNumeric(String cadena) {
 		try {
@@ -213,22 +203,22 @@ public class ManagerUsuarios {
 			return false;
 		}
 	}
-	
-	   public  String getMd5(String input)  throws Exception { 
-	        try { 
-	  
-	            MessageDigest md = MessageDigest.getInstance("MD5"); 
-	            byte[] messageDigest = md.digest(input.getBytes()); 
-	            BigInteger no = new BigInteger(1, messageDigest); 
-	            String hashtext = no.toString(16); 
-	            while (hashtext.length() < 32) { 
-	                hashtext = "0" + hashtext; 
-	            } 
-	            return hashtext; 
-	        }  
-	  
-	        catch (Exception e) { 
-	           throw new Exception(e); 
-	        } 
-	    } 
+
+	public String getMd5(String input) throws Exception {
+		try {
+
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] messageDigest = md.digest(input.getBytes());
+			BigInteger no = new BigInteger(1, messageDigest);
+			String hashtext = no.toString(16);
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		}
+
+		catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
 }
