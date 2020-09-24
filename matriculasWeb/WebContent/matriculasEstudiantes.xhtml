@@ -323,11 +323,14 @@ body {
 						<p:column headerText="Estado de matricula">
 							<p:outputLabel value="#{matricula.estado}" class="elem" />
 						</p:column>
+						<p:column headerText="Numero de creditos">
+							<p:outputLabel value="#{matricula.creditos}" class="elem" />
+						</p:column>
 					</p:dataTable>
 					<p:commandButton value="Ver matriculas" update="@form"
 						style="width:200px;"
 						actionListener="#{beanMatricula.matriculasBySemestre(beanLogin.correo)}"
-						icon="fa fa-save" />
+						icon="fas fa-redo-alt" />
 				</p:panel>
 			</h:form>
 		</div>

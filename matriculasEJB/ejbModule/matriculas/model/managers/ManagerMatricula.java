@@ -31,7 +31,7 @@ public class ManagerMatricula {
 		int idUsuario = findIDUsuarioByCorreo(correo).getId();
 
 		List<Object[]> lMatriculas = em.createNativeQuery(
-				"select r.id,m.nombre as nombre_materia,nm.nombre as tipo_matricula,e.nombre as nombre_estado\n"
+				"select m.nombre as nombre_materia,nm.nombre as tipo_matricula,e.nombre as nombre_estado,m.creditos\n"
 						+ "from matricula ma inner join materia m on ma.materia=m.codigo\n"
 						+ "inner join registro r on ma.registro=r.id inner join estado e on r.estado=e.id\n"
 						+ "inner join num_matricula nm on ma.num_materia=nm.codigo where ma.estudiante=" + idUsuario)
@@ -41,11 +41,13 @@ public class ManagerMatricula {
 		String nMateria;
 		String tipoMatricula;
 		String estado;
+		int creditos;
 		for (int i = 0; i < lMatriculas.size(); i++) {
-			nMateria = lMatriculas.get(i)[2].toString();
+			nMateria = lMatriculas.get(i)[0].toString();
 			tipoMatricula = lMatriculas.get(i)[1].toString();
-			estado = lMatriculas.get(i)[1].toString();
-			matriculaDTO = new MatriculaDTO(nMateria, tipoMatricula, estado);
+			estado = lMatriculas.get(i)[2].toString();
+			creditos = Integer.parseInt(lMatriculas.get(i)[3].toString());
+			matriculaDTO = new MatriculaDTO(nMateria, tipoMatricula, estado, creditos);
 			listadoMatriculas.add(matriculaDTO);
 		}
 		return listadoMatriculas;
