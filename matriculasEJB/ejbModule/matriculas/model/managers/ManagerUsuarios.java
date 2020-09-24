@@ -34,17 +34,27 @@ public class ManagerUsuarios {
 	public Rol findRolById(int rol) {
 		return em.find(Rol.class, rol);
 	}
+	
+	public Rol validarRol(Rol rol) throws Exception {
+		
+		if ( rol == null ) {
+			throw new Exception("Por favor seleccione un rol valido");
+		}
+		
+		return rol;
+	}
 
 	public void registrarUsuario(Usuario user, int rol, Persona persona) throws Exception {
 
-		if (rol <= 0) {
-			throw new Exception("Por favor seleccione un rol valido");
-		}
+		
 
 		user = validarUsuario(user);
 		persona = validarPersona(persona);
 
 		Rol rolBean = findRolById(rol);
+		rolBean = validarRol(rolBean);
+		
+		
 		user.setRolBean(rolBean);
 		user.setEstado(true);
 
@@ -158,6 +168,7 @@ public class ManagerUsuarios {
 			Object calleP = fu.get(i)[7];
 			Object calleS = fu.get(i)[8];
 			Object numCasa = fu.get(i)[9];
+			
 
 			usuariosDTO userdf = new usuariosDTO(id,nombres, apellidos, cedula, correo, estado, ciudad, calleP, calleS,
 					numCasa);

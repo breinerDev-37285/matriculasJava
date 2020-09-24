@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+	
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+
+
+	<h:form class="login-card">
+
+			<div class="top-border"></div>
+			<div class="login-content">
+
+
+				<h1>Login</h1>
+				<p>Bienvenido, por favor inicie sesion.</p>
+
+				<div class="username-container">
+					<label>Correo</label>
+					<div class="login-input">
+						<p:inputText value="#{beanLogin.correo}"
+							class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all"
+							placeholder="usuario@dominio.com" />
+					</div>
+				</div>
+
+				<div class="password-container">
+					<label>Contraseña</label>
+					<div class="login-input">
+						<p:password value="#{beanLogin.password}"
+							class="ui-inputfield ui-password ui-widget ui-state-default ui-corner-all"
+							placeholder="**********" />
+					</div>
+				</div>
+
+				
+				<div class="forgetpassword-container">
+					<a href="#" class="forget-password">Forget Password?</a>
+				</div>
+				
+				
+
+				<div>
+					<p:commandButton value="Ingresar"
+						class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+						action="#{beanLogin.actionValidarUsuario()}" />
+
+				</div>
+			</div>
+		</h:form>
+</body> 
+</html>

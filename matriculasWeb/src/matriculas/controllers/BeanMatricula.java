@@ -1,7 +1,6 @@
 package matriculas.controllers;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +12,8 @@ import javax.inject.Named;
 import matriculas.model.dto.MateriasMatriculadasDTO;
 import matriculas.model.dto.MatriculaDTO;
 import matriculas.model.entities.Materia;
-import matriculas.model.entities.Matricula;
 import matriculas.model.entities.MatriculaPK;
-import matriculas.model.entities.NumMateria;
+import matriculas.model.entities.NumMatricula;
 import matriculas.model.entities.Semestre;
 import matriculas.model.managers.ManagerMatricula;
 
@@ -29,32 +27,35 @@ public class BeanMatricula implements Serializable {
 	private List<Semestre> lSemestres;
 	private List<Materia> lMaterias;
 	private List<MatriculaDTO> lMatriculas;
-	private List<NumMateria> lNumMateria;
+	private List<NumMatricula> lNumMatricula;
 	private List<MatriculaPK> lMatriculaPKs;
 	private List<MateriasMatriculadasDTO> lMateriasMatriculadas;
 	private MatriculaPK matriculaPK;
 	private int idUsuario;
 	private int idSemestre;
+	private boolean semestre;
 
 	@PostConstruct
 	public void init() {
-		idUsuario = 2;
 		lSemestres = mMatricula.findAllSemestres();
 		matriculaPK = new MatriculaPK();
 		lMatriculaPKs = new ArrayList<MatriculaPK>();
+		lMaterias = new ArrayList<Materia>();
+		semestre = false;
 	}
 
 	public void materiasBySemestre() {
-		lMaterias = mMatricula.findMateriasBySemestre(idSemestre);
-		lNumMateria = mMatricula.findAllNumMaterias();
+		lMaterias = mMatricula.findMateriasBySemestre(idSemestre, lMaterias, lMatriculaPKs.size());
+		lNumMatricula = mMatricula.findAllNumMatriculas();
 	}
 
 	public void matriculasBySemestre() {
 		lMatriculas = mMatricula.findMatriculasBySemestre(idUsuario, idSemestre);
 	}
 
-	public void agregarMaterias() {
+	public void agregarMaterias(String correo) {
 		try {
+			idUsuario = mMatricula.findIDUsuarioByCorreo(correo).getId();
 			matriculaPK.setEstudiante(idUsuario);
 			lMatriculaPKs = mMatricula.agregarMateriaMatriculada(lMatriculaPKs, matriculaPK);
 			lMateriasMatriculadas = mMatricula.verMateriasMatriculadas(lMatriculaPKs);
@@ -105,12 +106,12 @@ public class BeanMatricula implements Serializable {
 		this.lMatriculas = lMatriculas;
 	}
 
-	public List<NumMateria> getlNumMateria() {
-		return lNumMateria;
+	public List<NumMatricula> getlNumMatricula() {
+		return lNumMatricula;
 	}
 
-	public void setlNumMateria(List<NumMateria> lNumMateria) {
-		this.lNumMateria = lNumMateria;
+	public void setlNumMatricula(List<NumMatricula> lNumMatricula) {
+		this.lNumMatricula = lNumMatricula;
 	}
 
 	public List<MatriculaPK> getlMatriculaPKs() {

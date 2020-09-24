@@ -1,11 +1,212 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
 
-<h:head></h:head> 
-<body> 
-estudiante
-</body> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+	<f:event listener="#{beanLogin.actionListenerVerificarLogin()}"
+		type="preRenderView" />
+</f:metadata>
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="prestige-layout/images/favicon.html" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/theme.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/fa/font-awesome.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/components.css" />
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/jquery/jquery.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/core.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/components.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/jquery/jquery-plugins.js"></script>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/keyboard/keyboard.css" />
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/keyboard/keyboard.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/touch/touchswipe.js"></script>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/css/primeflex.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/css/layout-blue.css" />
+	<title>Matriculas</title>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/js/layout.js"></script>
+	<style type="text/css">
+.ui-panelgrid.form-elements .ui-grc-2 {
+	padding-left: 60px;
+}
+
+@media ( max-width : 1024px) {
+	.ui-panelgrid.form-elements .ui-grc-2 {
+		padding-left: 20px;
+	}
+}
+
+@media ( max-width : 640px) {
+	.ui-panelgrid.form-elements .ui-grc-2 {
+		padding-left: 6px;
+	}
+}
+
+.dialogDemo label {
+	line-height: 2.1em;
+}
+</style>
+
+	<style type="text/css">
+@font-face {
+	font-family: ubuntu-regular;
+	src: url("assets/fonts/Ubuntu-Light.ttf");
+}
+
+body {
+	background-color: #fff;
+	font-family: ubuntu-regular;
+}
+
+.container-padre {
+	width: 48%
+}
+
+.container, .container2 {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	padding: 1em;
+	gap: 2em;
+	background: transparent;
+	width: 49%;
+	margin: 0.5em 0;
+}
+
+.container2 {
+	width: 100%;
+	border: solid gray 1px;
+}
+
+.form_panel {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 0.5em;
+}
+
+.panel {
+	margin-bottom: 3em;
+}
+
+.elem {
+	width: 100%;
+}
+
+.item-container {
+	width: 500px;
+}
+
+.itemd {
+	font-family: ubuntu-regular;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	height: 150px;
+	width: 100%;
+}
+
+.buttonreg {
+	width: 200px;
+	height: 35px;
+	margin-bottom: 50px;
+	align-self: flex-end;
+}
+
+.form {
+	margin: 2em 1em;
+}
+
+.inputText {
+	border: none;
+	outline: none;
+	background: transparent;
+}
+
+.buttonOp {
+	margin-left: 1em;
+	border: solid red;
+}
+
+@media screen and (max-width: 1000px) {
+	.container-padre {
+		width: 100%
+	}
+	.container {
+		width: 100%;
+	}
+	.form_panel {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.item-container {
+		width: 100%;
+	}
+}
+
+.reg {
+	margin-top: 1em;
+}
+</style>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form>
+		<p:growl id="messages" showDetail="true" />
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Usuarios" class="button" icon="fa fa-user"
+					action="usuarios.xhtml" />
+				<p:commandButton value="Matriculas" class="button"
+					icon="fa fa-check" action="matriculas.xhtml" />
+				<p:commandButton value="Materias" class="button" icon="fa fa-book"
+					action="matriculas.xhtml" />
+				<p:commandButton value="Ciclo academico" class="button"
+					icon="fa fa-undo" action="matriculas.xhtml" />
+				<p:commandButton value="Periodo Academico" class="button"
+					icon="fa fa-graduation-cap" action="periodoAcademico.xhtml" />
+				<p:commandButton value="Matricula" class="button"
+					icon="fa fa-file-alt" action="matricula.xhtml" />
+			</f:facet>
+
+			<f:facet name="right">
+				<span class="fa fa-user" />
+				<h:outputText value=" #{beanLogin.correo}" />
+				<p:commandButton value="Cerrar Session" icon="fa fa-sign-out"
+					style="border: none; outline:none"
+					action="#{beanLogin.actionCerrarSession()}" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+</body>
 </html>

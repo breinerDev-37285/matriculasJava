@@ -1,5 +1,9 @@
 package matriculas.model.managers;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -10,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 
 import matriculas.model.entities.Rol;
+import matriculas.model.entities.Usuario;
 
 /**
  * Session Bean implementation class ManagerLogin
@@ -21,32 +26,65 @@ public class ManagerLogin {
 	@PersistenceContext
     private EntityManager em;
     
-    public String verificarAcceso(String email, String password) throws Exception {
+    public  List<Object> verificarAcceso(String email, String password) throws Exception {
     	
 	    	String link = "";
+	 
+	    	List<Usuario> usuarios = em.createNamedQuery("Usuario.findAll",Usuario.class).getResultList();
+	    	Usuario usuario = null;
 	    	
-			StoredProcedureQuery query = em.createStoredProcedureQuery("verificarUsuario") 
-					.registerStoredProcedureParameter("correo",String.class, ParameterMode.IN) 
-					.registerStoredProcedureParameter("password",String.class, ParameterMode.IN);
-			query.setParameter("correo", email);
-			query.setParameter("password",password);
-			query.execute();
-			
-			List<Object[]> getUsuario = query.getResultList();
-			
-			String rol = getUsuario.get(0)[1].toString();
-		
-			switch (  rol  ) {
-		    		case "1": link = "estudiante.xhtml";  break;
-		    		case "2": link = "usuarios.xhtml"; break;
+	    	for (Usuario user : usuarios) {
+	    			if (  user.getCorreo().equals(email)  && user.getPassword().equals(getMd5(password))   )  {
+	    				usuario = user;
+	    			}
+	    	}
+	    	
+	    	if(  usuario == null ) {
+	    			throw new Exception("Credenciales invalidas!");
+	    	}
+	    	
+			if  ( !usuario.getEstado()  ) {
+				throw new Exception( "El usuario se encuentra inactivo" );
 			}
-	    		
-	       return link;
+			
+		
+			switch (  usuario.getRolBean().getId()  ) {
+					case 1: link = "matriculas.xhtml";  break;
+					case 2: link = "usuarios.xhtml"; break;
+			}	
+			
+			 List<Object> estado = new ArrayList<Object>();
+			 
+			 estado.add(link);
+			 estado.add(usuario.getRolBean().getId());
+			
+			
+			return estado;
     }
     
     public List<Rol> obtenerTodosRoles() throws Exception {
     		List<Rol> roles = em.createQuery("SELECT r FROM Rol r",Rol.class).getResultList();
     		return roles;
     }
+    
+    public  String getMd5(String input)  throws Exception { 
+        try { 
+  
+            MessageDigest md = MessageDigest.getInstance("MD5"); 
+            byte[] messageDigest = md.digest(input.getBytes()); 
+            BigInteger no = new BigInteger(1, messageDigest); 
+            String hashtext = no.toString(16); 
+            while (hashtext.length() < 32) { 
+                hashtext = "0" + hashtext; 
+            } 
+            return hashtext; 
+        }  
+  
+        catch (Exception e) { 
+           throw new Exception(e); 
+        } 
+    } 
+    
+  
 
 }

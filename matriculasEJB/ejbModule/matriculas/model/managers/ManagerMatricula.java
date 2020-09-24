@@ -15,7 +15,7 @@ import matriculas.model.entities.Estado;
 import matriculas.model.entities.Materia;
 import matriculas.model.entities.Matricula;
 import matriculas.model.entities.MatriculaPK;
-import matriculas.model.entities.NumMateria;
+import matriculas.model.entities.NumMatricula;
 import matriculas.model.entities.Registro;
 import matriculas.model.entities.Semestre;
 import matriculas.model.entities.Usuario;
@@ -54,13 +54,20 @@ public class ManagerMatricula {
 		return em.createNamedQuery("Semestre.findAll", Semestre.class).getResultList();
 	}
 
-	public List<NumMateria> findAllNumMaterias() {
-		return em.createNamedQuery("NumMateria.findAll", NumMateria.class).getResultList();
+	public List<NumMatricula> findAllNumMatriculas() {
+		return em.createNamedQuery("NumMatricula.findAll", NumMatricula.class).getResultList();
 	}
 
-	public List<Materia> findMateriasBySemestre(int idSemestre) {
-		return em.createQuery("select m from Materia m where m.semestreBean=" + idSemestre, Materia.class)
-				.getResultList();
+	public List<Materia> findMateriasBySemestre(int idSemestre, List<Materia> lMaterias, int tamaño) {
+		if (lMaterias.size() == 0 && tamaño == 0) {
+			lMaterias = em.createQuery("select m from Materia m where m.semestreBean=" + idSemestre, Materia.class)
+					.getResultList();
+		}
+		return lMaterias;
+	}
+
+	public Usuario findIDUsuarioByCorreo(String correo) {
+		return em.createNamedQuery("select u from Usario u where u.correo=" + correo, Usuario.class).getSingleResult();
 	}
 
 	public Semestre findSemestresById(int idSemestre) {
@@ -75,8 +82,8 @@ public class ManagerMatricula {
 		return em.find(Usuario.class, idUsuario);
 	}
 
-	public NumMateria findNumMateriaById(int idNumMateria) {
-		return em.find(NumMateria.class, idNumMateria);
+	public NumMatricula findNumMatriculaById(int idNumMatricula) {
+		return em.find(NumMatricula.class, idNumMatricula);
 	}
 
 	public Estado findEstadoById(int idEstado) {
@@ -133,11 +140,11 @@ public class ManagerMatricula {
 		for (int i = 0; i < lMatriculaPK.size(); i++) {
 
 			Materia materia = new Materia();
-			NumMateria nMateria = new NumMateria();
+			NumMatricula nMateria = new NumMatricula();
 			MateriasMatriculadasDTO materiasMatriculadasDTO = new MateriasMatriculadasDTO();
 
 			materia = findMateriaById(lMatriculaPK.get(i).getMateria());
-			nMateria = findNumMateriaById(lMatriculaPK.get(i).getNumMateria());
+			nMateria = findNumMatriculaById(lMatriculaPK.get(i).getNumMateria());
 
 			materiasMatriculadasDTO.setId(materia.getCodigo());
 			materiasMatriculadasDTO.setnSemestre(materia.getSemestreBean().getNombre());

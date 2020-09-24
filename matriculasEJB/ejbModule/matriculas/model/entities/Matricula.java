@@ -23,19 +23,22 @@ public class Matricula implements Serializable {
 	@JoinColumn(name = "materia", nullable = false, insertable = false, updatable = false)
 	private Materia materiaBean;
 
-	// bi-directional many-to-one association to NumMateria
+
+	//bi-directional many-to-one association to NumMatricula
 	@ManyToOne
-	@JoinColumn(name = "num_materia", nullable = false, insertable = false, updatable = false)
-	private NumMateria numMateriaBean;
+	@JoinColumn(name="num_materia", nullable=false, insertable=false, updatable=false)
+	private NumMatricula numMatricula;
+
 
 	// bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name = "estudiante", nullable = false, insertable = false, updatable = false)
 	private Usuario usuario;
 
-	// bi-directional many-to-one association to Registro
+	//bi-directional many-to-one association to Registro
 	@ManyToOne
-	@JoinColumn(name = "registro")
+	@JoinColumn(name="registro")
+
 	private Registro registroBean;
 
 	public Matricula() {
@@ -65,12 +68,12 @@ public class Matricula implements Serializable {
 		this.materiaBean = materiaBean;
 	}
 
-	public NumMateria getNumMateriaBean() {
-		return this.numMateriaBean;
+	public NumMatricula getNumMatricula() {
+		return this.numMatricula;
 	}
 
-	public void setNumMateriaBean(NumMateria numMateriaBean) {
-		this.numMateriaBean = numMateriaBean;
+	public void setNumMatricula(NumMatricula numMatricula) {
+		this.numMatricula = numMatricula;
 	}
 
 	public Usuario getUsuario() {

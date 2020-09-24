@@ -10,26 +10,30 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name = "registro")
-@NamedQuery(name = "Registro.findAll", query = "SELECT r FROM Registro r")
+
+@Table(name="registro")
+@NamedQuery(name="Registro.findAll", query="SELECT r FROM Registro r")
+
 public class Registro implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
+
 	private Integer id;
 
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
-	// bi-directional many-to-one association to Matricula
-	@OneToMany(mappedBy = "registroBean", cascade = CascadeType.ALL)
+	//bi-directional many-to-one association to Matricula
+	@OneToMany(mappedBy="registroBean")
 	private List<Matricula> matriculas;
 
-	// bi-directional many-to-one association to Estado
+	//bi-directional many-to-one association to Estado
 	@ManyToOne
-	@JoinColumn(name = "estado")
+	@JoinColumn(name="estado")
+
 	private Estado estadoBean;
 
 	public Registro() {

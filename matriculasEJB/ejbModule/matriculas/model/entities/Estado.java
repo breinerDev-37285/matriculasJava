@@ -1,7 +1,7 @@
 package matriculas.model.entities;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "estado")
 @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e")
+
 public class Estado implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,7 +25,7 @@ public class Estado implements Serializable {
 	private String nombre;
 
 	// bi-directional many-to-one association to Registro
-	@OneToMany(mappedBy = "estadoBean", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "estadoBean")
 	private List<Registro> registros;
 
 	public Estado() {

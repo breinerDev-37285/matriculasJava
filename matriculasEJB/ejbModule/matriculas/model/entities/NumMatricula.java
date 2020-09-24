@@ -6,13 +6,13 @@ import java.util.List;
 
 
 /**
- * The persistent class for the num_materia database table.
+ * The persistent class for the num_matricula database table.
  * 
  */
 @Entity
-@Table(name="num_materia")
-@NamedQuery(name="NumMateria.findAll", query="SELECT n FROM NumMateria n")
-public class NumMateria implements Serializable {
+@Table(name="num_matricula")
+@NamedQuery(name="NumMatricula.findAll", query="SELECT n FROM NumMatricula n")
+public class NumMatricula implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -24,10 +24,10 @@ public class NumMateria implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Matricula
-	@OneToMany(mappedBy="numMateriaBean")
+	@OneToMany(mappedBy="numMatricula")
 	private List<Matricula> matriculas;
 
-	public NumMateria() {
+	public NumMatricula() {
 	}
 
 	public Integer getCodigo() {
@@ -56,14 +56,14 @@ public class NumMateria implements Serializable {
 
 	public Matricula addMatricula(Matricula matricula) {
 		getMatriculas().add(matricula);
-		matricula.setNumMateriaBean(this);
+		matricula.setNumMatricula(this);
 
 		return matricula;
 	}
 
 	public Matricula removeMatricula(Matricula matricula) {
 		getMatriculas().remove(matricula);
-		matricula.setNumMateriaBean(null);
+		matricula.setNumMatricula(null);
 
 		return matricula;
 	}
