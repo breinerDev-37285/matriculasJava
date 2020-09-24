@@ -50,7 +50,7 @@ public class ManagerLogin {
 		
 			switch (  usuario.getRolBean().getId()  ) {
 					case 1: link = "estudiante.xhtml";  break;
-					case 2: link = "usuarios.xhtml"; break;
+					case 2: link = "inicio.xhtml"; break;
 			}	
 			
 			 List<Object> estado = new ArrayList<Object>();

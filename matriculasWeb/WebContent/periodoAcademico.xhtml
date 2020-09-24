@@ -174,8 +174,7 @@ body {
 
 				<li class="user-profile" role="menuitem"><a href="#">
 						<div class="user-profile-info profile-link">
-							<span class="user-profile-name">Ava Gregoraci</span> <span
-								class="user-profile-role">Design Ops</span>
+							<h:outputText value="#{beanLogin.correo}" class="user-profile-name" />
 						</div> <img id="j_idt15"
 						src="#{request.contextPath}/faces/resources/images/avatar/avatar-ava.jpg"
 						alt="" class="logo" />
@@ -201,53 +200,89 @@ body {
 			<div class="layout-menu-wrapper">
 
 				<ul id="menuform:j_idt21" class="layout-menu">
-					<li><a href="inicio.xhtml"> <i
-							class="fa fa-fw fa-dashboard fa-fw layout-menuitem-icon"></i> <span
-							class="layout-menuitem-text">Dashboard</span>
-					</a></li>
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px"
+								value="Dashboard"
+								icon="fa fa-dashboard"
+								action="inicio.xhtml"/>
+						</div>
+					</li>
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px"
+								value="Roles"
+								icon="fa fa-globe"
+								action="roles.xhtml"/>
+						</div>
+					</li>
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px"
+								value="Usuarios"
+								icon="fa fa-user"
+								action="usuarios.xhtml"/>
+						</div>
+					</li>
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px"
+								value="Telefonos"
+								icon="fa fa-phone"
+								action="telefonos.xhtml"/>
+						</div>
+					</li>
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px"
+								value="Materias"
+								icon="fa fa-bookmark"
+								action="materias.xhtml"/>
+						</div>
+					</li>
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px"
+								value="Matriculas"
+								icon="fa fa-graduation-cap "
+								action="matriculasAdmin.xhtml"/>
+						</div>
+					</li>
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px"
+								value="Semestre"
+								icon="fa fa-check-circle "
+								action="semestre.xhtml"/>
+						</div>
+					</li>
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:250px"
+								value="Periodo academico"
+								icon="fa fa-cog  "
+								action="periodoAcademico.xhtml"/>
+						</div>
+					</li>
 
-					<li><a href="roles.xhtml"> <i
-							class="fa fa-fw fa-globe fa-fw layout-menuitem-icon" /> <span
-							class="layout-menuitem-text">Roles</span>
-					</a></li>
-
-					<li><a href="usuarios.xhtml"> <i
-							class="fa fa-fw fa-user fa-fw layout-menuitem-icon" /> <span
-							class="layout-menuitem-text">Usuarios</span>
-					</a></li>
-
-					<li><a href="telefonos.xhtml"> <i
-							class="fa fa-fw fa-phone fa-fw layout-menuitem-icon"></i> <span
-							class="layout-menuitem-text">Telefonos</span>
-					</a></li>
-
-					<li><a href="materias.xhtml"> <i
-							class="fa fa-fw fa-bookmark fa-fw layout-menuitem-icon" /> <span
-							class="layout-menuitem-text">Materias</span>
-					</a></li>
-
-					<li><a href="matriculasAdmin.xhtml"> <i
-							class="fa fa-fw fa-graduation-cap fa-fw layout-menuitem-icon" />
-							<span class="layout-menuitem-text">Matriculas</span>
-					</a></li>
-
-					<li><a href="semestre.xhtml"> <i
-							class="fa fa-fw fa-check-circle fa-fw layout-menuitem-icon" /> <span
-							class="layout-menuitem-text">Semestre</span>
-					</a></li>
-
-					<li><a href="periodoAcademico.xhtml"> <i
-							class="fa fa-fw fa-cog fa-fw layout-menuitem-icon" /> <span
-							class="layout-menuitem-text">Periodo academico</span>
-					</a></li>
 				</ul>
-				<script id="menuform:j_idt21_s" type="text/javascript">
-					$(function() {
-						PrimeFaces.cw("Prestige", "prestigeMenuWidget", {
-							id : "menuform:j_idt21",
-						});
-					});
-				</script>
+				
 			</div>
 		</div>
 
@@ -280,21 +315,27 @@ body {
 
 							<p:outputPanel deferred="true" class="item-container">
 							
+							<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+ 
+    							<h:panelGrid columns="2" cellpadding="5">
+							
 							
 								<p:outputLabel value="Fecha de Inicio"
 									class="elem" />
 									
 								<p:datePicker
 									value="#{beanPeriodoAcademico.periodoAcademico.fechaInicio}"
-									 required="true" readonlyInput="false" />
+									 required="true"  />
 
 								<p:outputLabel value="Fecha de Finalización"
 									class="elem" />
 									
 								<p:datePicker
 									value="#{beanPeriodoAcademico.periodoAcademico.fechaFin}"
-									required="true" readonlyInput="false" />
+									required="true"  />
 
+
+							</h:panelGrid>
 							</p:outputPanel>
 
 							<p:commandButton value="Registrar" class="buttonreg"

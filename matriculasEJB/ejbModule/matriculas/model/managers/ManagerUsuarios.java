@@ -1,5 +1,7 @@
 package matriculas.model.managers;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,9 @@ import javax.persistence.Query;
 
 import matriculas.model.dto.usuariosDTO;
 import matriculas.model.entities.Persona;
+import matriculas.model.entities.Registro;
 import matriculas.model.entities.Rol;
+import matriculas.model.entities.Telefono;
 import matriculas.model.entities.Usuario;
 
 /**
@@ -46,8 +50,6 @@ public class ManagerUsuarios {
 
 	public void registrarUsuario(Usuario user, int rol, Persona persona) throws Exception {
 
-		
-
 		user = validarUsuario(user);
 		persona = validarPersona(persona);
 
@@ -57,6 +59,7 @@ public class ManagerUsuarios {
 		
 		user.setRolBean(rolBean);
 		user.setEstado(true);
+		user.setPassword(getMd5(user.getPassword()));
 
 		if (persona.getUsuarios() == null) {
 			persona.setUsuarios(new ArrayList<Usuario>());
@@ -150,7 +153,7 @@ public class ManagerUsuarios {
 
 		String consulta = "select p.id, p.nombres, p.apellidos, u.correo,p.cedula, u.estado, p.dir_ciudad as ciudad, \n"
 				+ "p.dir_calle_principal as calleP, p.dir_calle_secundaria as calleS, p.dir_num_casa as numCasa\n"
-				+ "from usuario u\n" + "inner join persona p\n" + "on u.persona = p.id;";
+				+ "from usuario u\n" + "inner join persona p\n" + "on u.persona = p.id order by u.id";
 
 		Query q = em.createNativeQuery(consulta);
 		List<Object[]> fu = q.getResultList();
@@ -184,10 +187,22 @@ public class ManagerUsuarios {
 	public void eliminarUsuario(usuariosDTO usuario)  {
 		
 		Persona persona = em.find(Persona.class, usuario.getId());
-	    Usuario user = persona.getUsuarios().get(0);
-	    
+		deleteTelefonoByPersona(persona);
 	    em.remove(persona);
 	}
+	
+	private void deleteTelefonoByPersona(Persona persona) {
+		
+		String consulta = "DELETE  from Telefono t " + 
+	              "WHERE t.personaBean = :idPersona";
+		
+	em.createQuery(consulta)
+			  .setParameter("idPersona", persona)
+			  .executeUpdate();
+
+}
+	
+	
 	
 
 	private boolean isNumeric(String cadena) {
@@ -198,4 +213,22 @@ public class ManagerUsuarios {
 			return false;
 		}
 	}
+	
+	   public  String getMd5(String input)  throws Exception { 
+	        try { 
+	  
+	            MessageDigest md = MessageDigest.getInstance("MD5"); 
+	            byte[] messageDigest = md.digest(input.getBytes()); 
+	            BigInteger no = new BigInteger(1, messageDigest); 
+	            String hashtext = no.toString(16); 
+	            while (hashtext.length() < 32) { 
+	                hashtext = "0" + hashtext; 
+	            } 
+	            return hashtext; 
+	        }  
+	  
+	        catch (Exception e) { 
+	           throw new Exception(e); 
+	        } 
+	    } 
 }
