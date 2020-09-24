@@ -2,16 +2,13 @@ package matriculas.model.managers;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 
 import matriculas.model.entities.Rol;
 import matriculas.model.entities.Usuario;
@@ -49,7 +46,7 @@ public class ManagerLogin {
 			
 		
 			switch (  usuario.getRolBean().getId()  ) {
-					case 1: link = "estudiante.xhtml";  break;
+					case 1: link = "matriculasEstudiantes.xhtml";  break;
 					case 2: link = "inicio.xhtml"; break;
 			}	
 			

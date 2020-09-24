@@ -49,9 +49,16 @@ public class BeanMatriculasAdmin implements Serializable {
 	
 	public void actionListenerFindFiltro() {
 		try {
+			
+
+			
 			switch (  filtro  ) {
 						case 1:
 							matriculas = mMatriculasAdmin.findAllMatriculasByEstado(estado);
+							
+							System.out.print(  matriculas.size()  );
+							
+							
 						break;
 						
 						case 2:
@@ -64,6 +71,7 @@ public class BeanMatriculasAdmin implements Serializable {
 				}
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
@@ -75,6 +83,7 @@ public class BeanMatriculasAdmin implements Serializable {
 					matriculas = mMatriculasAdmin.findAllMatriculas()	;
 			} catch (Exception e) {
 					JSFUtil.crearMensajeError(e.getMessage());
+					e.printStackTrace();
 			}
 	}
 	
@@ -85,6 +94,7 @@ public class BeanMatriculasAdmin implements Serializable {
 					matriculas = mMatriculasAdmin.findAllMatriculas()	;
 			} catch (Exception e) {
 					JSFUtil.crearMensajeError(e.getMessage());
+					e.printStackTrace();
 			}
 	}
 	
@@ -96,18 +106,9 @@ public class BeanMatriculasAdmin implements Serializable {
 			
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -121,11 +122,9 @@ public class BeanMatriculasAdmin implements Serializable {
 				lMaterias =  mMatriculasAdmin.listMateriasByMatricula(registroestado);
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
 		}
 	}
-	
-	
-	
 	
 	
 	public void actionListeneraceptarMateria( matriculasAdminDTO mater ) {
@@ -135,25 +134,9 @@ public class BeanMatriculasAdmin implements Serializable {
 			lMaterias =  mMatriculasAdmin.listMateriasByMatricula(registroestado);
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 

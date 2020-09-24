@@ -77,8 +77,10 @@ public class ManagerMatriculaAdmin {
 				if( est == null  ) {
 						throw new Exception( "Seleccione un estado valido" );
 				}
+				
+				
+				return em.createQuery(" select r from Registro r  where r.estadoBean="+est.getId(),Registro.class).getResultList();
 			
-				return em.createQuery("select r from Registro r where r.estadoBean="+est.getId(), Registro.class).getResultList();
 		}
 		
 		

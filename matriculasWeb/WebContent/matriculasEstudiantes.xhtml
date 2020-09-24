@@ -1,0 +1,356 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<f:metadata>
+	<f:event listener="#{beanLogin.actionListenerVerificarLogin()}"
+		type="preRenderView" />
+	
+</f:metadata>
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="prestige-layout/images/favicon.html" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/theme.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/fa/font-awesome.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/components.css" />
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/jquery/jquery.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/core.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/components.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/jquery/jquery-plugins.js"></script>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/keyboard/keyboard.css" />
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/keyboard/keyboard.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/touch/touchswipe.js"></script>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/css/primeflex.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/faces/resources/css/layout-blue.css" />
+	<title>Usuarios</title>
+	<script type="text/javascript"
+		src="#{request.contextPath}/faces/resources/js/layout.js"></script>
+	<style type="text/css">
+.ui-panelgrid.form-elements .ui-grc-2 {
+	padding-left: 60px;
+}
+
+@media ( max-width : 1024px) {
+	.ui-panelgrid.form-elements .ui-grc-2 {
+		padding-left: 20px;
+	}
+}
+
+@media ( max-width : 640px) {
+	.ui-panelgrid.form-elements .ui-grc-2 {
+		padding-left: 6px;
+	}
+}
+
+.dialogDemo label {
+	line-height: 2.1em;
+}
+</style>
+
+	<style type="text/css">
+@font-face {
+	font-family: ubuntu-regular;
+	src: url("assets/fonts/Ubuntu-Light.ttf");
+}
+
+body {
+	background-color: #fff;
+	font-family: ubuntu-regular;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2em;
+	background: transparent;
+}
+
+.form_panel {
+	width: 100%;
+	padding: 2em 1em;
+}
+
+.panel {
+	margin-bottom: 3em;
+}
+
+.elem {
+	width: 100%;
+}
+
+.item-container {
+	font-family: ubuntu-regular;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	height: 150px;
+	width: 300px;
+}
+
+.buttonreg {
+	width: 200px;
+	height: 35px;
+	margin-bottom: 50px;
+	align-self: flex-end;
+}
+
+.form {
+	margin: 2em 1em;
+}
+
+.inputText {
+	border: none;
+	outline: none;
+	background: transparent;
+}
+
+.buttonOp {
+	margin-left: 1em;
+	border: solid red;
+}
+</style>
+</h:head>
+
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<div class="layout-wrapper layout-menu-horizontal layout-blue">
+		<div class="layout-topbar">
+			<div class="layout-topbar-logo" />
+			<a class="layout-menu-button" href="#"> <i class="fa fa-bars" />
+			</a>
+			<ul class="layout-topbar-menu" role="menu">
+				<li class="layout-topbar-item"><a href="#"
+					class="layout-topbar-icon first"> <i
+						class="topbar-icon fa fa-cog"></i>
+				</a>
+					<ul>
+						<li>
+							<a class="layout-topbar-icon"> <i
+								class="topbar-icon fa fa-bar-chart"></i>
+							</a>
+							<div class="layout-quickmenu-tooltip">
+								<div class="layout-quickmenu-tooltip-arrow"></div>
+								<div class="layout-quickmenu-tooltip-text">Statistics</div>
+							</div></li>
+						<li>
+							<p:commandButton  
+									style="background:transparent; border:none"
+									class="layout-topbar-icon"
+									icon="fa fa-sign-out"
+									action="#{beanLogin.actionCerrarSession()}"/>
+						</li>
+					</ul></li>
+
+				<li class="user-profile" role="menuitem">
+						<a>
+								<div class="user-profile-info profile-link">
+									<h:outputText value="#{beanLogin.correo}" class="user-profile-name" />
+								</div>
+								<img id="j_idt15"
+									src="#{request.contextPath}/faces/resources/images/avatar/avatar-ava.jpg"
+									alt="" class="logo" />
+						</a>
+				</li>
+			</ul>
+		</div>
+
+		<!--  ...............................parte superior...........................................   -->
+
+		<div class="layout-menu-wrapper">
+
+				<ul class="layout-menu">
+					<li>
+						<div > 
+							<p:commandButton 
+								class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px"
+								value="Dashboard"
+								icon="fa fa-dashboard"
+								action="matriculasEstudiantes.xhtml"/>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+
+		<!-- .........................  Breadcrumbs  ..................................  -->
+
+		<div class="layout-actionbar">
+			<div class="layout-breadcrumb">
+				<ul class="route-bar-breadcrumb">
+					<li>Components</li>
+
+					
+				</ul>
+			</div>
+		</div>
+
+		<!-- ..................... Contenido .............. -->
+
+		<div class="layout-content">
+			<!-- ....................... Seleccion del Semestre ................. -->
+
+			<h:form class="form">
+				<p:panel header="Escoga el Semestre">
+					<p:outputPanel deferred="true" class="form_panel">
+						<p:outputPanel deferred="true" class="container">
+							<p:outputLabel value="Seleccione el Semestre " class="elem" />
+							<p:selectOneMenu value="#{beanMatricula.idSemestre}" class="elem"
+								style="width:40%" effect="fold" editable="true">
+								<f:selectItem itemLabel="Escoja uno..." noSelectionOption="true"
+									itemValue="0" />
+								<f:selectItems value="#{beanMatricula.lSemestres}" var="s"
+									itemLabel="#{s.nombre}" itemValue="#{s.id}"></f:selectItems>
+							</p:selectOneMenu>
+							<p:commandButton value="Buscar" update="form1" class="buttonreg"
+								style="width:200px;" icon="fa fa-search"
+								actionListener="#{beanMatricula.materiasBySemestre()}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:panel>
+			</h:form>
+
+			<!-- ............... Eleccion de materias ............. -->
+			<h:form id="form1" class="form">
+				<p:panel header="Escoga las Materias">
+					<p:outputPanel deferred="true" class="form_panel">
+						<p:outputPanel deferred="true" class="container">
+							<p:outputLabel value="Seleccione la Materia " class="elem" />
+							<p:panelGrid columns="5">
+								<h:outputText value="Nombre Materia:" />
+								<p:selectOneMenu value="#{beanMatricula.matriculaPK.materia}"
+									class="elem" style="width:100%" effect="fold" editable="true">
+									<f:selectItem itemLabel="Escoja una..."
+										noSelectionOption="true" />
+									<f:selectItems value="#{beanMatricula.lMaterias}" var="m"
+										itemLabel="#{m.nombre}" itemValue="#{m.codigo}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Seleccione el Tipo de Matricula "
+									class="elem" />
+								<p:selectOneMenu value="#{beanMatricula.matriculaPK.numMateria}"
+									class="elem" style="width:100%" effect="fold" editable="true">
+									<f:selectItem itemLabel="Escoja uno..."
+										noSelectionOption="true" />
+									<f:selectItems value="#{beanMatricula.lNumMatricula}" var="nm"
+										itemLabel="#{nm.nombre}" itemValue="#{nm.codigo}" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Agregar Materia" update="@form"
+									style="width:200px;" icon="fa fa-plus-circle"
+									actionListener="#{beanMatricula.agregarMaterias(beanLogin.correo)}" />
+							</p:panelGrid>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:panel header="Lista de Materias en las que se registro">
+						<p:dataTable value="#{beanMatricula.lMateriasMatriculadas}"
+							reflow="true" var="mm">
+							<p:column headerText="Semestre">
+								<h:outputText value="#{mm.nSemestre}" />
+							</p:column>
+							<p:column headerText="Nombre de la Materia">
+								<h:outputText value="#{mm.nMateria}" />
+							</p:column>
+							<p:column headerText="Numero de Creditos">
+								<h:outputText value="#{mm.nCreditos}" />
+							</p:column>
+							<p:column headerText="Tipo de matricula">
+								<h:outputText value="#{mm.tipoMatricula}" />
+							</p:column>
+							<p:column headerText="Eliminar Materia">
+								<p:commandButton update="@form" icon="fa fa-trash"
+									actionListener="#{beanMatricula.eliminarMateriaMatriculada(mm.id)}" />
+							</p:column>
+						</p:dataTable>
+						<f:facet name="footer">
+							<p:commandButton value="Matricularse" update="@form,:form2"
+								style="width:200px;"
+								actionListener="#{beanMatricula.guardarMatricula(beanLogin.correo)}"
+								icon="fa fa-save" />
+						</f:facet>
+					</p:panel>
+				</p:panel>
+			</h:form>
+
+			<h:form id="form2">
+				<p:panel header="Lista de Matriculas">
+					<p:dataTable var="matricula" value="#{beanMatricula.lMatriculas}"
+						reflow="true">
+						<p:column headerText="Nombre de la materia">
+							<p:outputLabel value="#{matricula.nombreMateria}" class="elem" />
+						</p:column>
+						<p:column headerText="Tipo de matricula">
+							<p:outputLabel value="#{matricula.nombreNumMateria}" class="elem" />
+						</p:column>
+						<p:column headerText="Estado de matricula">
+							<p:outputLabel value="#{matricula.estado}" class="elem" />
+						</p:column>
+						<p:column headerText="Numero de creditos">
+							<p:outputLabel value="#{matricula.creditos}" class="elem" />
+						</p:column>
+					</p:dataTable>
+					<p:commandButton value="Ver matriculas" update="@form"
+						style="width:200px;"
+						actionListener="#{beanMatricula.matriculasBySemestre(beanLogin.correo)}"
+						icon="fas fa-redo-alt" />
+				</p:panel>
+			</h:form>
+		</div>
+
+		<!-- ..................................... Footer .................................... -->
+
+		<div class="layout-footer">
+			<div class="p-grid">
+				<div class="p-col-12 p-md-6 p-lg-3">
+					<span class="logo">UTN</span>
+					<p>Universidad Técnica del Norte</p>
+				</div>
+
+
+				<div class="p-col-12 p-md-6 p-lg-3">
+					<span>SOCIAL</span>
+					<div class="p-grid">
+						<ul class="links social">
+							<li><a href="#twitter" class="icon-link"><i
+									class="fa fa-twitter icon"></i></a></li>
+							<li><a href="#facebook" class="icon-link"><i
+									class="fa fa-facebook icon"></i></a></li>
+							<li><a href="#github" class="icon-link"><i
+									class="fa fa-github icon"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
