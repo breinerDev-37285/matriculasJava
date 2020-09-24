@@ -1,12 +1,10 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
-
-<f:metadata>
-	<f:event listener="#{beanLogin.actionListenerVerificarLogin()}" type="preRenderView" />
-</f:metadata>
-
-
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
 <h:head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -25,7 +23,7 @@
 	<script type="text/javascript" src="#{request.contextPath}/faces/resources/touch/touchswipe.js"></script>
 	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/faces/resources/css/primeflex.css" />
 	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/faces/resources/css/layout-blue.css" />
-	<title>Usuarios</title>
+	<title>Roles</title>
 	<script type="text/javascript" src="#{request.contextPath}/faces/resources/js/layout.js"></script>
 	<style type="text/css">
 		.ui-panelgrid.form-elements .ui-grc-2 {
@@ -114,15 +112,12 @@
 	</style>
 </h:head>
 
-
 <h:body>
-
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
-
+	
 	<div class="layout-wrapper layout-menu-horizontal layout-blue">
-
 		<div class="layout-topbar">
 			<div class="layout-topbar-logo" />
 			<a class="layout-menu-button" href="#"> <i class="fa fa-bars" />
@@ -157,10 +152,10 @@
 							src="#{request.contextPath}/faces/resources/images/avatar/avatar-ava.jpg" alt=""
 							class="logo" />
 					</a></li>
-			</ul>
-		</div>
+				</ul>
+			</div>
 
-		<!--  ...............................parte superior...........................................   -->
+			<!--  ...............................parte superior...........................................   -->
 
 		<div class="layout-menu-container">
 			<div class="overlay-menu-button">
@@ -219,8 +214,7 @@
 				</script>
 			</div>
 		</div>
-
-
+	
 		<!-- .........................  Breadcrumbs  ..................................  -->
 
 		<div class="layout-actionbar">
@@ -234,82 +228,25 @@
 			</div>
 		</div>
 
-
 		<div class="layout-content">
 
 			<!-- ................................. Tabla de registro............................ -->
 
 			<h:form id="form1" class="form">
-				<p:panel header="Agregar un nuevo usuario">
+				<p:panel header="Agregar un nuevo rol">
 
 					<p:outputPanel deferred="true" class="form_panel">
 						<p:outputPanel deferred="true" class="container">
 							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Nombres completos:" class="elem" />
+								<h:outputText value="Nombres del rol" class="elem" />
 								<p:inputText value="#{ beanUsuarios.persona.nombres }" class="elem"
-									placeholder="nombre de usuario" />
-								<h:outputText value="Apellidos completos:" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.apellidos}" class="elem"
-									placeholder="apellidos de usuario" />
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Cedula" class="elem" />
-								<p:inputText value="#{ beanUsuarios.persona.cedula }" class="elem"
-									placeholder="1009874563210" />
-								<h:outputText value="Ciudad:" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.dirCiudad}" class="elem"
-									placeholder="ibarra" />
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Ingrese su correo:" class="elem" />
-								<p:inputText value="#{beanUsuarios.usuario.correo}" class="elem"
-									placeholder="usuario@dominio.com" />
-								<h:outputText value="Ingrese su contraseña:" class="elem" />
-								<p:password value="#{beanUsuarios.usuario.password}" class="elem"
-									placeholder="**********" />
-
-
-							</p:outputPanel>
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Calle principal:" class="elem" />
-
-								<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}" class="elem"
-									placeholder="fray vacas galindo" />
-								<h:outputText value="Calle secundaria:" class="elem" />
-
-								<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}" class="elem"
-									placeholder="bastion" />
-
-
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-
-
-								<h:outputText value="Numero de Casa" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.dirNumCasa}" class="elem chil"
-									placeholder="12-03" />
-
-
-
-
-								<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-								<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd" class="elem" style="width:100%"
-									effect="fold" editable="true">
-									<f:selectItem itemLabel="Seleccione uno...." noSelectionOption="true"
-										itemValue="0" />
-									<f:selectItems value="#{beanUsuarios.roles}" var="rol" itemLabel="#{rol.nombre}"
-										itemValue="#{rol.id}" />
-								</p:selectOneMenu>
-
+									placeholder="nombre del rol" />
 
 							</p:outputPanel>
 
 
 							<p:commandButton value="Registrar" class="buttonreg" update="@form,:form2"
-								style="width:200px;" actionListener="#{beanUsuarios.registrarUsuario()}"
+								style="width:200px;" actionListener="#{beanUsuarios.registrarRol()}"
 								icon="fa fa-save" />
 
 						</p:outputPanel>
@@ -323,50 +260,10 @@
 
 
 			<h:form id="form2" class="form">
-				<p:panel header="Lista de usuarios">
+				<p:panel header="Listado de roles del sistema">
 					<p:dataTable var="user" value="#{beanUsuarios.usuarios}" reflow="true">
-						<p:column headerText="Nombres">
-							<h:inputText value="#{user.nombres}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Apellidos">
-							<h:inputText value="#{user.apellidos}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Correo">
-							<h:inputText value="#{user.correo}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Estado">
-
-							<p:selectOneMenu value="#{user.estado}"
-								style="border:none; width:100%; outline: none; background:transparent">
-								<f:selectItem itemLabel="activo" itemValue="true" />
-								<f:selectItem itemLabel="inactivo" itemValue="false" />
-							</p:selectOneMenu>
-
-						</p:column>
-
-						<p:column headerText="Cedula">
-							<h:inputText value="#{user.cedula}" class="inputText" />
-						</p:column>
-
-
-						<p:column headerText="Ciudad">
-							<h:inputText value="#{user.ciudad}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Calle Prin.">
-							<h:inputText value="#{user.calleP}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Calle Sec.">
-							<h:inputText value="#{user.calleS}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Num Casa">
-							<h:inputText value="#{user.numCasa}" class="inputText" />
-
+						<p:column headerText="Tipo de rol">
+							<h:inputText value="#{rol.nombre}" class="inputText" />
 						</p:column>
 
 						<p:column headerText="Opciones">
@@ -388,31 +285,32 @@
 
 
 
-		<!-- ..................................... Footer .................................... -->
 
 
-		<div class="layout-footer">
-			<div class="p-grid">
-				<div class="p-col-12 p-md-6 p-lg-3">
-					<span class="logo">UTN</span>
-					<p>Universidad Técnica del Norte</p>
-				</div>
 
 
-				<div class="p-col-12 p-md-6 p-lg-3">
-					<span>SOCIAL</span>
-					<div class="p-grid">
-						<ul class="links social">
-							<li><a href="#twitter" class="icon-link"><i class="fa fa-twitter icon"></i></a></li>
-							<li><a href="#facebook" class="icon-link"><i class="fa fa-facebook icon"></i></a></li>
-							<li><a href="#github" class="icon-link"><i class="fa fa-github icon"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
+
+
+	</div>	
 </h:body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </html>
