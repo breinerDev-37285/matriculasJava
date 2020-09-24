@@ -22,7 +22,7 @@ public class ManagerMaterias {
  
 	
 	public List<Materia> findAllmaterias() {
-		return em.createQuery("select m from Materia m" , Materia.class).getResultList();
+		return em.createQuery("select m from Materia m order by m.semestreBean" , Materia.class).getResultList();
 	}
 	
 	public List<Semestre> findAllSemestres(){
@@ -51,12 +51,18 @@ public class ManagerMaterias {
 	
 	public void actualizarMateria(Materia materia) throws Exception {
 		
-		int idSemestre = Integer.parseInt(materia.getSemestreBean().getNombre());
+		int idSemestre = materia.getSemestreBean().getId();
 		materia = validarMateria(materia, idSemestre);
-		Semestre semestre = em.find(Semestre.class,idSemestre );
 		
-		materia.setSemestreBean(semestre);
-		em.merge(materia);	
+		Materia mat = findMateriaById(materia.getCodigo());
+		Semestre semestre = em.find(Semestre.class,idSemestre );
+		mat.setSemestreBean(semestre);
+		
+		em.merge(mat);	
+	}
+	
+	private Materia findMateriaById( int idMateria) {
+				return em.find(Materia.class, idMateria);
 	}
 	
 	

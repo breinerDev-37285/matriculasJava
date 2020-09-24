@@ -44,5 +44,6 @@ public class ManagerTipoMatriculas {
     			mat = validarTipo(mat);
     			em.merge(mat);
     	}
+    	
 
 }

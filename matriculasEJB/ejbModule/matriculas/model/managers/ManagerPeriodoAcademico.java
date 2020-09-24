@@ -36,6 +36,12 @@ public class ManagerPeriodoAcademico {
 		pa.setFechaFin(periodoAcademico.getFechaFin());
 		em.merge(pa);
 	}
+	
+	public void eliminarPeriodoAcademico(PeriodoAcademico periodoAcademico) throws Exception {
+		PeriodoAcademico pa = findPeriodoAcademicoById(periodoAcademico.getId());
+	
+		em.remove(pa);
+	}
 
 	public PeriodoAcademico validacionesPeriodoAcademico(PeriodoAcademico periodoAcademico) throws Exception {
 		if (periodoAcademico.getFechaInicio() == null || periodoAcademico.getFechaInicio().equals(""))

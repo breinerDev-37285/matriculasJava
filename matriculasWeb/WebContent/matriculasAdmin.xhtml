@@ -7,6 +7,9 @@
 <f:metadata>
 	<f:event listener="#{beanLogin.actionListenerVerificarLogin()}"
 		type="preRenderView" />
+		
+	<f:event listener="#{beanMatriculasAdmin.init()}"
+		type="preRenderView" />
 </f:metadata>
 
 
@@ -344,7 +347,6 @@ body {
 				<ul class="route-bar-breadcrumb">
 					<li>Components</li>
 
-					<a href="inicio.xhtml" class="ui-link ui-widget">Dashboard</a>
 
 				</ul>
 			</div>
@@ -460,8 +462,9 @@ body {
 										<p:commandButton icon="fa fa-edit" update="@form"
 											actionListener="#{beanTIpoMatricula.actionListenerActualizarTipoMatricula(mat)}"
 											class="buttonOp" />
-											
+									
 										
+									
 									</p:column>
 
 								</p:dataTable>

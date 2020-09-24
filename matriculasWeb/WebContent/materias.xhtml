@@ -8,6 +8,9 @@
 <f:metadata>
 	<f:event listener="#{beanLogin.actionListenerVerificarLogin()}"
 		type="preRenderView" />
+		
+	<f:event listener="#{beanMateria.init()}"
+		type="preRenderView" />
 </f:metadata>
 
 
@@ -153,33 +156,27 @@ body {
 						class="topbar-icon fa fa-cog"></i>
 				</a>
 					<ul>
-						<li>
-							<a class="layout-topbar-icon"> <i
+						<li><a class="layout-topbar-icon"> <i
 								class="topbar-icon fa fa-bar-chart"></i>
-							</a>
+						</a>
 							<div class="layout-quickmenu-tooltip">
 								<div class="layout-quickmenu-tooltip-arrow"></div>
 								<div class="layout-quickmenu-tooltip-text">Statistics</div>
 							</div></li>
-						<li>
-							<p:commandButton  
-									style="background:transparent; border:none"
-									class="layout-topbar-icon"
-									icon="fa fa-sign-out"
-									action="#{beanLogin.actionCerrarSession()}"/>
-						</li>
+						<li><p:commandButton
+								style="background:transparent; border:none"
+								class="layout-topbar-icon" icon="fa fa-sign-out"
+								action="#{beanLogin.actionCerrarSession()}" /></li>
 					</ul></li>
 
-				<li class="user-profile" role="menuitem">
-						<a>
-								<div class="user-profile-info profile-link">
-									<h:outputText value="#{beanLogin.correo}" class="user-profile-name" />
-								</div>
-								<img id="j_idt15"
-									src="#{request.contextPath}/faces/resources/images/avatar/avatar-ava.jpg"
-									alt="" class="logo" />
-						</a>
-				</li>
+				<li class="user-profile" role="menuitem"><a>
+						<div class="user-profile-info profile-link">
+							<h:outputText value="#{beanLogin.correo}"
+								class="user-profile-name" />
+						</div> <img id="j_idt15"
+						src="#{request.contextPath}/faces/resources/images/avatar/avatar-ava.jpg"
+						alt="" class="logo" />
+				</a></li>
 			</ul>
 		</div>
 
@@ -196,89 +193,65 @@ body {
 			</div>
 
 
-				<!--  ..................................  menu  ........................................   -->
+			<!--  ..................................  menu  ........................................   -->
 
 			<div class="layout-menu-wrapper">
 
 				<ul id="menuform:j_idt21" class="layout-menu">
 					<li>
-						<div > 
-							<p:commandButton 
-								class="fa fa-fw fa-fw layout-menuitem-icon"
-								style="width:150px"
-								value="Dashboard"
-								icon="fa fa-dashboard"
-								action="inicio.xhtml"/>
+						<div>
+							<p:commandButton class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px" value="Dashboard" icon="fa fa-dashboard"
+								action="inicio.xhtml" />
 						</div>
 					</li>
 					<li>
-						<div > 
-							<p:commandButton 
-								class="fa fa-fw fa-fw layout-menuitem-icon"
-								style="width:150px"
-								value="Roles"
-								icon="fa fa-globe"
-								action="roles.xhtml"/>
+						<div>
+							<p:commandButton class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px" value="Roles" icon="fa fa-globe"
+								action="roles.xhtml" />
 						</div>
 					</li>
 					<li>
-						<div > 
-							<p:commandButton 
-								class="fa fa-fw fa-fw layout-menuitem-icon"
-								style="width:150px"
-								value="Usuarios"
-								icon="fa fa-user"
-								action="usuarios.xhtml"/>
+						<div>
+							<p:commandButton class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px" value="Usuarios" icon="fa fa-user"
+								action="usuarios.xhtml" />
 						</div>
 					</li>
 					<li>
-						<div > 
-							<p:commandButton 
-								class="fa fa-fw fa-fw layout-menuitem-icon"
-								style="width:150px"
-								value="Telefonos"
-								icon="fa fa-phone"
-								action="telefonos.xhtml"/>
+						<div>
+							<p:commandButton class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px" value="Telefonos" icon="fa fa-phone"
+								action="telefonos.xhtml" />
 						</div>
 					</li>
 					<li>
-						<div > 
-							<p:commandButton 
-								class="fa fa-fw fa-fw layout-menuitem-icon"
-								style="width:150px"
-								value="Materias"
-								icon="fa fa-bookmark"
-								action="materias.xhtml"/>
+						<div>
+							<p:commandButton class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px" value="Materias" icon="fa fa-bookmark"
+								action="materias.xhtml" />
 						</div>
 					</li>
 					<li>
-						<div > 
-							<p:commandButton 
-								class="fa fa-fw fa-fw layout-menuitem-icon"
-								style="width:150px"
-								value="Matriculas"
-								icon="fa fa-graduation-cap "
-								action="matriculasAdmin.xhtml"/>
+						<div>
+							<p:commandButton class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px" value="Matriculas"
+								icon="fa fa-graduation-cap " action="matriculasAdmin.xhtml" />
 						</div>
 					</li>
 					<li>
-						<div > 
-							<p:commandButton 
-								class="fa fa-fw fa-fw layout-menuitem-icon"
-								style="width:150px"
-								value="Semestre"
-								icon="fa fa-check-circle "
-								action="semestre.xhtml"/>
+						<div>
+							<p:commandButton class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:150px" value="Semestre" icon="fa fa-check-circle "
+								action="semestre.xhtml" />
 						</div>
 					</li>
 					<li>
-						<div > 
-							<p:commandButton 
-								class="fa fa-fw fa-fw layout-menuitem-icon"
-								style="width:250px"
-								value="Periodo academico"
-								icon="fa fa-cog  "
-								action="periodoAcademico.xhtml"/>
+						<div>
+							<p:commandButton class="fa fa-fw fa-fw layout-menuitem-icon"
+								style="width:250px" value="Periodo academico" icon="fa fa-cog  "
+								action="periodoAcademico.xhtml" />
 						</div>
 					</li>
 
@@ -300,9 +273,9 @@ body {
 			<div class="layout-breadcrumb">
 				<ul class="route-bar-breadcrumb">
 					<li>Components</li>
-	
-						<a href="inicio.xhtml" class="ui-link ui-widget">Dashboard</a>
-					
+
+					<a href="inicio.xhtml" class="ui-link ui-widget">Dashboard</a>
+
 				</ul>
 			</div>
 		</div>
@@ -311,25 +284,26 @@ body {
 		<div class="layout-content">
 			<p:outputPanel deferred="true">
 
-			<!-- ................................. Tabla de registro............................ -->
-			
-			
+				<!-- ................................. Tabla de registro............................ -->
+
+
 				<h:form id="form1" class="form">
 					<p:panel header="Agregar un nuevo usuario">
-	
+
 						<p:outputPanel deferred="true" class="form_panel">
 							<p:outputPanel deferred="true" class="container">
-							
-	
+
+
 								<p:outputPanel deferred="true" class="item-container">
-	
-	
+
+
 									<h:outputText value="Nombre de la materia" class="elem" />
 									<p:inputText value="#{ beanMateria.materia.nombre }"
 										class="elem chil" placeholder="Matematicas" />
-	
-	
-									<p:outputLabel for="sd" value="Seleccione el semestre" class="elem" />
+
+
+									<p:outputLabel for="sd" value="Seleccione el semestre"
+										class="elem" />
 									<p:selectOneMenu value="#{beanMateria.semestre}" id="sd"
 										class="elem" style="width:100%" effect="fold" editable="true">
 										<f:selectItem itemLabel="Seleccione uno...."
@@ -337,74 +311,69 @@ body {
 										<f:selectItems value="#{beanMateria.semestres}" var="semestre"
 											itemLabel="#{semestre.nombre}" itemValue="#{semestre.id}" />
 									</p:selectOneMenu>
-									
-									
+
+
 									<p:outputPanel deferred="true" class="caja" style="width:100%">
 										<p:outputLabel value="Creditos:" class="elem" />
 										<p:spinner id="basic" value="#{beanMateria.materia.creditos}"
 											class="elem" placeholder="4" min="0" max="5" />
 									</p:outputPanel>
-	
+
 								</p:outputPanel>
-	
-	
+
+
 								<p:commandButton value="Registrar" class="buttonreg"
 									update="@form,:form2" style="width:200px;"
 									actionListener="#{beanMateria.actionListenerRegistrarMateria()}"
 									icon="fa fa-save" />
-	
+
 							</p:outputPanel>
-	
+
 						</p:outputPanel>
 					</p:panel>
 				</h:form>
-				
 
-				
 
-			<!-- .................................. Tabla de datos ......................... -->
+
+
+				<!-- .................................. Tabla de datos ......................... -->
 
 
 
 				<h:form id="form2">
-				<p:panel header="Listado de materias">
-					<p:dataTable var="materia" value="#{beanMateria.materias}">
-						<p:column headerText="Nombre">
-							<h:inputText value="#{materia.nombre}" class="inputText" />
-						</p:column>
-	
-						<p:column headerText="Creditos">
-							<p:spinner id="basic" value="#{materia.creditos}" class="elem"
-								placeholder="4" min="0" max="5"
-								style="border:none; width:100%; outline: none; background:transparent" />
-						</p:column>
-	
-						<p:column headerText="Semestre">
-	
-							<p:selectOneMenu value="#{ materia.semestreBean.nombre }" id="sd"
-								style="border:none; width:100%; outline: none; background:transparent" class="inputText"
-								effect="fold" >
-								<f:selectItems value="#{beanMateria.semestres}" var="semestre"
-									itemLabel="#{semestre.nombre}" itemValue="#{semestre.id}" />
-							</p:selectOneMenu>
-						</p:column>
-						
-						
-						
-	
-	
-	
-						<p:column headerText="Opciones">
-					
-							<p:commandButton icon="fa fa-edit" update="@form"
-								actionListener="#{beanMateria.actionListenerActualizarMateria(materia)}" />
-		
-						</p:column>
-	
-					</p:dataTable>
-				</p:panel>
-			</h:form>
-	
+					<p:panel header="Listado de materias">
+						<p:dataTable var="materia" value="#{beanMateria.materias}">
+							<p:column headerText="Nombre">
+								<h:inputText value="#{materia.nombre}" class="inputText" />
+							</p:column>
+
+							<p:column headerText="Creditos">
+								<p:spinner id="basic" value="#{materia.creditos}" class="elem"
+									placeholder="4" min="0" max="5"
+									style="border:none; width:100%; outline: none; background:transparent" />
+							</p:column>
+
+							
+							<p:column headerText="Semestre">
+								<p:selectOneMenu value="#{ materia.semestreBean.id }" id="sd"
+									class="elem" style="width:100%" effect="fold" editable="true">
+									<f:selectItems value="#{beanMateria.semestres}" var="sem"
+										itemLabel="#{sem.nombre}" itemValue="#{sem.id}" />
+								</p:selectOneMenu>
+							</p:column>
+							
+
+							<p:column headerText="Opciones">
+
+								<p:commandButton icon="fa fa-edit" update="@form"
+									actionListener="#{beanMateria.actionListenerActualizarMateria(materia)}" />
+
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+				</h:form>
+
 			</p:outputPanel>
 		</div>
 

@@ -7,6 +7,8 @@
 <f:metadata>
 	<f:event listener="#{beanLogin.actionListenerVerificarLogin()}"
 		type="preRenderView" />
+	<f:event listener="#{beanPeriodoAcademico.init()}"
+		type="preRenderView" />
 </f:metadata>
 
 
@@ -16,7 +18,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		
 	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
 	<link rel="shortcut icon" type="image/x-icon"
 		href="prestige-layout/images/favicon.html" />
 	<link type="text/css" rel="stylesheet"
@@ -25,27 +29,20 @@
 		href="#{request.contextPath}/faces/resources/fa/font-awesome.css" />
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/faces/resources/components.css" />
-	<script type="text/javascript"
-		src="#{request.contextPath}/faces/resources/jquery/jquery.js"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/faces/resources/core.js"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/faces/resources/components.js"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/faces/resources/jquery/jquery-plugins.js"></script>
+	
+	
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/faces/resources/keyboard/keyboard.css" />
-	<script type="text/javascript"
-		src="#{request.contextPath}/faces/resources/keyboard/keyboard.js"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/faces/resources/touch/touchswipe.js"></script>
+	
+
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/faces/resources/css/primeflex.css" />
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/faces/resources/css/layout-blue.css" />
 	<title>Periodo Academico</title>
-	<script type="text/javascript"
-		src="#{request.contextPath}/faces/resources/js/layout.js"></script>
+	
+	
+	
 	<style type="text/css">
 .ui-panelgrid.form-elements .ui-grc-2 {
 	padding-left: 60px;
@@ -134,10 +131,7 @@ body {
 </h:head>
 
 
-
-
 <h:body>
-
 
 
 	<p:growl>
@@ -151,34 +145,25 @@ body {
 			<a class="layout-menu-button" href="#"> <i class="fa fa-bars" />
 			</a>
 			<ul class="layout-topbar-menu" role="menu">
-				<li class="layout-topbar-item"><a href="#"
-					class="layout-topbar-icon first"> <i
-						class="topbar-icon fa fa-cog"></i>
-				</a>
-					<ul>
-						<li><a href="#" class="layout-topbar-icon"> <i
-								class="topbar-icon fa fa-bar-chart"></i>
-						</a>
-							<div class="layout-quickmenu-tooltip">
-								<div class="layout-quickmenu-tooltip-arrow"></div>
-								<div class="layout-quickmenu-tooltip-text">Statistics</div>
-							</div></li>
-						<li><a href="#" class="layout-topbar-icon"> <i
-								class="topbar-icon fa fa-sign-out"></i>
-						</a>
-							<div class="layout-quickmenu-tooltip">
-								<div class="layout-quickmenu-tooltip-arrow"></div>
-								<div class="layout-quickmenu-tooltip-text">Sign Out</div>
-							</div></li>
-					</ul></li>
+				<li class="layout-topbar-item">
+					
+					<p:commandButton  
+						style="background:transparent; border:none"
+						class="layout-topbar-icon first"
+						icon="fa fa-sign-out"
+						action="#{beanLogin.actionCerrarSession()}"/>
+				</li>
 
-				<li class="user-profile" role="menuitem"><a href="#">
-						<div class="user-profile-info profile-link">
-							<h:outputText value="#{beanLogin.correo}" class="user-profile-name" />
-						</div> <img id="j_idt15"
-						src="#{request.contextPath}/faces/resources/images/avatar/avatar-ava.jpg"
-						alt="" class="logo" />
-				</a></li>
+				<li class="user-profile" role="menuitem">
+						<a>
+								<div class="user-profile-info profile-link">
+									<h:outputText value="#{beanLogin.correo}" class="user-profile-name" />
+								</div>
+								<img id="j_idt15"
+									src="#{request.contextPath}/faces/resources/images/avatar/avatar-ava.jpg"
+									alt="" class="logo" />
+						</a>
+				</li>
 			</ul>
 		</div>
 
@@ -199,7 +184,7 @@ body {
 
 			<div class="layout-menu-wrapper">
 
-				<ul id="menuform:j_idt21" class="layout-menu">
+				<ul  class="layout-menu">
 					<li>
 						<div > 
 							<p:commandButton 
@@ -294,7 +279,6 @@ body {
 				<ul class="route-bar-breadcrumb">
 					<li>Components</li>
 
-					<a href="inicio.xhtml" class="ui-link ui-widget">Dashboard</a>
 
 				</ul>
 			</div>
@@ -305,7 +289,7 @@ body {
 		<p:outputPanel deferred="true">
 
 			<!-- ................................. Tabla de registro............................ -->
-
+ 
 			<h:form id="form1">
 				<p:panel header="Agregar un nuevo Periodo Academico" class="panel">
 
@@ -315,27 +299,21 @@ body {
 
 							<p:outputPanel deferred="true" class="item-container">
 							
-							<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
- 
-    							<h:panelGrid columns="2" cellpadding="5">
-							
 							
 								<p:outputLabel value="Fecha de Inicio"
 									class="elem" />
 									
 								<p:datePicker
 									value="#{beanPeriodoAcademico.periodoAcademico.fechaInicio}"
-									 required="true"  />
+									 required="true" readonlyInput="true" />
 
 								<p:outputLabel value="Fecha de Finalización"
 									class="elem" />
 									
 								<p:datePicker
 									value="#{beanPeriodoAcademico.periodoAcademico.fechaFin}"
-									required="true"  />
+									required="true" readonlyInput="true" />
 
-
-							</h:panelGrid>
 							</p:outputPanel>
 
 							<p:commandButton value="Registrar" class="buttonreg"
@@ -350,32 +328,43 @@ body {
 			</h:form>
 
 
+ 
+				
+		
 			<!-- .................................. Tabla de datos ......................... -->
 
 
+
+			
 			<h:form id="form2">
-				<p:panel header="Lista de Periodos Academicos">
-					<p:dataTable var="periodoAcademico"
-						value="#{beanPeriodoAcademico.listaPeriodoAcademico}">
-						<p:column headerText="Fecha de Inicio del Periodo Academico">
-							<p:datePicker value="#{periodoAcademico.fechaInicio}"
-								class="elem" required="true" readonlyInput="true" />
-						</p:column>
+			<p:panel header="Lista de Periodos Academicos">
+				<p:dataTable var="periodoAcademico"
+					value="#{beanPeriodoAcademico.listaPeriodoAcademico}">
+					<p:column headerText="Fecha de Inicio del Periodo Academico">
+						<p:datePicker value="#{periodoAcademico.fechaInicio}" class="elem"
+							required="true" readonlyInput="true" />
+					</p:column>
 
-						<p:column headerText="Fecha De Fin del Periodo Academico">
-							<p:datePicker value="#{periodoAcademico.fechaFin}"
-								required="true" class="elem" readonlyInput="true" />
-						</p:column>
+					<p:column headerText="Fecha De Fin del Periodo Academico">
+						<p:datePicker value="#{periodoAcademico.fechaFin}" required="true"
+							class="elem" readonlyInput="true" />
+					</p:column>
 
-						<p:column headerText="Opciones">
-							<p:commandButton icon="fa fa-edit" class="buttonreg"
-								update="@form"
-								actionListener="#{beanPeriodoAcademico.actualizarPeriodoAcademico(periodoAcademico)}" />
-						</p:column>
+					<p:column headerText="Opciones">
+						<p:commandButton icon="fa fa-edit" class="buttonreg"
+							update="@form"
+							actionListener="#{beanPeriodoAcademico.actualizarPeriodoAcademico(periodoAcademico)}" />
+							
+						<p:commandButton icon="fa fa-trash" class="buttonreg"
+							update="@form"
+							actionListener="#{beanPeriodoAcademico.eliminarPeriodoAcademico(periodoAcademico)}" />
+					</p:column>
 
-					</p:dataTable>
-				</p:panel>
-			</h:form>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+			
+			
 			</p:outputPanel>
 		</div>
 

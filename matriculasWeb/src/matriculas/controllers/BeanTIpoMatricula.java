@@ -52,6 +52,8 @@ public class BeanTIpoMatricula implements Serializable {
 		}
 	}
 	
+	
+	
 	public ManagerTipoMatriculas getMtMatricula() {
 		return mtMatricula;
 	}

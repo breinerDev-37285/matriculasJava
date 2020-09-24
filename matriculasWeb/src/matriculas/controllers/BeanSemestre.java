@@ -27,11 +27,12 @@ public class BeanSemestre implements Serializable {
 	private int periodo;
 	
 	@PostConstruct
-	private void init() {
+	public void init() {
 		lSemestres = mSemestre.getAllSemestres();
 		lPeriodos = mSemestre.findAllPeriodo();
 		semestre = new Semestre();
 	}
+
 	
 	public void actionListenerActualizarSemestre(semestreDTO sem) {
 		try {

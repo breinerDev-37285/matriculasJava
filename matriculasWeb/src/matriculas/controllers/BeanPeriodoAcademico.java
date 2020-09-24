@@ -31,6 +31,7 @@ public class BeanPeriodoAcademico implements Serializable {
 		try {
 			mPeriodoAcademico.registrarPeriodoAcademico(periodoAcademico);
 			listaPeriodoAcademico = mPeriodoAcademico.findAllPeriodoAcademico();
+			JSFUtil.crearMensajeInfo("Se registro un nuevo periodo academico");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 		}
@@ -38,11 +39,27 @@ public class BeanPeriodoAcademico implements Serializable {
 
 	public void actualizarPeriodoAcademico(PeriodoAcademico periodoAcademico) {
 		try {
+			
+			
 			mPeriodoAcademico.actualizarPeriodoAcademico(periodoAcademico);
 			listaPeriodoAcademico = mPeriodoAcademico.findAllPeriodoAcademico();
+			JSFUtil.crearMensajeInfo("Se actualizo el periodo academico");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 		}
+	}
+	
+	public void eliminarPeriodoAcademico(PeriodoAcademico periodoAcademico) {
+		
+		try {
+			
+			mPeriodoAcademico.eliminarPeriodoAcademico(periodoAcademico);
+			listaPeriodoAcademico = mPeriodoAcademico.findAllPeriodoAcademico();
+			JSFUtil.crearMensajeInfo("Se actualizo el periodo academico");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+		}
+		
 	}
 
 	public List<PeriodoAcademico> getListaPeriodoAcademico() {

@@ -195,7 +195,7 @@ public class ManagerMatriculaAdmin {
 				num_matricula = objects[5].toString();
 				
 				if( Boolean.parseBoolean(  objects[6].toString().toString()  )  ) {
-					estado = "aprovado";	
+					estado = "aprobado";	
 				}
 				
 				matriculas = new matriculasAdminDTO(idEstud, idMateria, idNumMatricula, cedula, materia, num_matricula, estado);

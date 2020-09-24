@@ -47,8 +47,9 @@ public class BeanMateria implements Serializable {
 	
 	public void actionListenerActualizarMateria( Materia materia )  {
 		try {
+			
+			System.out.println( materia.getSemestreBean().getId() );
 			mMateria.actualizarMateria(materia);
-			materia = new Materia();
 			materias = mMateria.findAllmaterias();
 			JSFUtil.crearMensajeInfo("Materia actualizada correctamente");
 		} catch (Exception e) {

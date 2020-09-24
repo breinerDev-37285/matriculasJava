@@ -7,11 +7,7 @@
 <f:metadata>
 	<f:event listener="#{beanLogin.actionListenerVerificarLogin()}"
 		type="preRenderView" />
-		
-	<f:event listener="#{beanUsuarios.init()}"
-		type="preRenderView" />
 </f:metadata>
-
 
 
 <h:head>
@@ -46,7 +42,7 @@
 		href="#{request.contextPath}/faces/resources/css/primeflex.css" />
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/faces/resources/css/layout-blue.css" />
-	<title>Usuarios</title>
+	<title>Inicio</title>
 	<script type="text/javascript"
 		src="#{request.contextPath}/faces/resources/js/layout.js"></script>
 	<style type="text/css">
@@ -71,7 +67,7 @@
 }
 </style>
 
-	<style type="text/css">
+<style type="text/css">
 @font-face {
 	font-family: ubuntu-regular;
 	src: url("assets/fonts/Ubuntu-Light.ttf");
@@ -119,7 +115,7 @@ body {
 	align-self: flex-end;
 }
 
-.form {
+.form{
 	margin: 2em 1em;
 }
 
@@ -196,9 +192,9 @@ body {
 					<span></span> <span></span>
 				</div>
 			</div>
-
-
-				<!--  ..................................  menu  ........................................   -->
+			
+			
+					<!--  ..................................  menu  ........................................   -->
 
 			<div class="layout-menu-wrapper">
 
@@ -294,98 +290,38 @@ body {
 				</script>
 			</div>
 		</div>
-
-
+		
+		
 		<!-- .........................  Breadcrumbs  ..................................  -->
 
 		<div class="layout-actionbar">
 			<div class="layout-breadcrumb">
-				<ul class="route-bar-breadcrumb">
+				<div class="route-bar-breadcrumb">
 					<li>Components</li>
-	
-						<a href="inicio.xhtml" class="ui-link ui-widget">Dashboard</a>
-					
-				</ul>
+				</div>
 			</div>
 		</div>
-
-
+		
+		
 		<div class="layout-content">
 
 			<!-- ................................. Tabla de registro............................ -->
 
 			<h:form id="form1" class="form">
-				<p:panel header="Agregar un nuevo usuario">
+				<p:panel header="Agregar un nuevo rol">
 
 					<p:outputPanel deferred="true" class="form_panel">
 						<p:outputPanel deferred="true" class="container">
 							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Nombres completos:" class="elem" />
-								<p:inputText value="#{ beanUsuarios.persona.nombres }"
-									class="elem" placeholder="nombre de usuario" />
-								<h:outputText value="Apellidos completos:" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.apellidos}"
-									class="elem" placeholder="apellidos de usuario" />
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Cedula" class="elem" />
-								<p:inputText value="#{ beanUsuarios.persona.cedula }"
-									class="elem" placeholder="1009874563210" />
-								<h:outputText value="Ciudad:" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.dirCiudad}"
-									class="elem" placeholder="ibarra" />
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Ingrese su correo:" class="elem" />
-								<p:inputText value="#{beanUsuarios.usuario.correo}" class="elem"
-									placeholder="usuario@dominio.com" />
-								<h:outputText value="Ingrese su contraseña:" class="elem" />
-								<p:password value="#{beanUsuarios.usuario.password}"
-									class="elem" placeholder="**********" />
-
-
-							</p:outputPanel>
-							<p:outputPanel deferred="true" class="item-container">
-								<h:outputText value="Calle principal:" class="elem" />
-
-								<p:inputText value="#{beanUsuarios.persona.dirCallePrincipal}"
-									class="elem" placeholder="fray vacas galindo" />
-								<h:outputText value="Calle secundaria:" class="elem" />
-
-								<p:inputText value="#{beanUsuarios.persona.dirCalleSecundaria}"
-									class="elem" placeholder="bastion" />
-
-
-							</p:outputPanel>
-
-							<p:outputPanel deferred="true" class="item-container">
-
-
-								<h:outputText value="Numero de Casa" class="elem" />
-								<p:inputText value="#{beanUsuarios.persona.dirNumCasa}"
-									class="elem chil" placeholder="12-03" />
-
-
-
-
-								<p:outputLabel for="sd" value="Seleccione el Rol " class="elem" />
-								<p:selectOneMenu value="#{beanUsuarios.rol}" id="sd"
-									class="elem" style="width:100%" effect="fold" editable="true">
-									<f:selectItem itemLabel="Seleccione uno...."
-										noSelectionOption="true" itemValue="0" />
-									<f:selectItems value="#{beanUsuarios.roles}" var="rol"
-										itemLabel="#{rol.nombre}" itemValue="#{rol.id}" />
-								</p:selectOneMenu>
-
+								<h:outputText value="Nombres del rol" class="elem" />
+								<p:inputText value="#{ beanRol.rol.nombre }" class="elem"
+									placeholder="nombre del rol" />
 
 							</p:outputPanel>
 
 
-							<p:commandButton value="Registrar" class="buttonreg"
-								update="@form,:form2" style="width:200px;"
-								actionListener="#{beanUsuarios.registrarUsuario()}"
+							<p:commandButton value="Registrar" class="buttonreg" update="@form,:form2"
+								style="width:200px;" actionListener="#{beanRol.actionListenerRegistrarRol()}"
 								icon="fa fa-save" />
 
 						</p:outputPanel>
@@ -396,62 +332,19 @@ body {
 
 			<!-- .................................. Tabla de datos ......................... -->
 
-
-
 			<h:form id="form2" class="form">
-				<p:panel header="Lista de usuarios">
-					<p:dataTable var="user" value="#{beanUsuarios.usuarios}"
-						reflow="true">
-						<p:column headerText="Nombres">
-							<h:inputText value="#{user.nombres}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Apellidos">
-							<h:inputText value="#{user.apellidos}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Correo">
-							<h:inputText value="#{user.correo}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Estado">
-
-							<p:selectOneMenu value="#{user.estado}"
-								style="border:none; width:100%; outline: none; background:transparent">
-								<f:selectItem itemLabel="activo" itemValue="true" />
-								<f:selectItem itemLabel="inactivo" itemValue="false" />
-							</p:selectOneMenu>
-
-						</p:column>
-
-						<p:column headerText="Cedula">
-							<h:inputText value="#{user.cedula}" class="inputText" />
-						</p:column>
-
-
-						<p:column headerText="Ciudad">
-							<h:inputText value="#{user.ciudad}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Calle Prin.">
-							<h:inputText value="#{user.calleP}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Calle Sec.">
-							<h:inputText value="#{user.calleS}" class="inputText" />
-						</p:column>
-
-						<p:column headerText="Num Casa">
-							<h:inputText value="#{user.numCasa}" class="inputText" />
-
+				<p:panel header="Listado de roles del sistema">
+					<p:dataTable var="rol" value="#{beanRol.lRoles}" reflow="true">
+						<p:column headerText="Tipo de rol">
+							<h:inputText value="#{rol.nombre}" class="inputText" />
 						</p:column>
 
 						<p:column headerText="Opciones">
-							<p:commandButton icon="fa fa-trash" update="@form"
-								actionListener="#{beanUsuarios.eliminarUsuario(user,beanLogin.correo)}"
-								class="buttonOp" />
 							<p:commandButton icon="fa fa-edit" update="@form"
-								actionListener="#{beanUsuarios.actualizarUsuario(user,beanLogin.correo)}"
+								actionListener="#{beanRol.actionListenerActualizarRol(rol)}"
+								class="buttonOp" />
+							<p:commandButton icon="fa fa-trash" update="@form"
+								actionListener="#{beanRol.actionListenerEliminarRol(rol)}"
 								class="buttonOp" />
 						</p:column>
 
@@ -459,15 +352,14 @@ body {
 				</p:panel>
 			</h:form>
 
-
 		</div>
-
-
-
-
+		
+		
+		
+		
 		<!-- ..................................... Footer .................................... -->
-
-
+		
+		
 		<div class="layout-footer">
 			<div class="p-grid">
 				<div class="p-col-12 p-md-6 p-lg-3">
@@ -492,6 +384,6 @@ body {
 			</div>
 		</div>
 	</div>
-
+	
 </h:body>
 </html>

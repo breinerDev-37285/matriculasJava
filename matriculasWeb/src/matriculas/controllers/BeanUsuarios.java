@@ -43,9 +43,9 @@ public class BeanUsuarios implements Serializable {
 			
 		} catch (Exception e) {
 			JSFUtil.crearMensajeInfo(e.getMessage());
-			e.printStackTrace();
 		}
 	}
+	
 
 	public void registrarUsuario() {
 		try {
