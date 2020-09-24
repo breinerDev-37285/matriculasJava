@@ -49,7 +49,7 @@ public class ManagerLogin {
 			link = "matriculasEstudiantes.xhtml";
 			break;
 		case 2:
-			link = "usuarios.xhtml";
+			link = "inicio.xhtml";
 			break;
 
 		}
