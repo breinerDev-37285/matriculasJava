@@ -36,52 +36,7 @@ public class ManagerMatriculaAdmin {
 		public Estado findEstadoById(int estado) {
 			return em.find(Estado.class, estado);
 		}
-		
-		public List<matriculasAdminDTO> listMateriasByMatricula( int registro ) throws Exception{
-			
-			String consulta = "select u.id as idusuario,m.codigo as idmatricula, nm.codigo as idnummateria, p.cedula, m.nombre, nm.nombre as matricula, ma.estado\n" + 
-					"from matricula ma\n" + 
-					"inner join registro r\n" + 
-					"on ma.registro = r.id\n" + 
-					"inner join usuario u\n" + 
-					"on ma.estudiante = u.id\n" + 
-					"inner join persona p\n" + 
-					"on u.persona = p.id\n" + 
-					"inner join materia m\n" + 
-					"on ma.materia = m.codigo\n" + 
-					"inner join num_matricula nm\n" + 
-					"on ma.num_materia = nm.codigo\n" + 
-					"where r.id="+registro;
-			
-			Query query = em.createNativeQuery(consulta);
-			
-			List<Object[]> lObject = query.getResultList();
-			List<matriculasAdminDTO>  lmatriculas = new ArrayList<matriculasAdminDTO>();
-			matriculasAdminDTO matriculas;
-			
-			int idEstud, idMateria, idNumMatricula;
-			String cedula, materia, num_matricula,estado="rechazado";
-			
-			for (Object[] objects : lObject) {
-				
-				idEstud = Integer.parseInt(  objects[0].toString()   );
-				idMateria = Integer.parseInt(  objects[1].toString()   );
-				idNumMatricula = Integer.parseInt(  objects[2].toString()   );
-				
-				cedula = objects[3].toString();
-				materia = objects[4].toString();
-				num_matricula = objects[5].toString();
-				
-				if(  Boolean.parseBoolean(  objects[6].toString()  )  ) {
-					estado = "aceptado";
-				}
-				
-				matriculas = new matriculasAdminDTO(idEstud, idMateria, idNumMatricula, cedula, materia, num_matricula, estado);
-				lmatriculas.add(matriculas);
-			}
-			
-			return lmatriculas;
-		}
+
 		
 		
 		public List<Registro> findMatriculaById( String matricula ) throws Exception {
@@ -109,8 +64,11 @@ public class ManagerMatriculaAdmin {
 		}
 		
 		public List<Registro> findAllMatriculas() {
-				return em.createNamedQuery("Registro.findAll",Registro.class).getResultList();
+				return em.createQuery(" select r from Registro r order by r.id  ",Registro.class).getResultList();
 		}
+		
+		
+		
 		
 		public List<Registro> findAllMatriculasByEstado(int estado) throws Exception{
 			
@@ -142,18 +100,111 @@ public class ManagerMatriculaAdmin {
 		}
 		
 		public void rechazarMaterias ( matriculasAdminDTO mater  ) throws Exception {
-			Matricula matricula = findMatriculaPK(mater);
+			Matricula matricula = new Matricula();
+			matricula = findMatriculaPK(mater);
 			
 			matricula.setEstado(false);
 			em.merge(matricula);
 		}
 		
 		public void aceptarMaterias ( matriculasAdminDTO mater  ) throws Exception {
-			Matricula matricula = findMatriculaPK(mater);
+			Matricula matricula = new Matricula();
+			matricula = findMatriculaPK(mater);
 			
 			matricula.setEstado(true);
 			em.merge(matricula);
 		}
+		
+		public void rechazarMatricula( int idregistro ) throws Exception {
+				Registro registro = findRegistro(idregistro);
+				Estado estadoBean = findEstado(3);
+				registro.setEstadoBean(estadoBean);
+				
+				changeEstadosMatriculas( registro, false );
+				
+				em.persist( registro );
+		}
+		
+		
+		private void changeEstadosMatriculas( Registro registro, boolean estado ) {
+			
+					String consulta = "UPDATE Matricula m " + 
+				              "SET m.estado = :updated_status " +
+				              "WHERE m.registroBean = :current_status";
+					
+					
+				em.createQuery(consulta)
+						  .setParameter("updated_status", estado)
+						  .setParameter("current_status", registro)
+						  .executeUpdate();
+			
+		}
+		
+		public void aceptarMatricula( int idregistro ) throws Exception {
+				Registro registro = findRegistro(idregistro);
+				Estado estadoBean = findEstado(2);
+				registro.setEstadoBean(estadoBean);
+				changeEstadosMatriculas( registro, true );
+				em.persist( registro );
+		}
+		
+		
+		private Registro findRegistro(int registro) {
+			return em.find(Registro.class, registro);
+		}
+		
+		private Estado findEstado(int estado) {
+			return em.find( Estado.class , estado);
+		}
+		
+		
+		public List<matriculasAdminDTO> listMateriasByMatricula( int registro ) throws Exception{
+			
+			String consulta = "select u.id as idusuario,m.codigo as idmatricula, nm.codigo as idnummateria, p.cedula, m.nombre, nm.nombre as matricula, ma.estado\n" + 
+					"from matricula ma\n" + 
+					"inner join registro r\n" + 
+					"on ma.registro = r.id\n" + 
+					"inner join usuario u\n" + 
+					"on ma.estudiante = u.id\n" + 
+					"inner join persona p\n" + 
+					"on u.persona = p.id\n" + 
+					"inner join materia m\n" + 
+					"on ma.materia = m.codigo\n" + 
+					"inner join num_matricula nm\n" + 
+					"on ma.num_materia = nm.codigo\n" + 
+					"where r.id="+registro+
+					"order by m.codigo";
+			
+			Query query = em.createNativeQuery(consulta);
+			
+			List<Object[]> lObject = query.getResultList();
+			List<matriculasAdminDTO>  lmatriculas = new ArrayList<matriculasAdminDTO>();
+			matriculasAdminDTO matriculas;
+			
+			int idEstud, idMateria, idNumMatricula;
+			String cedula, materia, num_matricula,estado="rechazado";
+			
+			for (Object[] objects : lObject) {
+				
+				idEstud = Integer.parseInt(  objects[0].toString()   );
+				idMateria = Integer.parseInt(  objects[1].toString()   );
+				idNumMatricula = Integer.parseInt(  objects[2].toString()   );
+				
+				cedula = objects[3].toString();
+				materia = objects[4].toString();
+				num_matricula = objects[5].toString();
+				
+				if( Boolean.parseBoolean(  objects[6].toString().toString()  )  ) {
+					estado = "aprovado";	
+				}
+				
+				matriculas = new matriculasAdminDTO(idEstud, idMateria, idNumMatricula, cedula, materia, num_matricula, estado);
+				lmatriculas.add(matriculas);
+			}
+						
+			return lmatriculas;
+		}
+		
 		
 		
 		public Matricula findMatricula( MatriculaPK matricula  ) {

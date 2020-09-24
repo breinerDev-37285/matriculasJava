@@ -41,6 +41,7 @@ public class BeanMatriculasAdmin implements Serializable {
 	
 	@PostConstruct
 	public void init() {
+			registroestado = 0;
 			lEstados = mMatriculasAdmin.findAllEstados();
 			matriculas = mMatriculasAdmin.findAllMatriculas()	;
 			lMaterias = new ArrayList<matriculasAdminDTO>();
@@ -67,24 +68,49 @@ public class BeanMatriculasAdmin implements Serializable {
 	}
 	
 	
-	public void actionListenerAceptarMatricula( int registro) {
-			
+	public void actionListenerAceptarMatricula( int idregistro) {
+			try {
+					mMatriculasAdmin.aceptarMatricula(idregistro);
+					JSFUtil.crearMensajeInfo("La matricula ha sido aceptada");
+					matriculas = mMatriculasAdmin.findAllMatriculas()	;
+			} catch (Exception e) {
+					JSFUtil.crearMensajeError(e.getMessage());
+			}
 	}
 	
-	public void actionListenerRechazarMatricula( int registro ) {
-		
+	public void actionListenerRechazarMatricula( int idregistro ) {
+			try {
+					mMatriculasAdmin.rechazarMatricula(idregistro);
+					JSFUtil.crearMensajeInfo("La matricula ha sido rechazada");
+					matriculas = mMatriculasAdmin.findAllMatriculas()	;
+			} catch (Exception e) {
+					JSFUtil.crearMensajeError(e.getMessage());
+			}
 	}
 	
 	
 	public void actionListenerVerMaterias(int registro ) {
 		try {
 			registroestado = registro;
-			lMaterias =  mMatriculasAdmin.listMateriasByMatricula(registro);
+			lMaterias =  mMatriculasAdmin.listMateriasByMatricula(registroestado);
 			
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public void actionListenerRechazarMateria( matriculasAdminDTO mater ) {
@@ -92,24 +118,44 @@ public class BeanMatriculasAdmin implements Serializable {
 				mMatriculasAdmin.rechazarMaterias(mater);
 				JSFUtil.crearMensajeWarning("La materia ha sido rechazada");
 				
-				System.out.println( registroestado  );
 				lMaterias =  mMatriculasAdmin.listMateriasByMatricula(registroestado);
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 		}
 	}
 	
+	
+	
+	
+	
 	public void actionListeneraceptarMateria( matriculasAdminDTO mater ) {
 		try {
 			mMatriculasAdmin.aceptarMaterias(mater);
 			JSFUtil.crearMensajeInfo("La materia ha sido aprovada");
-			
-			System.out.println( registroestado  );
 			lMaterias =  mMatriculasAdmin.listMateriasByMatricula(registroestado);
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public List<Estado> getlEstados() {
 		return lEstados;

@@ -2,6 +2,7 @@ package matriculas.model.managers;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -26,14 +27,14 @@ public class ManagerMatricula {
 	@PersistenceContext
 	private EntityManager em;
 
-	public List<MatriculaDTO> findMatriculasBySemestre(int idUsuario, int idSemestre) {
+	public List<MatriculaDTO> findMatriculasBySemestre(String correo) {
+		int idUsuario = findIDUsuarioByCorreo(correo).getId();
+
 		List<Object[]> lMatriculas = em.createNativeQuery(
-				"select e.nombre as nombre_estado,nm.nombre as tipo_matricula, m.nombre as nombre_materia"
-						+ "from matricula ma inner join materia m on ma.materia=m.codigo"
-						+ "inner join registro r on ma.registro=r.id inner join estado e"
-						+ "on r.estado=e.id inner join num_matricula nm\n"
-						+ "on ma.num_materia=nm.codigo where ma.estudiante=" + idUsuario + " and m.semestre="
-						+ idSemestre)
+				"select r.id,m.nombre as nombre_materia,nm.nombre as tipo_matricula,e.nombre as nombre_estado\n"
+						+ "from matricula ma inner join materia m on ma.materia=m.codigo\n"
+						+ "inner join registro r on ma.registro=r.id inner join estado e on r.estado=e.id\n"
+						+ "inner join num_matricula nm on ma.num_materia=nm.codigo where ma.estudiante=" + idUsuario)
 				.getResultList();
 		List<MatriculaDTO> listadoMatriculas = new ArrayList<MatriculaDTO>();
 		MatriculaDTO matriculaDTO;
@@ -41,9 +42,9 @@ public class ManagerMatricula {
 		String tipoMatricula;
 		String estado;
 		for (int i = 0; i < lMatriculas.size(); i++) {
-			nMateria = lMatriculas.get(i)[0].toString();
+			nMateria = lMatriculas.get(i)[2].toString();
 			tipoMatricula = lMatriculas.get(i)[1].toString();
-			estado = lMatriculas.get(i)[2].toString();
+			estado = lMatriculas.get(i)[1].toString();
 			matriculaDTO = new MatriculaDTO(nMateria, tipoMatricula, estado);
 			listadoMatriculas.add(matriculaDTO);
 		}
@@ -59,15 +60,16 @@ public class ManagerMatricula {
 	}
 
 	public List<Materia> findMateriasBySemestre(int idSemestre, List<Materia> lMaterias, int tamaño) {
-		if (lMaterias.size() == 0 && tamaño == 0) {
-			lMaterias = em.createQuery("select m from Materia m where m.semestreBean=" + idSemestre, Materia.class)
-					.getResultList();
-		}
+
+		lMaterias = em.createQuery("select m from Materia m where m.semestreBean=" + idSemestre, Materia.class)
+				.getResultList();
+
 		return lMaterias;
 	}
 
 	public Usuario findIDUsuarioByCorreo(String correo) {
-		return em.createNamedQuery("select u from Usario u where u.correo=" + correo, Usuario.class).getSingleResult();
+		return em.createQuery("select u from Usuario u where u.correo='" + correo + "'", Usuario.class)
+				.getSingleResult();
 	}
 
 	public Semestre findSemestresById(int idSemestre) {
@@ -124,12 +126,14 @@ public class ManagerMatricula {
 		Estado estado = findEstadoById(1);
 		Registro registro = new Registro();
 		registro.setEstadoBean(estado);
+		registro.setFecha(new Date());
 		registro.setMatriculas(new ArrayList<Matricula>());
 		Matricula matricula;
 		for (int i = 0; i < lMaterias.size(); i++) {
 			matricula = new Matricula();
 			matricula.setId(lMaterias.get(i));
 			matricula.setEstado(false);
+			matricula.setRegistroBean(registro);
 			registro.getMatriculas().add(matricula);
 		}
 		em.persist(registro);

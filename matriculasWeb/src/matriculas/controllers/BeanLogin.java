@@ -75,6 +75,7 @@ public class BeanLogin implements Serializable {
 				//paginas.add("matriculas.xhtml");
 				paginas.add("periodoAcademico.xhtml");
 				paginas.add("materias.xhtml");
+				paginas.add("matriculasAdmin.xhtml");
 				
 				for (String pg : paginas) {
 					if ( pagina.contains(pg)  && rol !=2  ) {

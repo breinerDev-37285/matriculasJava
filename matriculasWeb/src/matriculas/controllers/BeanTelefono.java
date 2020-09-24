@@ -33,20 +33,45 @@ public class BeanTelefono implements Serializable {
 	public void init() {
 		lTelefonos = mTelefono.getAllTelefono();		
 		lPersonas = mTelefono.getAllPersonas();
+		telefono = new Telefono();
 	}
 	
 	
-	public void actionListenerRegistrarPersona() {
+	public void actionListenerRegistrarTelefono() {
 		
-		
+			try {
+				int personas = lPersonas.size() + 1;
+				
+				mTelefono.registrarTelefono( telefono , persona, personas );
+				telefono = new Telefono();
+				lTelefonos = mTelefono.getAllTelefono();		
+				JSFUtil.crearMensajeInfo("Telefono agregado correctamente");
+			} catch (Exception e) {
+				JSFUtil.crearMensajeError(e.getMessage());
+			}
 	}
 	
 	public void actionListenerActualizarTelefono(  telefonoDTO tel  ) {
-		
+		try {
+
+				mTelefono.actualizarTelefono(tel);
+				telefono = new Telefono();
+				lTelefonos = mTelefono.getAllTelefono();		
+				JSFUtil.crearMensajeInfo("Telefono actualizad correctamente");
+			} catch (Exception e) {
+				JSFUtil.crearMensajeError(e.getMessage());
+			}
 	}
 	
 	public void actionListenereliminarTelefono(   telefonoDTO tel  ) {
-		
+		try {
+				mTelefono.eliminarTelefono(tel);
+				telefono = new Telefono();
+				lTelefonos = mTelefono.getAllTelefono();		
+				JSFUtil.crearMensajeWarning("Telefono eliminado correctamente");
+			} catch (Exception e) {
+				JSFUtil.crearMensajeError(e.getMessage());
+			}
 	}
 
 	public List<telefonoDTO> getlTelefonos() {

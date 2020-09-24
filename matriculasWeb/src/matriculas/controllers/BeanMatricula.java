@@ -33,7 +33,6 @@ public class BeanMatricula implements Serializable {
 	private MatriculaPK matriculaPK;
 	private int idUsuario;
 	private int idSemestre;
-	private boolean semestre;
 
 	@PostConstruct
 	public void init() {
@@ -41,7 +40,6 @@ public class BeanMatricula implements Serializable {
 		matriculaPK = new MatriculaPK();
 		lMatriculaPKs = new ArrayList<MatriculaPK>();
 		lMaterias = new ArrayList<Materia>();
-		semestre = false;
 	}
 
 	public void materiasBySemestre() {
@@ -49,8 +47,9 @@ public class BeanMatricula implements Serializable {
 		lNumMatricula = mMatricula.findAllNumMatriculas();
 	}
 
-	public void matriculasBySemestre() {
-		lMatriculas = mMatricula.findMatriculasBySemestre(idUsuario, idSemestre);
+	public void matriculasBySemestre(String correo) {
+		lMatriculas = mMatricula.findMatriculasBySemestre(correo);
+
 	}
 
 	public void agregarMaterias(String correo) {
@@ -72,11 +71,12 @@ public class BeanMatricula implements Serializable {
 		lMaterias = mMatricula.agregarMateria(lMaterias, id);
 	}
 
-	public void guardarMatricula() {
+	public void guardarMatricula(String correo) {
 		try {
 			mMatricula.guardarMatricula(lMatriculaPKs);
 			matriculaPK = new MatriculaPK();
 			materiasBySemestre();
+			matriculasBySemestre(correo);
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 		}

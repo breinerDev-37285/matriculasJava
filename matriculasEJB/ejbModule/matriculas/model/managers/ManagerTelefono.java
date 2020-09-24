@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import matriculas.model.dto.telefonoDTO;
 import matriculas.model.entities.PeriodoAcademico;
 import matriculas.model.entities.Persona;
+import matriculas.model.entities.Telefono;
 
 /**
  * Session Bean implementation class ManagerTelefono
@@ -57,5 +58,68 @@ public class ManagerTelefono {
     	
     	return lTelefonos;
     }
+    
+    private Persona findPersona(int idPersona) {
+    		return em.find(Persona.class, idPersona);
+    }
+    
+    
+    public void registrarTelefono( Telefono telefono, int idpersona, int personas ) throws Exception {
+    	
+
+    	
+    	if (  idpersona <= 0 || idpersona > personas) {
+    		throw new Exception( "Por favor seleccione una persona valida" );
+    	}
+    		
+    		Persona persona = findPersona(idpersona);
+    		Telefono telf = validarTelefono(telefono);
+    		telf.setPersonaBean(persona);
+    		
+    		em.persist(telf);
+    }
+    
+    private Telefono validarTelefono ( Telefono telefono ) throws Exception{
+    		if (  telefono.getNumero().equals("")  ) {
+    			throw new Exception( "Por favor ingrese un numero" );
+    		}
+    		
+    		if( telefono.getNumero().length() != 10 ||
+    			 !isNumeric(telefono.getNumero())
+    				) {
+    			throw new Exception( "El número telefonico debe contener 10 digitos" );
+    		}
+    	
+    		return telefono;
+    }
+    
+    
+    public void actualizarTelefono( telefonoDTO telefono ) throws Exception {
+    		Telefono telf = findTelefono(telefono.getCodigo());
+    		telf.setNumero(telefono.getNumero());
+    		telf = validarTelefono(telf);
+    		
+    		em.merge(telf);
+    }
+    
+    
+    public void eliminarTelefono( telefonoDTO telefono ) throws Exception {
+    		Telefono telf = findTelefono(telefono.getCodigo());
+    		em.remove(telf);
+    }
+    
+    private Telefono findTelefono( int idtelefono )  {
+    		return em.find(Telefono.class, idtelefono);
+    }
+    
+    
+	private boolean isNumeric(String cadena) {
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+	}
 
 }

@@ -194,7 +194,7 @@ body {
 			<div class="layout-menu-wrapper">
 
 				<ul id="menuform:j_idt21" class="layout-menu">
-					<li><a href="matriculas.xhtml"> <i
+					<li><a href="matriculasEstudiantes.xhtml"> <i
 							class="fa fa-fw fa-graduation-cap fa-fw layout-menuitem-icon" />
 							<span class="layout-menuitem-text">Matriculas</span>
 					</a></li>
@@ -302,8 +302,9 @@ body {
 						</p:dataTable>
 						<f:facet name="footer">
 							<p:commandButton value="Matricularse" update="@form,:form2"
-								style="width:200px;" icon="fa fa-save"
-								actionListener="#{beanMatricula.guardarMatricula()}" />
+								style="width:200px;"
+								actionListener="#{beanMatricula.guardarMatricula(beanLogin.correo)}"
+								icon="fa fa-save" />
 						</f:facet>
 					</p:panel>
 				</p:panel>
@@ -323,6 +324,10 @@ body {
 							<p:outputLabel value="#{matricula.estado}" class="elem" />
 						</p:column>
 					</p:dataTable>
+					<p:commandButton value="Ver matriculas" update="@form"
+						style="width:200px;"
+						actionListener="#{beanMatricula.matriculasBySemestre(beanLogin.correo)}"
+						icon="fa fa-save" />
 				</p:panel>
 			</h:form>
 		</div>
@@ -355,4 +360,3 @@ body {
 	</div>
 </body>
 </html>
-

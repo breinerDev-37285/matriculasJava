@@ -46,7 +46,7 @@ public class Persona implements Serializable {
 	private List<Telefono> telefonos;
 
 	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="personaBean")
+	@OneToMany(mappedBy="personaBean",cascade = CascadeType.ALL)
 	private List<Usuario> usuarios;
 
 	public Persona() {
