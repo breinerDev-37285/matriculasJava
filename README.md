@@ -2,7 +2,7 @@
 
 ## Examen practico para la materia de aplicaciones informaticas II
 
-Integrantes: 
+### Integrantes: 
 
   * Jose Pai
   * Erik Morocho
